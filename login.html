@@ -2,35 +2,25 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>GlobalTrotters | Login</title>
 
-
     <!-- Google Font -->
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet">
-
-
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
     <style>
-
-     
 
         * {
             margin: 0;
@@ -38,18 +28,12 @@
             box-sizing: border-box;
         }
 
-
-
         body {
-
             font-family: "Poppins", sans-serif;
-
             min-height: 100vh;
 
             display: flex;
-
             justify-content: center;
-
             align-items: center;
 
             overflow: hidden;
@@ -65,106 +49,81 @@
             position: relative;
         }
 
-
+        /* =========================
+           BACKGROUND CIRCLES
+        ========================= */
 
         .circle {
-
-            position: absolute;
-
+            position: fixed;
             border-radius: 50%;
-
             opacity: 0.35;
-
             filter: blur(1px);
+            z-index: 0;
         }
 
-
         .circle.one {
-
             width: 300px;
-
             height: 300px;
-
             background: #4fd1c5;
-
             top: -100px;
-
             left: -80px;
         }
 
-
         .circle.two {
-
             width: 350px;
-
             height: 350px;
-
             background: #667eea;
-
             right: -120px;
-
             bottom: -120px;
         }
 
-
         .circle.three {
-
             width: 150px;
-
             height: 150px;
-
             background: #f6ad55;
-
             right: 15%;
-
             top: 8%;
         }
 
+        /* =========================
+           MAIN LOGIN CONTAINER
+        ========================= */
 
         .main-container {
-
             width: 1000px;
-
             max-width: 92%;
-
             min-height: 600px;
 
             display: flex;
 
             border-radius: 25px;
-
             overflow: hidden;
 
-            background:
-                rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.12);
 
             backdrop-filter: blur(18px);
-
             -webkit-backdrop-filter: blur(18px);
 
-            border:
-                1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
 
             box-shadow:
-                0 30px 70px rgba(0,0,0,0.35);
+                0 30px 70px rgba(0, 0, 0, 0.35);
 
             position: relative;
-
             z-index: 2;
         }
 
-
+        /* =========================
+           LEFT SECTION
+        ========================= */
 
         .left-section {
-
             width: 52%;
 
             padding: 45px;
 
             display: flex;
-
             flex-direction: column;
-
             justify-content: space-between;
 
             color: white;
@@ -172,177 +131,128 @@
             background:
                 linear-gradient(
                     145deg,
-                    rgba(0,0,0,0.25),
-                    rgba(255,255,255,0.05)
+                    rgba(0, 0, 0, 0.25),
+                    rgba(255, 255, 255, 0.05)
                 );
         }
 
-
-
         .logo {
-
             width: 240px;
-
             height: auto;
 
             display: block;
-
             object-fit: contain;
 
             filter:
                 drop-shadow(
-                    0 8px 15px rgba(0,0,0,0.25)
+                    0 8px 15px rgba(0, 0, 0, 0.25)
                 );
 
             transition: 0.3s ease;
         }
 
-
         .logo:hover {
-
             transform: scale(1.03);
         }
 
-
-
         .hero-content {
-
             margin-top: 20px;
         }
 
-
         .hero-content h1 {
-
             font-size: 44px;
-
             line-height: 1.15;
-
             font-weight: 700;
-
             margin-bottom: 20px;
         }
 
-
         .hero-content h1 span {
-
             color: #4fd1c5;
         }
 
-
         .hero-content p {
-
             font-size: 15px;
-
             line-height: 1.8;
 
-            color:
-                rgba(255,255,255,0.75);
+            color: rgba(255, 255, 255, 0.75);
 
             max-width: 430px;
         }
 
-
+        /* =========================
+           TRAVEL INFO
+        ========================= */
 
         .travel-info {
-
             display: flex;
-
             gap: 30px;
-
             margin-top: 30px;
         }
 
-
         .info {
-
             display: flex;
-
             align-items: center;
-
             gap: 9px;
 
             font-size: 13px;
 
-            color:
-                rgba(255,255,255,0.8);
+            color: rgba(255, 255, 255, 0.8);
         }
 
-
         .info i {
-
             color: #4fd1c5;
-
             font-size: 18px;
         }
 
-
-
         .left-footer {
-
             font-size: 11px;
-
-            color:
-                rgba(255,255,255,0.5);
+            color: rgba(255, 255, 255, 0.5);
         }
 
-
+        /* =========================
+           RIGHT LOGIN SECTION
+        ========================= */
 
         .right-section {
-
             width: 48%;
 
-            background:
-                rgba(255,255,255,0.97);
+            background: rgba(255, 255, 255, 0.97);
 
             padding: 55px 60px;
 
             display: flex;
-
             flex-direction: column;
-
             justify-content: center;
         }
 
-
         .login-title {
-
             margin-bottom: 30px;
         }
 
-
         .login-title h2 {
-
             font-size: 30px;
-
             color: #1a202c;
-
             margin-bottom: 8px;
         }
 
-
         .login-title p {
-
             font-size: 13px;
-
             color: #718096;
         }
 
-
+        /* =========================
+           INPUTS
+        ========================= */
 
         .input-group {
-
             margin-bottom: 20px;
-
             position: relative;
         }
 
-
         .input-group label {
-
             display: block;
 
             font-size: 13px;
-
             font-weight: 500;
 
             color: #4a5568;
@@ -350,47 +260,34 @@
             margin-bottom: 8px;
         }
 
-
         .input-wrapper {
-
             position: relative;
         }
 
-
         .input-wrapper > i:first-child {
-
             position: absolute;
 
             left: 15px;
-
             top: 50%;
 
-            transform:
-                translateY(-50%);
+            transform: translateY(-50%);
 
             color: #a0aec0;
-
             font-size: 15px;
+
+            pointer-events: none;
         }
 
-
         .input-wrapper input {
-
             width: 100%;
-
             height: 50px;
 
-            border:
-                1px solid #e2e8f0;
-
+            border: 1px solid #e2e8f0;
             border-radius: 12px;
 
-            padding:
-                0 45px;
+            padding: 0 45px;
 
-            font-family:
-                "Poppins", sans-serif;
-
+            font-family: "Poppins", sans-serif;
             font-size: 13px;
 
             color: #2d3748;
@@ -402,109 +299,90 @@
             transition: 0.3s ease;
         }
 
-
         .input-wrapper input:focus {
-
             border-color: #38b2ac;
-
             background: white;
 
             box-shadow:
-                0 0 0 4px
-                rgba(56,178,172,0.1);
+                0 0 0 4px rgba(56, 178, 172, 0.1);
         }
 
-
-  
+        /* =========================
+           PASSWORD TOGGLE
+        ========================= */
 
         .password-toggle {
-
             position: absolute;
 
             right: 15px;
-
             top: 50%;
 
-            transform:
-                translateY(-50%);
+            transform: translateY(-50%);
 
             cursor: pointer;
 
             color: #a0aec0;
-
             font-size: 14px;
         }
 
+        .password-toggle:hover {
+            color: #319795;
+        }
 
-  
+        /* =========================
+           OPTIONS
+        ========================= */
 
         .options {
-
             display: flex;
-
             justify-content: space-between;
-
             align-items: center;
 
-            margin:
-                5px 0 25px;
+            margin: 5px 0 25px;
 
             font-size: 12px;
         }
 
-
         .remember {
-
             display: flex;
-
             align-items: center;
-
             gap: 7px;
 
             color: #718096;
+            cursor: pointer;
         }
-
 
         .remember input {
-
             accent-color: #38b2ac;
+            cursor: pointer;
         }
 
-
         .forgot {
-
             color: #319795;
 
             text-decoration: none;
-
             font-weight: 500;
         }
 
-
         .forgot:hover {
-
             text-decoration: underline;
         }
 
-
+        /* =========================
+           LOGIN BUTTON
+        ========================= */
 
         .login-btn {
-
             width: 100%;
-
             height: 50px;
 
             border: none;
-
             border-radius: 12px;
 
             color: white;
 
-            font-family:
-                "Poppins", sans-serif;
-
+            font-family: "Poppins", sans-serif;
             font-size: 14px;
-
             font-weight: 600;
 
             cursor: pointer;
@@ -517,35 +395,27 @@
                 );
 
             box-shadow:
-                0 8px 20px
-                rgba(49,151,149,0.3);
+                0 8px 20px rgba(49, 151, 149, 0.3);
 
             transition: 0.3s ease;
         }
 
-
         .login-btn:hover {
-
-            transform:
-                translateY(-2px);
+            transform: translateY(-2px);
 
             box-shadow:
-                0 12px 25px
-                rgba(49,151,149,0.4);
+                0 12px 25px rgba(49, 151, 149, 0.4);
         }
-
 
         .login-btn:active {
-
-            transform:
-                translateY(0);
+            transform: translateY(0);
         }
 
-
-
+        /* =========================
+           MESSAGE
+        ========================= */
 
         #message {
-
             text-align: center;
 
             min-height: 18px;
@@ -553,17 +423,15 @@
             margin-top: 12px;
 
             font-size: 12px;
-
             font-weight: 500;
         }
 
-
-
+        /* =========================
+           DIVIDER
+        ========================= */
 
         .divider {
-
             display: flex;
-
             align-items: center;
 
             gap: 12px;
@@ -575,10 +443,8 @@
             font-size: 10px;
         }
 
-
         .divider::before,
         .divider::after {
-
             content: "";
 
             height: 1px;
@@ -588,25 +454,21 @@
             background: #e2e8f0;
         }
 
-
-
+        /* =========================
+           SOCIAL LOGIN
+        ========================= */
 
         .social-login {
-
             display: flex;
-
             gap: 10px;
         }
 
-
         .social-btn {
-
             flex: 1;
 
             height: 45px;
 
-            border:
-                1px solid #e2e8f0;
+            border: 1px solid #e2e8f0;
 
             background: white;
 
@@ -615,16 +477,12 @@
             cursor: pointer;
 
             display: flex;
-
             justify-content: center;
-
             align-items: center;
 
             gap: 8px;
 
-            font-family:
-                "Poppins", sans-serif;
-
+            font-family: "Poppins", sans-serif;
             font-size: 12px;
 
             color: #4a5568;
@@ -632,18 +490,16 @@
             transition: 0.2s;
         }
 
-
         .social-btn:hover {
-
             background: #f7fafc;
-
-            transform:
-                translateY(-1px);
+            transform: translateY(-1px);
         }
 
+        /* =========================
+           SIGN UP
+        ========================= */
 
         .signup {
-
             text-align: center;
 
             margin-top: 25px;
@@ -653,9 +509,7 @@
             color: #718096;
         }
 
-
         .signup a {
-
             color: #319795;
 
             font-weight: 600;
@@ -663,26 +517,22 @@
             text-decoration: none;
         }
 
-
         .signup a:hover {
-
             text-decoration: underline;
         }
 
-
+        /* =========================
+           RESPONSIVE
+        ========================= */
 
         @media (max-width: 800px) {
 
             body {
-
                 overflow-y: auto;
-
                 padding: 30px 0;
             }
 
-
             .main-container {
-
                 flex-direction: column;
 
                 max-width: 90%;
@@ -690,68 +540,50 @@
                 margin: 20px auto;
             }
 
-
             .left-section {
-
                 width: 100%;
-
                 padding: 40px;
             }
-
 
             .right-section {
-
                 width: 100%;
-
                 padding: 40px;
             }
 
-
             .hero-content h1 {
-
                 font-size: 36px;
             }
         }
 
-
         @media (max-width: 500px) {
 
             .left-section {
-
                 padding: 30px;
             }
 
-
             .right-section {
-
-                padding:
-                    30px 25px;
+                padding: 30px 25px;
             }
 
-
             .logo {
-
                 width: 200px;
             }
 
-
             .hero-content h1 {
-
                 font-size: 30px;
             }
 
-
             .travel-info {
-
                 flex-direction: column;
-
                 gap: 15px;
             }
 
-
             .social-login {
-
                 flex-direction: column;
+            }
+
+            .options {
+                font-size: 11px;
             }
         }
 
@@ -762,23 +594,26 @@
 
 <body>
 
+    <!-- Decorative Background -->
 
     <div class="circle one"></div>
-
     <div class="circle two"></div>
-
     <div class="circle three"></div>
 
 
+    <!-- =========================
+         MAIN CONTAINER
+    ========================== -->
 
     <div class="main-container">
 
 
-  
+        <!-- =========================
+             LEFT SECTION
+        ========================== -->
+
         <section class="left-section">
 
-
-       
             <div>
 
                 <img
@@ -792,30 +627,22 @@
             <div class="hero-content">
 
                 <h1>
-
                     Your journey
                     <br>
-
                     starts
                     <span>here.</span>
-
                 </h1>
 
 
                 <p>
-
                     Discover new destinations,
                     plan unforgettable adventures,
                     and keep all your travel memories
                     in one beautiful place.
-
                 </p>
 
 
-              
-
                 <div class="travel-info">
-
 
                     <div class="info">
 
@@ -843,11 +670,9 @@
 
                     </div>
 
-
                 </div>
 
             </div>
-
 
 
             <div class="left-footer">
@@ -857,13 +682,14 @@
 
             </div>
 
-
         </section>
 
 
+        <!-- =========================
+             LOGIN SECTION
+        ========================== -->
 
         <section class="right-section">
-
 
 
             <div class="login-title">
@@ -872,7 +698,6 @@
                     Welcome back!
                 </h2>
 
-
                 <p>
                     Sign in to continue your journey.
                 </p>
@@ -880,11 +705,10 @@
             </div>
 
 
-
             <form id="loginForm">
 
 
-         
+                <!-- Username -->
 
                 <div class="input-group">
 
@@ -892,13 +716,9 @@
                         Username
                     </label>
 
-
                     <div class="input-wrapper">
 
-                        <i
-                            class="fa-regular fa-user">
-                        </i>
-
+                        <i class="fa-regular fa-user"></i>
 
                         <input
                             type="text"
@@ -911,27 +731,23 @@
                 </div>
 
 
-              
+                <!-- Password -->
+
                 <div class="input-group">
 
                     <label for="password">
                         Password
                     </label>
 
-
                     <div class="input-wrapper">
 
-                        <i
-                            class="fa-solid fa-lock">
-                        </i>
-
+                        <i class="fa-solid fa-lock"></i>
 
                         <input
                             type="password"
                             id="password"
                             placeholder="Enter your password"
                             autocomplete="current-password">
-
 
                         <i
                             class="fa-regular fa-eye password-toggle"
@@ -943,9 +759,9 @@
                 </div>
 
 
+                <!-- Remember / Forgot -->
 
                 <div class="options">
-
 
                     <label class="remember">
 
@@ -967,18 +783,16 @@
 
                     </a>
 
-
                 </div>
 
 
+                <!-- Login -->
 
                 <button
                     type="submit"
                     class="login-btn">
 
-                    <i
-                        class="fa-solid fa-right-to-bracket">
-                    </i>
+                    <i class="fa-solid fa-right-to-bracket"></i>
 
                     &nbsp; Login
 
@@ -987,31 +801,26 @@
 
                 <div id="message"></div>
 
-
             </form>
 
 
-         
+            <!-- Divider -->
 
             <div class="divider">
-
                 OR CONTINUE WITH
-
             </div>
 
 
+            <!-- Social Login -->
 
             <div class="social-login">
-
 
                 <button
                     class="social-btn"
                     type="button"
                     onclick="socialLogin('Google')">
 
-                    <i
-                        class="fa-brands fa-google">
-                    </i>
+                    <i class="fa-brands fa-google"></i>
 
                     Google
 
@@ -1023,17 +832,16 @@
                     type="button"
                     onclick="socialLogin('Apple')">
 
-                    <i
-                        class="fa-brands fa-apple">
-                    </i>
+                    <i class="fa-brands fa-apple"></i>
 
                     Apple
 
                 </button>
 
-
             </div>
 
+
+            <!-- Register Link -->
 
             <div class="signup">
 
@@ -1045,34 +853,33 @@
 
             </div>
 
-
         </section>
-
 
     </div>
 
 
-  
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
 
     <script>
 
-
-     
         const loginForm =
             document.getElementById("loginForm");
-
 
         const username =
             document.getElementById("username");
 
-
         const password =
             document.getElementById("password");
-
 
         const message =
             document.getElementById("message");
 
+
+        /* =========================
+           LOGIN VALIDATION
+        ========================== */
 
         loginForm.addEventListener(
             "submit",
@@ -1080,14 +887,11 @@
 
                 event.preventDefault();
 
-
                 const usernameValue =
                     username.value.trim();
 
-
                 const passwordValue =
                     password.value.trim();
-
 
 
                 if (usernameValue === "") {
@@ -1103,7 +907,6 @@
                 }
 
 
-
                 if (passwordValue === "") {
 
                     showMessage(
@@ -1115,7 +918,6 @@
 
                     return;
                 }
-
 
 
                 if (passwordValue.length < 6) {
@@ -1131,78 +933,67 @@
                 }
 
 
-
                 showMessage(
                     "Login successful! ✈️",
                     "success"
                 );
 
-
-               
-
             }
         );
 
+
+        /* =========================
+           MESSAGE
+        ========================== */
 
         function showMessage(text, type) {
 
             message.textContent = text;
 
-
             if (type === "error") {
 
-                message.style.color =
-                    "#e53e3e";
+                message.style.color = "#e53e3e";
 
-            }
-            else {
+            } else {
 
-                message.style.color =
-                    "#319795";
+                message.style.color = "#319795";
 
             }
 
         }
 
 
-   
+        /* =========================
+           PASSWORD VISIBILITY
+        ========================== */
 
         const togglePassword =
-            document.getElementById(
-                "togglePassword"
-            );
+            document.getElementById("togglePassword");
 
 
         togglePassword.addEventListener(
             "click",
             function() {
 
-
                 if (password.type === "password") {
 
                     password.type = "text";
-
 
                     togglePassword.classList.remove(
                         "fa-eye"
                     );
 
-
                     togglePassword.classList.add(
                         "fa-eye-slash"
                     );
 
-                }
-
-                else {
+                } else {
 
                     password.type = "password";
-
 
                     togglePassword.classList.remove(
                         "fa-eye-slash"
                     );
-
 
                     togglePassword.classList.add(
                         "fa-eye"
@@ -1214,6 +1005,9 @@
         );
 
 
+        /* =========================
+           FORGOT PASSWORD
+        ========================== */
 
         document
             .getElementById("forgotPassword")
@@ -1222,7 +1016,6 @@
                 function(event) {
 
                     event.preventDefault();
-
 
                     const email =
                         prompt(
@@ -1246,6 +1039,9 @@
             );
 
 
+        /* =========================
+           SOCIAL LOGIN
+        ========================== */
 
         function socialLogin(provider) {
 
@@ -1257,7 +1053,6 @@
         }
 
     </script>
-
 
 </body>
 
