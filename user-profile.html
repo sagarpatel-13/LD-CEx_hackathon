@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>User Profile | GlobeTrotter</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --background: #f5f7fb;
+            --white: #ffffff;
+            --text: #172033;
+            --muted: #6b7280;
+            --border: #e5e7eb;
+            --danger: #dc2626;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--background);
+            color: var(--text);
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .navbar {
+            height: 70px;
+            background: white;
+            border-bottom: 1px solid var(--border);
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 5%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            color: var(--primary);
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+
+            background: #dbeafe;
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 19px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4b5563;
+
+            padding: 9px 14px;
+            border-radius: 8px;
+
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            background: #eff6ff;
+            color: var(--primary);
+        }
+
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .small-avatar {
+            width: 35px;
+            height: 35px;
+
+            background: #dbeafe;
+            color: var(--primary);
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-weight: bold;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .container {
+            width: 92%;
+            max-width: 1180px;
+
+            margin: auto;
+            padding: 40px 0 60px;
+        }
+
+        .page-header {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            margin-bottom: 25px;
+        }
+
+        .page-header h1 {
+            font-size: 31px;
+            margin: 5px 0;
+        }
+
+        .eyebrow {
+            color: var(--primary);
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+        }
+
+        .subtitle {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .edit-profile-btn {
+            background: white;
+            color: var(--primary);
+
+            border: 1px solid #bfdbfe;
+
+            padding: 10px 17px;
+            border-radius: 9px;
+
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .edit-profile-btn:hover {
+            background: #eff6ff;
+        }
+
+        /* =========================
+           PROFILE LAYOUT
+        ========================= */
+
+        .profile-layout {
+            display: grid;
+            grid-template-columns: 330px 1fr;
+
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+        }
+
+        /* =========================
+           PROFILE CARD
+        ========================= */
+
+        .profile-card {
+            overflow: hidden;
+            height: fit-content;
+        }
+
+        .cover {
+            height: 110px;
+
+            background:
+                radial-gradient(
+                    circle at 20% 30%,
+                    rgba(255,255,255,.35) 0 7%,
+                    transparent 8%
+                ),
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #06b6d4
+                );
+        }
+
+        .profile-content {
+            padding: 0 25px 25px;
+            text-align: center;
+        }
+
+        .avatar-container {
+            width: 100px;
+            height: 100px;
+
+            margin: -50px auto 15px;
+
+            position: relative;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+
+            border-radius: 50%;
+
+            background: #eff6ff;
+
+            border: 5px solid white;
+
+            color: var(--primary);
+
+            font-size: 38px;
+            font-weight: bold;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            box-shadow: 0 5px 20px rgba(0,0,0,.12);
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .camera-button {
+            position: absolute;
+
+            right: -2px;
+            bottom: 2px;
+
+            width: 32px;
+            height: 32px;
+
+            border-radius: 50%;
+
+            border: 3px solid white;
+
+            background: var(--primary);
+            color: white;
+
+            cursor: pointer;
+        }
+
+        .profile-content h2 {
+            font-size: 21px;
+        }
+
+        .username {
+            color: var(--muted);
+            font-size: 13px;
+
+            margin-top: 2px;
+        }
+
+        .location {
+            color: #4b5563;
+
+            font-size: 13px;
+
+            margin: 12px 0;
+        }
+
+        .bio {
+            color: #5b6472;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+        /* =========================
+           PROFILE STATS
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            border-top: 1px solid var(--border);
+
+            margin-top: 22px;
+            padding-top: 18px;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+
+            gap: 2px;
+        }
+
+        .stat + .stat {
+            border-left: 1px solid var(--border);
+        }
+
+        .stat strong {
+            font-size: 18px;
+        }
+
+        .stat span {
+            color: var(--muted);
+            font-size: 11px;
+        }
+
+        /* =========================
+           RIGHT SIDE
+        ========================= */
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+
+            gap: 18px;
+        }
+
+        .details-card {
+            padding: 24px;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+
+            margin-bottom: 22px;
+        }
+
+        .card-header h2 {
+            font-size: 18px;
+        }
+
+        .card-header p {
+            color: var(--muted);
+            font-size: 13px;
+
+            margin-top: 3px;
+        }
+
+        .edit-button {
+            border: none;
+            background: transparent;
+
+            color: var(--primary);
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        /* =========================
+           FORM
+        ========================= */
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 17px;
+        }
+
+        .form-group label {
+            display: block;
+
+            color: #4b5563;
+
+            font-size: 12px;
+            font-weight: bold;
+
+            margin-bottom: 7px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+
+            border: 1px solid var(--border);
+
+            border-radius: 10px;
+
+            padding: 11px 12px;
+
+            font-size: 14px;
+
+            outline: none;
+
+            background: #f9fafb;
+
+            color: var(--text);
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #93c5fd;
+
+            box-shadow:
+                0 0 0 3px #dbeafe;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+
+            gap: 10px;
+
+            margin-top: 20px;
+        }
+
+        .cancel-button {
+            background: white;
+
+            border: 1px solid var(--border);
+
+            padding: 10px 16px;
+
+            border-radius: 9px;
+
+            cursor: pointer;
+        }
+
+        .save-button {
+            background: var(--primary);
+            color: white;
+
+            border: none;
+
+            padding: 10px 17px;
+
+            border-radius: 9px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .save-button:hover {
+            background: var(--primary-dark);
+        }
+
+        /* =========================
+           TRAVEL PREFERENCES
+        ========================= */
+
+        .preferences {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 12px;
+        }
+
+        .preference {
+            border: 1px solid var(--border);
+
+            border-radius: 12px;
+
+            padding: 14px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+        .preference-icon {
+            width: 40px;
+            height: 40px;
+
+            border-radius: 10px;
+
+            background: #eff6ff;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 18px;
+        }
+
+        .preference strong {
+            font-size: 13px;
+        }
+
+        .preference p {
+            color: var(--muted);
+
+            font-size: 12px;
+
+            margin-top: 2px;
+        }
+
+        /* =========================
+           ACCOUNT SETTINGS
+        ========================= */
+
+        .account-settings {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .account-settings h2 {
+            font-size: 18px;
+        }
+
+        .account-settings p {
+            color: var(--muted);
+
+            font-size: 13px;
+
+            margin-top: 3px;
+        }
+
+        .delete-button {
+            color: var(--danger);
+
+            background: #fef2f2;
+
+            border: 1px solid #fecaca;
+
+            padding: 10px 15px;
+
+            border-radius: 9px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background: #fee2e2;
+        }
+
+        /* =========================
+           TOAST
+        ========================= */
+
+        .toast {
+            position: fixed;
+
+            right: 25px;
+            bottom: 25px;
+
+            background: #111827;
+
+            color: white;
+
+            padding: 13px 18px;
+
+            border-radius: 10px;
+
+            font-size: 13px;
+
+            opacity: 0;
+
+            transform: translateY(20px);
+
+            transition: .3s;
+
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+
+            transform: translateY(0);
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media(max-width: 900px) {
+
+            .profile-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-card {
+                max-width: 500px;
+
+                width: 100%;
+
+                margin: auto;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media(max-width: 600px) {
+
+            .container {
+                width: 94%;
+
+                padding-top: 25px;
+            }
+
+            .page-header {
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+
+            .form-grid,
+            .preferences {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: auto;
+            }
+
+            .details-card {
+                padding: 18px;
+            }
+
+            .account-settings {
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+
+            .delete-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            <div class="logo-icon">✈</div>
+            GlobeTrotter
+        </div>
+
+        <nav class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">My Trips</a>
+            <a href="#">Explore</a>
+            <a href="#">Community</a>
+        </nav>
+
+        <div class="nav-user">
+
+            <div class="small-avatar" id="smallAvatar">
+                P
+            </div>
+
+            <span id="navName">
+                Parth
+            </span>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="container">
+
+        <div class="page-header">
+
+            <div>
+
+                <p class="eyebrow">
+                    ACCOUNT
+                </p>
+
+                <h1>
+                    User Profile
+                </h1>
+
+                <p class="subtitle">
+                    Manage your profile information and travel preferences.
+                </p>
+
+            </div>
+
+            <button
+                class="edit-profile-btn"
+                onclick="enableEditing()">
+
+                Edit Profile
+
+            </button>
+
+        </div>
+
+
+        <section class="profile-layout">
+
+
+            <!-- =========================
+                 PROFILE CARD
+            ========================== -->
+
+            <aside class="profile-card card">
+
+                <div class="cover"></div>
+
+                <div class="profile-content">
+
+                    <div class="avatar-container">
+
+                        <div
+                            class="avatar"
+                            id="avatar">
+
+                            P
+
+                        </div>
+
+                        <button
+                            class="camera-button"
+                            onclick="document.getElementById('photoInput').click()">
+
+                            📷
+
+                        </button>
+
+                        <input
+                            type="file"
+                            id="photoInput"
+                            accept="image/*"
+                            hidden>
+
+                    </div>
+
+
+                    <h2 id="profileName">
+                        Parth Rakhaiya
+                    </h2>
+
+                    <p class="username">
+                        @parth
+                    </p>
+
+                    <div class="location">
+                        📍 Gujarat, India
+                    </div>
+
+                    <p class="bio" id="profileBio">
+
+                        Computer Engineering student who loves
+                        technology, gaming, photography and
+                        discovering new places.
+
+                    </p>
+
+
+                    <div class="stats">
+
+                        <div class="stat">
+
+                            <strong>
+                                8
+                            </strong>
+
+                            <span>
+                                Trips
+                            </span>
+
+                        </div>
+
+                        <div class="stat">
+
+                            <strong>
+                                21
+                            </strong>
+
+                            <span>
+                                Places
+                            </span>
+
+                        </div>
+
+                        <div class="stat">
+
+                            <strong>
+                                14
+                            </strong>
+
+                            <span>
+                                Activities
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+
+            <!-- =========================
+                 RIGHT COLUMN
+            ========================== -->
+
+            <div class="right-column">
+
+
+                <!-- PERSONAL INFORMATION -->
+
+                <div class="card details-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>
+                                Personal Information
+                            </h2>
+
+                            <p>
+                                Your basic account information
+                            </p>
+
+                        </div>
+
+                        <button
+                            class="edit-button"
+                            onclick="enableEditing()">
+
+                            Edit
+
+                        </button>
+
+                    </div>
+
+
+                    <form id="profileForm">
+
+                        <div class="form-grid">
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    First Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="firstName"
+                                    value="Parth"
+                                    disabled>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Last Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="lastName"
+                                    value="Rakhaiya"
+                                    disabled>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Email Address
+                                </label>
+
+                                <input
+                                    type="email"
+                                    value="parth@example.com"
+                                    disabled>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Phone Number
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="phone"
+                                    value="+91 98765 43210"
+                                    disabled>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    City
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="city"
+                                    value="Gandhinagar"
+                                    disabled>
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label>
+                                    Country
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="country"
+                                    value="India"
+                                    disabled>
+
+                            </div>
+
+
+                            <div class="form-group full-width">
+
+                                <label>
+                                    About Me
+                                </label>
+
+                                <textarea
+                                    id="bio"
+                                    disabled>Computer Engineering student who loves technology, gaming, photography and discovering new places.</textarea>
+
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="form-actions"
+                            id="formActions"
+                            style="display:none;">
+
+                            <button
+                                type="button"
+                                class="cancel-button"
+                                onclick="cancelEditing()">
+
+                                Cancel
+
+                            </button>
+
+                            <button
+                                type="submit"
+                                class="save-button">
+
+                                Save Changes
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+                <!-- TRAVEL PREFERENCES -->
+
+                <div class="card details-card">
+
+                    <div class="card-header">
+
+                        <div>
+
+                            <h2>
+                                Travel Preferences
+                            </h2>
+
+                            <p>
+                                Customize your travel experience
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="preferences">
+
+
+                        <div class="preference">
+
+                            <div class="preference-icon">
+                                🌍
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Favorite Region
+                                </strong>
+
+                                <p>
+                                    Europe
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="preference">
+
+                            <div class="preference-icon">
+                                💰
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Budget Style
+                                </strong>
+
+                                <p>
+                                    Balanced
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="preference">
+
+                            <div class="preference-icon">
+                                🏛️
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Interests
+                                </strong>
+
+                                <p>
+                                    Culture, Food, Adventure
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="preference">
+
+                            <div class="preference-icon">
+                                🗣️
+                            </div>
+
+                            <div>
+
+                                <strong>
+                                    Language
+                                </strong>
+
+                                <p>
+                                    English
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACCOUNT SETTINGS -->
+
+                <div class="card details-card">
+
+                    <div class="account-settings">
+
+                        <div>
+
+                            <h2>
+                                Account Settings
+                            </h2>
+
+                            <p>
+                                Manage your account and privacy.
+                            </p>
+
+                        </div>
+
+                        <button
+                            class="delete-button"
+                            onclick="deleteAccount()">
+
+                            Delete Account
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- TOAST -->
+
+    <div
+        class="toast"
+        id="toast">
+
+        Profile updated successfully!
+
+    </div>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <script>
+
+        const form = document.getElementById("profileForm");
+
+        const formActions =
+            document.getElementById("formActions");
+
+        const fields = [
+            "firstName",
+            "lastName",
+            "phone",
+            "city",
+            "country",
+            "bio"
+        ];
+
+
+        let oldValues = {};
+
+
+        /* =========================
+           ENABLE EDITING
+        ========================== */
+
+        function enableEditing() {
+
+            fields.forEach(id => {
+
+                const element =
+                    document.getElementById(id);
+
+                oldValues[id] =
+                    element.value;
+
+                element.disabled = false;
+
+            });
+
+            formActions.style.display = "flex";
+
+            document
+                .getElementById("firstName")
+                .focus();
+        }
+
+
+        /* =========================
+           CANCEL EDITING
+        ========================== */
+
+        function cancelEditing() {
+
+            fields.forEach(id => {
+
+                const element =
+                    document.getElementById(id);
+
+                element.value =
+                    oldValues[id];
+
+                element.disabled = true;
+
+            });
+
+            formActions.style.display = "none";
+        }
+
+
+        /* =========================
+           SAVE PROFILE
+        ========================== */
+
+        form.addEventListener(
+            "submit",
+            function(event) {
+
+                event.preventDefault();
+
+
+                const firstName =
+                    document
+                        .getElementById("firstName")
+                        .value
+                        .trim();
+
+
+                const lastName =
+                    document
+                        .getElementById("lastName")
+                        .value
+                        .trim();
+
+
+                const bio =
+                    document
+                        .getElementById("bio")
+                        .value
+                        .trim();
+
+
+                if (!firstName || !lastName) {
+
+                    alert(
+                        "First Name and Last Name are required."
+                    );
+
+                    return;
+                }
+
+
+                document
+                    .getElementById("profileName")
+                    .textContent =
+                    firstName + " " + lastName;
+
+
+                document
+                    .getElementById("navName")
+                    .textContent =
+                    firstName;
+
+
+                document
+                    .getElementById("smallAvatar")
+                    .textContent =
+                    firstName.charAt(0)
+                    .toUpperCase();
+
+
+                document
+                    .getElementById("profileBio")
+                    .textContent =
+                    bio;
+
+
+                document
+                    .getElementById("avatar")
+                    .textContent =
+                    firstName.charAt(0)
+                    .toUpperCase();
+
+
+                fields.forEach(id => {
+
+                    document
+                        .getElementById(id)
+                        .disabled = true;
+
+                });
+
+
+                formActions.style.display = "none";
+
+
+                showToast(
+                    "Profile updated successfully!"
+                );
+
+            }
+        );
+
+
+        /* =========================
+           PROFILE PHOTO
+        ========================== */
+
+        document
+            .getElementById("photoInput")
+            .addEventListener(
+                "change",
+                function(event) {
+
+                    const file =
+                        event.target.files[0];
+
+                    if (!file)
+                        return;
+
+
+                    if (
+                        !file.type
+                            .startsWith("image/")
+                    ) {
+
+                        alert(
+                            "Please select an image."
+                        );
+
+                        return;
+                    }
+
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload =
+                        function(e) {
+
+                            const avatar =
+                                document
+                                    .getElementById("avatar");
+
+
+                            avatar.textContent = "";
+
+                            avatar.style.backgroundImage =
+                                `url("${e.target.result}")`;
+
+                        };
+
+
+                    reader.readAsDataURL(file);
+
+                }
+            );
+
+
+        /* =========================
+           DELETE ACCOUNT
+        ========================== */
+
+        function deleteAccount() {
+
+            const confirmation =
+                confirm(
+                    "Are you sure you want to delete your account?"
+                );
+
+
+            if (confirmation) {
+
+                showToast(
+                    "Account deletion requested."
+                );
+
+            }
+
+        }
+
+
+        /* =========================
+           TOAST
+        ========================== */
+
+        function showToast(message) {
+
+            const toast =
+                document.getElementById("toast");
+
+
+            toast.textContent =
+                message;
+
+
+            toast.classList.add("show");
+
+
+            setTimeout(
+                function() {
+
+                    toast.classList.remove("show");
+
+                },
+                2500
+            );
+
+        }
+
+    </script>
+
+</body>
+</html>
