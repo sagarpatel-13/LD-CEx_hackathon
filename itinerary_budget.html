@@ -1,0 +1,3685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Travio - Itinerary</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+>
+
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background:
+        radial-gradient(circle at 75% 10%, rgba(105, 42, 210, .10), transparent 30%),
+        #06111d;
+    color: #dbe5f2;
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   SIDEBAR
+========================================================= */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 286px;
+    height: 100vh;
+
+    background:
+        linear-gradient(
+            180deg,
+            #071321 0%,
+            #06101c 55%,
+            #07111d 100%
+        );
+
+    border-right: 1px solid rgba(255,255,255,.08);
+
+    padding: 23px 18px;
+
+    z-index: 1000;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow-y: auto;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(130, 74, 255, .5);
+    border-radius: 10px;
+}
+
+
+/* Logo */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 0 12px 28px;
+
+    text-decoration: none;
+    color: #fff;
+}
+
+.logo-icon {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #fff;
+    font-size: 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #9b38e8,
+            #6840f4
+        );
+
+    box-shadow:
+        0 8px 25px rgba(123, 49, 236, .35);
+}
+
+.logo span {
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -.5px;
+}
+
+
+/* Menu title */
+
+.menu-label {
+    padding: 0 16px;
+    margin-bottom: 11px;
+
+    color: #718096;
+
+    font-size: 10px;
+    font-weight: 500;
+
+    letter-spacing: 2px;
+}
+
+
+/* Navigation */
+
+.side-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.side-nav a {
+    height: 43px;
+
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    padding: 0 16px;
+
+    border-radius: 11px;
+
+    color: #aeb9ca;
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    transition: .25s ease;
+}
+
+.side-nav a i {
+    width: 17px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.side-nav a:hover {
+    color: #fff;
+
+    background:
+        rgba(121, 58, 239, .16);
+
+    transform: translateX(2px);
+}
+
+.side-nav a.active {
+    color: #fff;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7130df,
+            #8938ee
+        );
+
+    box-shadow:
+        0 8px 22px rgba(110, 43, 224, .28);
+}
+
+
+/* Sidebar promo */
+
+.sidebar-promo {
+    margin-top: auto;
+
+    min-height: 145px;
+
+    padding: 19px;
+
+    border-radius: 17px;
+
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7136df,
+            #bd55b7
+        );
+
+    box-shadow:
+        0 15px 35px rgba(94, 36, 172, .25);
+}
+
+.sidebar-promo::after {
+    content: "";
+
+    position: absolute;
+
+    width: 130px;
+    height: 130px;
+
+    right: -35px;
+    bottom: -50px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,.08);
+}
+
+.sidebar-promo h3 {
+    position: relative;
+    z-index: 2;
+
+    color: #fff;
+
+    font-size: 16px;
+    line-height: 1.35;
+
+    margin-bottom: 8px;
+}
+
+.sidebar-promo p {
+    position: relative;
+    z-index: 2;
+
+    color: rgba(255,255,255,.78);
+
+    font-size: 9px;
+    line-height: 1.5;
+
+    margin-bottom: 13px;
+}
+
+.promo-btn {
+    position: relative;
+    z-index: 3;
+
+    border: none;
+
+    padding: 8px 13px;
+
+    border-radius: 7px;
+
+    color: #7333d8;
+    background: #fff;
+
+    font-family: inherit;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   MAIN AREA
+========================================================= */
+
+.main-wrapper {
+    margin-left: 286px;
+
+    min-height: 100vh;
+}
+
+
+/* =========================================================
+   TOP BAR
+========================================================= */
+
+.topbar {
+    height: 70px;
+
+    padding: 0 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    background: rgba(7, 18, 30, .9);
+
+    border-bottom: 1px solid rgba(255,255,255,.07);
+
+    position: sticky;
+    top: 0;
+
+    z-index: 500;
+
+    backdrop-filter: blur(14px);
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.notification {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #b8c6d9;
+
+    background: #101e2e;
+
+    border: 1px solid rgba(255,255,255,.07);
+
+    cursor: pointer;
+}
+
+.profile {
+    width: 39px;
+    height: 39px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    color: #fff;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    background:
+        linear-gradient(
+            135deg,
+            #9e3be8,
+            #633ef1
+        );
+
+    cursor: pointer;
+}
+
+.profile img,
+.profile-large img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* Profile menu */
+
+.profile-menu {
+    position: absolute;
+
+    right: 30px;
+    top: 59px;
+
+    width: 275px;
+
+    padding: 16px;
+
+    background: #0d1b2a;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    border-radius: 14px;
+
+    box-shadow: 0 20px 45px rgba(0,0,0,.35);
+
+    display: none;
+}
+
+.profile-menu.active {
+    display: block;
+}
+
+.profile-top {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding-bottom: 13px;
+
+    border-bottom: 1px solid rgba(255,255,255,.07);
+}
+
+.profile-large {
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    color: #fff;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    background:
+        linear-gradient(
+            135deg,
+            #9e3be8,
+            #633ef1
+        );
+}
+
+.profile-name {
+    color: #fff;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.profile-email {
+    color: #78889c;
+
+    font-size: 8px;
+
+    margin-top: 2px;
+}
+
+.profile-location {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    padding: 12px 0;
+
+    color: #8b9aad;
+
+    font-size: 9px;
+}
+
+.profile-location i {
+    color: #9142e9;
+}
+
+.logout-btn {
+    width: 100%;
+    height: 35px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: rgba(220, 78, 96, .12);
+
+    color: #e17c87;
+
+    font-family: inherit;
+    font-size: 9px;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.container {
+    width: min(1220px, calc(100% - 50px));
+
+    margin: auto;
+
+    padding: 28px 0 50px;
+}
+
+
+/* =========================================================
+   PAGE HEADER
+========================================================= */
+
+.page-heading {
+    margin-bottom: 24px;
+}
+
+.page-heading h1 {
+    color: #fff;
+
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.page-heading p {
+    color: #718197;
+
+    font-size: 10px;
+
+    margin-top: 5px;
+}
+
+
+/* =========================================================
+   TOOLBAR
+========================================================= */
+
+.toolbar {
+    display: flex;
+    gap: 9px;
+
+    padding: 11px;
+
+    margin-bottom: 20px;
+
+    background: #0b1928;
+
+    border: 1px solid rgba(255,255,255,.07);
+
+    border-radius: 13px;
+}
+
+.search {
+    flex: 1;
+
+    position: relative;
+}
+
+.search i {
+    position: absolute;
+
+    left: 13px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #697a8e;
+
+    font-size: 10px;
+}
+
+.search input,
+.toolbar select {
+    width: 100%;
+    height: 38px;
+
+    border: 1px solid #203145;
+
+    border-radius: 8px;
+
+    background: #081522;
+
+    color: #b9c6d5;
+
+    outline: none;
+
+    font-family: inherit;
+    font-size: 9px;
+}
+
+.search input {
+    padding: 0 12px 0 34px;
+}
+
+.toolbar select {
+    width: 105px;
+
+    padding: 0 8px;
+}
+
+.search input:focus,
+.toolbar select:focus,
+.activity-select:focus,
+.expense-input:focus,
+.budget-input:focus {
+    border-color: #8140e7;
+
+    box-shadow:
+        0 0 0 3px rgba(129, 64, 231, .12);
+}
+
+
+/* =========================================================
+   DESTINATION
+========================================================= */
+
+.destination-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding: 19px 21px;
+
+    margin-bottom: 20px;
+
+    border-radius: 15px;
+
+    border: 1px solid rgba(135, 70, 238, .25);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(101, 48, 193, .20),
+            rgba(12, 29, 45, .9)
+        );
+}
+
+.destination-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.destination-icon {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #c28aff;
+
+    background:
+        rgba(129, 64, 231, .18);
+
+    border: 1px solid rgba(143, 79, 239, .2);
+
+    font-size: 18px;
+}
+
+.destination-label {
+    color: #718197;
+
+    font-size: 8px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+.destination-name {
+    color: #fff;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    margin-top: 1px;
+}
+
+.destination-location {
+    color: #77879a;
+
+    font-size: 8px;
+}
+
+
+/* Selected place dropdown */
+
+.destination-select {
+    height: 39px;
+
+    min-width: 210px;
+
+    padding: 0 12px;
+
+    border-radius: 8px;
+
+    border: 1px solid #36455a;
+
+    outline: none;
+
+    background: #0a1826;
+
+    color: #d9e1ec;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    cursor: pointer;
+}
+
+.destination-select:focus {
+    border-color: #8a45ee;
+
+    box-shadow:
+        0 0 0 3px rgba(138, 69, 238, .12);
+}
+
+
+/* =========================================================
+   MAIN GRID
+========================================================= */
+
+.main-layout {
+    display: grid;
+
+    grid-template-columns: 1fr 290px;
+
+    gap: 18px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   ITINERARY CARD
+========================================================= */
+
+.itinerary-card,
+.summary-card {
+    background:
+        linear-gradient(
+            145deg,
+            #0b1928,
+            #091522
+        );
+
+    border: 1px solid rgba(255,255,255,.07);
+
+    border-radius: 16px;
+}
+
+.itinerary-card {
+    padding: 20px;
+}
+
+
+/* Day */
+
+.day-section {
+    margin-bottom: 27px;
+}
+
+.day-section:last-child {
+    margin-bottom: 0;
+}
+
+.day-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 14px;
+}
+
+.day-title {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.day-number {
+    min-width: 45px;
+    height: 31px;
+
+    padding: 0 7px;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #d4b5ff;
+
+    background:
+        rgba(121, 53, 223, .18);
+
+    border: 1px solid rgba(134, 66, 232, .18);
+
+    font-size: 8px;
+    font-weight: 600;
+}
+
+.day-title h2 {
+    color: #dce5ef;
+
+    font-size: 13px;
+}
+
+.day-total {
+    color: #6f8092;
+
+    font-size: 9px;
+}
+
+.day-total strong {
+    color: #aa76ee;
+}
+
+
+/* Activity header */
+
+.activity-header {
+    display: grid;
+
+    grid-template-columns:
+        38px
+        1fr
+        125px
+        35px;
+
+    gap: 10px;
+
+    margin-left: 47px;
+    margin-bottom: 7px;
+
+    color: #617286;
+
+    font-size: 8px;
+}
+
+.activity-header span:nth-child(2),
+.activity-header span:nth-child(3) {
+    text-align: center;
+}
+
+
+/* Activity row */
+
+.activity-row {
+    display: grid;
+
+    grid-template-columns:
+        38px
+        1fr
+        125px
+        35px;
+
+    gap: 10px;
+
+    align-items: center;
+
+    margin-bottom: 9px;
+}
+
+.activity-number {
+    width: 30px;
+    height: 30px;
+
+    border-radius: 8px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #8798aa;
+
+    background: #101f2e;
+
+    border: 1px solid rgba(255,255,255,.05);
+
+    font-size: 9px;
+}
+
+
+/* =========================================================
+   ACTIVITY DROPDOWN
+========================================================= */
+
+.activity-select {
+    width: 100%;
+    height: 42px;
+
+    border: 1px solid #223347;
+
+    border-radius: 9px;
+
+    padding: 0 11px;
+
+    background: #081522;
+
+    color: #bfcbd9;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    outline: none;
+
+    cursor: pointer;
+}
+
+.activity-select option,
+.destination-select option,
+.toolbar select option {
+    background: #0d1c2b;
+    color: #dbe5f2;
+}
+
+
+/* Custom activity */
+
+.custom-activity-input {
+    display: none;
+
+    width: 100%;
+    height: 42px;
+
+    border: 1px solid #223347;
+
+    border-radius: 9px;
+
+    padding: 0 11px;
+
+    background: #081522;
+
+    color: #bfcbd9;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    outline: none;
+}
+
+.custom-activity-input.show {
+    display: block;
+}
+
+.custom-activity-input:focus {
+    border-color: #8140e7;
+
+    box-shadow:
+        0 0 0 3px rgba(129, 64, 231, .12);
+}
+
+
+/* Expense */
+
+.expense-wrapper {
+    position: relative;
+}
+
+.expense-wrapper span {
+    position: absolute;
+
+    left: 10px;
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #718197;
+
+    font-size: 9px;
+
+    z-index: 2;
+}
+
+.expense-input {
+    width: 100%;
+    height: 42px;
+
+    border: 1px solid #223347;
+
+    border-radius: 9px;
+
+    padding: 0 7px 0 22px;
+
+    background: #081522;
+
+    color: #c3cfdd;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    outline: none;
+}
+
+
+/* Delete */
+
+.delete-btn {
+    width: 30px;
+    height: 30px;
+
+    border: none;
+    border-radius: 7px;
+
+    background: rgba(211, 82, 100, .10);
+
+    color: #d87986;
+
+    cursor: pointer;
+
+    font-size: 9px;
+}
+
+.delete-btn:hover {
+    background: rgba(211, 82, 100, .18);
+}
+
+
+/* Add */
+
+.add-activity {
+    margin-left: 47px;
+
+    height: 35px;
+
+    padding: 0 13px;
+
+    border-radius: 8px;
+
+    border: 1px dashed #7142ae;
+
+    background: rgba(107, 52, 183, .10);
+
+    color: #ae76ec;
+
+    font-family: inherit;
+
+    font-size: 8px;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.add-activity:hover {
+    background: rgba(107, 52, 183, .20);
+}
+
+
+/* =========================================================
+   SUMMARY
+========================================================= */
+
+.summary-card {
+    padding: 19px;
+
+    position: sticky;
+    top: 90px;
+}
+
+.summary-title {
+    color: #e2e9f1;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    margin-bottom: 16px;
+}
+
+
+/* Budget circle */
+
+.budget-circle {
+    width: 135px;
+    height: 135px;
+
+    margin: 0 auto 18px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        conic-gradient(
+            #793ce2 0deg,
+            #793ce2 235deg,
+            #17283a 235deg,
+            #17283a 360deg
+        );
+
+    position: relative;
+}
+
+.budget-circle::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 4px;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            transparent,
+            transparent
+        );
+}
+
+.budget-inner {
+    width: 102px;
+    height: 102px;
+
+    border-radius: 50%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: #0b1928;
+
+    position: relative;
+    z-index: 2;
+}
+
+.budget-inner span {
+    color: #708196;
+
+    font-size: 8px;
+}
+
+.budget-inner strong {
+    color: #fff;
+
+    font-size: 17px;
+
+    margin-top: 2px;
+}
+
+
+/* Details */
+
+.budget-details {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin-bottom: 17px;
+}
+
+.budget-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #718196;
+
+    font-size: 9px;
+}
+
+.budget-line strong {
+    color: #c3cfdd;
+}
+
+.budget-line.total {
+    padding-top: 11px;
+
+    border-top: 1px solid rgba(255,255,255,.07);
+
+    font-size: 10px;
+}
+
+.budget-line.total strong {
+    color: #a96ce8;
+
+    font-size: 13px;
+}
+
+
+/* Budget input */
+
+.budget-input-label {
+    display: block;
+
+    color: #718196;
+
+    font-size: 8px;
+
+    margin-bottom: 5px;
+}
+
+.budget-input {
+    width: 100%;
+    height: 38px;
+
+    border: 1px solid #223347;
+
+    border-radius: 8px;
+
+    padding: 0 10px;
+
+    background: #081522;
+
+    color: #c9d3df;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 9px;
+
+    margin-bottom: 13px;
+}
+
+
+/* Save */
+
+.save-btn {
+    width: 100%;
+    height: 42px;
+
+    border: none;
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7b32e1,
+            #933fe9
+        );
+
+    color: #fff;
+
+    font-family: inherit;
+
+    font-size: 9px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 20px rgba(111, 45, 212, .22);
+
+    transition: .2s;
+}
+
+.save-btn:hover {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 11px 25px rgba(111, 45, 212, .32);
+}
+
+.saved-message {
+    min-height: 12px;
+
+    margin-top: 9px;
+
+    text-align: center;
+
+    color: #72c69d;
+
+    font-size: 8px;
+}
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+.toast {
+    position: fixed;
+
+    right: 22px;
+    bottom: 22px;
+
+    padding: 11px 15px;
+
+    border-radius: 9px;
+
+    background: #152437;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    color: #fff;
+
+    font-size: 9px;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.35);
+
+    transform: translateY(100px);
+
+    opacity: 0;
+
+    transition: .3s;
+
+    z-index: 2000;
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+
+/* =========================================================
+   MOBILE SIDEBAR
+========================================================= */
+
+.mobile-menu-btn {
+    display: none;
+
+    width: 38px;
+    height: 38px;
+
+    border: 1px solid rgba(255,255,255,.08);
+
+    border-radius: 9px;
+
+    background: #101e2e;
+
+    color: #fff;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .sidebar {
+        width: 230px;
+    }
+
+    .main-wrapper {
+        margin-left: 230px;
+    }
+
+    .side-nav a {
+        font-size: 11px;
+    }
+
+    .logo span {
+        font-size: 17px;
+    }
+
+    .main-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .summary-card {
+        position: static;
+    }
+}
+
+
+@media (max-width: 800px) {
+
+    .sidebar {
+        transform: translateX(-100%);
+
+        transition: .3s;
+
+        box-shadow:
+            15px 0 40px rgba(0,0,0,.4);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .main-wrapper {
+        margin-left: 0;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+
+        align-items: center;
+        justify-content: center;
+    }
+
+    .topbar {
+        justify-content: space-between;
+
+        padding: 0 16px;
+    }
+
+    .container {
+        width: calc(100% - 25px);
+    }
+
+    .toolbar {
+        display: grid;
+
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .search {
+        grid-column: 1 / -1;
+    }
+
+    .destination-box {
+        align-items: flex-start;
+    }
+}
+
+
+@media (max-width: 650px) {
+
+    .activity-header {
+        display: none;
+    }
+
+    .activity-row {
+        grid-template-columns:
+            30px
+            1fr
+            95px
+            30px;
+
+        gap: 6px;
+    }
+
+    .activity-select,
+    .custom-activity-input,
+    .expense-input {
+        height: 38px;
+    }
+
+    .activity-number {
+        width: 27px;
+        height: 27px;
+    }
+
+    .destination-box {
+        flex-direction: column;
+    }
+
+    .destination-select {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .page-heading h1 {
+        font-size: 21px;
+    }
+
+    .toolbar {
+        grid-template-columns: 1fr;
+    }
+
+    .search {
+        grid-column: auto;
+    }
+
+    .toolbar select {
+        width: 100%;
+    }
+
+    .activity-row {
+        grid-template-columns:
+            1fr
+            85px
+            29px;
+    }
+
+    .activity-number {
+        display: none;
+    }
+
+    .add-activity {
+        margin-left: 0;
+    }
+
+    .activity-header {
+        margin-left: 0;
+    }
+
+    .itinerary-card {
+        padding: 14px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LEFT SIDEBAR
+===================================================== -->
+
+<aside class="sidebar" id="sidebar">
+
+    <a href="admin.html" class="logo">
+
+        <div class="logo-icon">
+            <i class="fa-solid fa-plane"></i>
+        </div>
+
+        <span>Travio</span>
+
+    </a>
+
+
+    <div class="menu-label">
+        MAIN MENU
+    </div>
+
+
+    <nav class="side-nav">
+
+        <a href="admin.html">
+            <i class="fa-solid fa-house"></i>
+            <span>Dashboard</span>
+        </a>
+
+        <a href="create-trip.html">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>Create Trip</span>
+        </a>
+
+        <a href="my-trips.html">
+            <i class="fa-regular fa-square"></i>
+            <span>My Trips</span>
+        </a>
+
+        <a href="itinerary-builder.html">
+            <i class="fa-solid fa-person-walking"></i>
+            <span>Itinerary Builder</span>
+        </a>
+
+        <a href="itinerary.html" class="active">
+            <i class="fa-solid fa-list"></i>
+            <span>Itinerary View</span>
+        </a>
+
+        <a href="city-search.html">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>City Search</span>
+        </a>
+
+        <a href="activities.html">
+            <i class="fa-solid fa-person-hiking"></i>
+            <span>Activities</span>
+        </a>
+
+        <a href="budget.html">
+            <i class="fa-solid fa-wallet"></i>
+            <span>Budget</span>
+        </a>
+
+        <a href="calendar.html">
+            <i class="fa-regular fa-calendar-days"></i>
+            <span>Calendar</span>
+        </a>
+
+        <a href="shared-trip.html">
+            <i class="fa-solid fa-share-nodes"></i>
+            <span>Shared Trip</span>
+        </a>
+
+        <a href="settings.html">
+            <i class="fa-solid fa-gear"></i>
+            <span>Settings</span>
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-promo">
+
+        <h3>
+            Let's make your
+            dream journey come true!
+        </h3>
+
+        <p>
+            Plan unforgettable adventures
+            with GlobeTrotter.
+        </p>
+
+        <button class="promo-btn">
+            Get Started
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN WRAPPER
+===================================================== -->
+
+<div class="main-wrapper">
+
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+        <button
+            class="mobile-menu-btn"
+            id="mobileMenuButton"
+        >
+            <i class="fa-solid fa-bars"></i>
+        </button>
+
+
+        <div class="topbar-right">
+
+            <div class="notification">
+                <i class="fa-regular fa-bell"></i>
+            </div>
+
+
+            <div
+                class="profile"
+                id="profileButton"
+            ></div>
+
+
+            <div
+                class="profile-menu"
+                id="profileMenu"
+            >
+
+                <div class="profile-top">
+
+                    <div
+                        class="profile-large"
+                        id="profileLarge"
+                    ></div>
+
+                    <div>
+
+                        <div
+                            class="profile-name"
+                            id="profileName"
+                        >
+                            Guest User
+                        </div>
+
+                        <div
+                            class="profile-email"
+                            id="profileEmail"
+                        >
+                            guest@example.com
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="profile-location">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <span id="profileLocation">
+                        Not provided
+                    </span>
+
+                </div>
+
+
+                <button
+                    class="logout-btn"
+                    id="logoutButton"
+                >
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    &nbsp; Logout
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================================
+         CONTENT
+    ================================================= -->
+
+    <main class="container">
+
+
+        <div class="page-heading">
+
+            <h1>
+                Itinerary View
+            </h1>
+
+            <p>
+                Plan your physical activities and manage your travel expenses
+            </p>
+
+        </div>
+
+
+
+        <!-- TOOLBAR -->
+
+        <div class="toolbar">
+
+            <div class="search">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search activities..."
+                >
+
+            </div>
+
+
+            <select id="groupSelect">
+
+                <option value="group">
+                    Group By
+                </option>
+
+                <option value="day">
+                    Day
+                </option>
+
+                <option value="activity">
+                    Activity
+                </option>
+
+            </select>
+
+
+            <select id="filterSelect">
+
+                <option value="all">
+                    Filter
+                </option>
+
+                <option value="budget">
+                    With Expense
+                </option>
+
+                <option value="activities">
+                    Filled Activities
+                </option>
+
+            </select>
+
+
+            <select id="sortSelect">
+
+                <option value="default">
+                    Sort by...
+                </option>
+
+                <option value="expenseHigh">
+                    Expense High
+                </option>
+
+                <option value="expenseLow">
+                    Expense Low
+                </option>
+
+                <option value="activity">
+                    Activity
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- =================================================
+             DESTINATION
+        ================================================= -->
+
+        <section class="destination-box">
+
+            <div class="destination-info">
+
+                <div class="destination-icon">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                </div>
+
+
+                <div>
+
+                    <div class="destination-label">
+                        Selected Place
+                    </div>
+
+                    <div
+                        class="destination-name"
+                        id="destinationName"
+                    >
+                        Paris
+                    </div>
+
+                    <div
+                        class="destination-location"
+                        id="destinationLocation"
+                    >
+                        France
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- SELECTED PLACE DROPDOWN -->
+
+            <select
+                class="destination-select"
+                id="destinationSelect"
+            >
+
+                <option
+                    value="Paris|France"
+                >
+                    Paris, France
+                </option>
+
+                <option
+                    value="Rome|Italy"
+                >
+                    Rome, Italy
+                </option>
+
+                <option
+                    value="London|United Kingdom"
+                >
+                    London, United Kingdom
+                </option>
+
+                <option
+                    value="Amsterdam|Netherlands"
+                >
+                    Amsterdam, Netherlands
+                </option>
+
+                <option
+                    value="Barcelona|Spain"
+                >
+                    Barcelona, Spain
+                </option>
+
+                <option
+                    value="Dubai|UAE"
+                >
+                    Dubai, UAE
+                </option>
+
+                <option
+                    value="Tokyo|Japan"
+                >
+                    Tokyo, Japan
+                </option>
+
+                <option
+                    value="New York|USA"
+                >
+                    New York, USA
+                </option>
+
+                <option
+                    value="Sydney|Australia"
+                >
+                    Sydney, Australia
+                </option>
+
+                <option
+                    value="Bali|Indonesia"
+                >
+                    Bali, Indonesia
+                </option>
+
+                <option
+                    value="Singapore|Singapore"
+                >
+                    Singapore, Singapore
+                </option>
+
+            </select>
+
+        </section>
+
+
+
+        <!-- =================================================
+             MAIN GRID
+        ================================================= -->
+
+        <div class="main-layout">
+
+
+            <!-- ITINERARY -->
+
+            <section class="itinerary-card">
+
+                <div id="daysContainer"></div>
+
+            </section>
+
+
+
+            <!-- BUDGET SUMMARY -->
+
+            <aside class="summary-card">
+
+                <div class="summary-title">
+                    Budget Summary
+                </div>
+
+
+                <div
+                    class="budget-circle"
+                    id="budgetCircle"
+                >
+
+                    <div class="budget-inner">
+
+                        <span>
+                            Total Expense
+                        </span>
+
+                        <strong id="circleTotal">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="budget-details">
+
+                    <div class="budget-line">
+
+                        <span>
+                            Day 1
+                        </span>
+
+                        <strong id="day1Total">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="budget-line">
+
+                        <span>
+                            Day 2
+                        </span>
+
+                        <strong id="day2Total">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+
+                    <div class="budget-line total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong id="totalExpense">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <label class="budget-input-label">
+                    Set Your Budget
+                </label>
+
+
+                <input
+                    type="number"
+                    class="budget-input"
+                    id="budgetInput"
+                    placeholder="Enter budget"
+                    min="0"
+                >
+
+
+                <button
+                    class="save-btn"
+                    id="saveButton"
+                >
+
+                    <i class="fa-solid fa-floppy-disk"></i>
+
+                    &nbsp; Save Itinerary
+
+                </button>
+
+
+                <div
+                    class="saved-message"
+                    id="savedMessage"
+                ></div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<div
+    class="toast"
+    id="toast"
+></div>
+
+
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* =====================================================
+       USER
+    ===================================================== */
+
+    let user = null;
+
+    const loggedInUser =
+        localStorage.getItem("loggedInUser");
+
+    const globalUser =
+        localStorage.getItem("globalTrottersUser");
+
+
+    if (loggedInUser) {
+
+        try {
+            user = JSON.parse(loggedInUser);
+        } catch (error) {
+            user = null;
+        }
+
+    }
+
+
+    if (!user && globalUser) {
+
+        try {
+            user = JSON.parse(globalUser);
+        } catch (error) {
+            user = null;
+        }
+
+    }
+
+
+    if (!user) {
+
+        user = {
+            firstName: "Guest",
+            lastName: "User",
+            fullName: "Guest User",
+            email: "guest@example.com",
+            city: "Not provided",
+            country: "Not provided",
+            profilePhoto: ""
+        };
+
+    }
+
+
+    const firstName =
+        user.firstName || "";
+
+    const lastName =
+        user.lastName || "";
+
+
+    const fullName =
+        user.fullName ||
+        `${firstName} ${lastName}`.trim() ||
+        "Guest User";
+
+
+    const email =
+        user.email ||
+        "guest@example.com";
+
+
+    const city =
+        user.city ||
+        "Not provided";
+
+
+    const country =
+        user.country ||
+        "Not provided";
+
+
+    const photo =
+        user.profilePhoto ||
+        user.profileImage ||
+        user.photo ||
+        "";
+
+
+    let initials =
+        `${firstName.charAt(0)}${lastName.charAt(0)}`
+        .toUpperCase();
+
+
+    if (!initials || initials === "") {
+        initials = "GU";
+    }
+
+
+    function setAvatar(element) {
+
+        if (!element) {
+            return;
+        }
+
+
+        element.innerHTML = "";
+
+
+        if (photo) {
+
+            const img =
+                document.createElement("img");
+
+            img.src = photo;
+
+            img.alt = "Profile";
+
+
+            img.onerror = function () {
+
+                element.innerHTML = "";
+
+                element.textContent =
+                    initials;
+
+            };
+
+
+            element.appendChild(img);
+
+        } else {
+
+            element.textContent =
+                initials;
+
+        }
+
+    }
+
+
+    setAvatar(
+        document.getElementById("profileButton")
+    );
+
+
+    setAvatar(
+        document.getElementById("profileLarge")
+    );
+
+
+    document.getElementById(
+        "profileName"
+    ).textContent = fullName;
+
+
+    document.getElementById(
+        "profileEmail"
+    ).textContent = email;
+
+
+    document.getElementById(
+        "profileLocation"
+    ).textContent =
+        `${city}, ${country}`;
+
+
+
+    /* =====================================================
+       PROFILE MENU
+    ===================================================== */
+
+    const profileButton =
+        document.getElementById(
+            "profileButton"
+        );
+
+
+    const profileMenu =
+        document.getElementById(
+            "profileMenu"
+        );
+
+
+    profileButton.addEventListener(
+        "click",
+        function (event) {
+
+            event.stopPropagation();
+
+            profileMenu.classList.toggle(
+                "active"
+            );
+
+        }
+    );
+
+
+    document.addEventListener(
+        "click",
+        function (event) {
+
+            if (
+                !profileMenu.contains(
+                    event.target
+                ) &&
+                event.target !== profileButton
+            ) {
+
+                profileMenu.classList.remove(
+                    "active"
+                );
+
+            }
+
+        }
+    );
+
+
+
+    /* =====================================================
+       LOGOUT
+    ===================================================== */
+
+    document.getElementById(
+        "logoutButton"
+    ).addEventListener(
+        "click",
+        function () {
+
+            localStorage.removeItem(
+                "loggedInUser"
+            );
+
+            localStorage.removeItem(
+                "globalTrottersUser"
+            );
+
+            window.location.href =
+                "login.html";
+
+        }
+    );
+
+
+
+    /* =====================================================
+       MOBILE SIDEBAR
+    ===================================================== */
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+    const mobileMenuButton =
+        document.getElementById(
+            "mobileMenuButton"
+        );
+
+
+    mobileMenuButton.addEventListener(
+        "click",
+        function () {
+
+            sidebar.classList.toggle("open");
+
+        }
+    );
+
+
+
+    /* =====================================================
+       DESTINATION
+    ===================================================== */
+
+    let selectedPlace = {
+        name: "Paris",
+        country: "France"
+    };
+
+
+    const savedPlace =
+        localStorage.getItem(
+            "selectedDestination"
+        );
+
+
+    if (savedPlace) {
+
+        try {
+
+            const parsed =
+                JSON.parse(savedPlace);
+
+
+            if (parsed) {
+
+                selectedPlace.name =
+                    parsed.name ||
+                    parsed.city ||
+                    "Paris";
+
+
+                selectedPlace.country =
+                    parsed.country ||
+                    "France";
+
+            }
+
+        } catch (error) {}
+
+    }
+
+
+    const destinationName =
+        document.getElementById(
+            "destinationName"
+        );
+
+
+    const destinationLocation =
+        document.getElementById(
+            "destinationLocation"
+        );
+
+
+    const destinationSelect =
+        document.getElementById(
+            "destinationSelect"
+        );
+
+
+    function updateDestinationUI() {
+
+        destinationName.textContent =
+            selectedPlace.name;
+
+
+        destinationLocation.textContent =
+            selectedPlace.country;
+
+
+        const destinationValue =
+            `${selectedPlace.name}|${selectedPlace.country}`;
+
+
+        const matchingOption =
+            Array.from(
+                destinationSelect.options
+            ).find(
+                option =>
+                    option.value ===
+                    destinationValue
+            );
+
+
+        if (matchingOption) {
+
+            destinationSelect.value =
+                destinationValue;
+
+        }
+
+    }
+
+
+    updateDestinationUI();
+
+
+
+    destinationSelect.addEventListener(
+        "change",
+        function () {
+
+            const parts =
+                this.value.split("|");
+
+
+            selectedPlace.name =
+                parts[0];
+
+
+            selectedPlace.country =
+                parts[1];
+
+
+            updateDestinationUI();
+
+
+            localStorage.setItem(
+                "selectedDestination",
+                JSON.stringify(
+                    selectedPlace
+                )
+            );
+
+
+            showToast(
+                `Destination changed to ${selectedPlace.name}.`
+            );
+
+        }
+    );
+
+
+
+    /* =====================================================
+       ACTIVITY DATA
+    ===================================================== */
+
+    const activityOptions = [
+
+        "Visit Eiffel Tower",
+        "Explore Louvre Museum",
+        "Seine River Cruise",
+        "Visit Montmartre",
+        "Local Food Tour",
+        "Shopping",
+        "City Walking Tour",
+        "Museum Visit",
+        "Beach Visit",
+        "Mountain Trekking",
+        "Scuba Diving",
+        "Hot Air Balloon Adventure",
+        "Food Tour",
+        "Boat Ride",
+        "Cycling Tour",
+        "Historical Tour",
+        "Photography Tour",
+        "Wildlife Safari",
+        "Theme Park",
+        "Cultural Experience",
+        "Custom Activity"
+
+    ];
+
+
+
+    /* =====================================================
+       ITINERARY
+    ===================================================== */
+
+    let itineraryData = {
+
+        day1: [
+
+            {
+                activity: "Visit Eiffel Tower",
+                expense: 2500
+            },
+
+            {
+                activity: "Explore Louvre Museum",
+                expense: 1800
+            },
+
+            {
+                activity: "Seine River Cruise",
+                expense: 2200
+            }
+
+        ],
+
+
+        day2: [
+
+            {
+                activity: "Visit Montmartre",
+                expense: 1500
+            },
+
+            {
+                activity: "Local Food Tour",
+                expense: 2000
+            },
+
+            {
+                activity: "Shopping",
+                expense: 1200
+            }
+
+        ]
+
+    };
+
+
+
+    const savedItinerary =
+        localStorage.getItem(
+            "globalTrottersItinerary"
+        );
+
+
+    if (savedItinerary) {
+
+        try {
+
+            const parsed =
+                JSON.parse(savedItinerary);
+
+
+            if (parsed) {
+
+                if (
+                    Array.isArray(parsed.day1)
+                ) {
+
+                    itineraryData.day1 =
+                        parsed.day1;
+
+                }
+
+
+                if (
+                    Array.isArray(parsed.day2)
+                ) {
+
+                    itineraryData.day2 =
+                        parsed.day2;
+
+                }
+
+            }
+
+        } catch (error) {}
+
+    }
+
+
+
+    /* =====================================================
+       BUDGET
+    ===================================================== */
+
+    let budget =
+        Number(
+            localStorage.getItem(
+                "globalTrottersBudget"
+            )
+        ) || 0;
+
+
+    document.getElementById(
+        "budgetInput"
+    ).value =
+        budget || "";
+
+
+
+    /* =====================================================
+       DOM
+    ===================================================== */
+
+    const daysContainer =
+        document.getElementById(
+            "daysContainer"
+        );
+
+
+
+    /* =====================================================
+       RENDER DAYS
+    ===================================================== */
+
+    function renderDays() {
+
+        daysContainer.innerHTML = "";
+
+
+        createDay(
+            1,
+            itineraryData.day1
+        );
+
+
+        createDay(
+            2,
+            itineraryData.day2
+        );
+
+
+        updateTotals();
+
+    }
+
+
+
+    /* =====================================================
+       CREATE DAY
+    ===================================================== */
+
+    function createDay(
+        dayNumber,
+        activities
+    ) {
+
+        const section =
+            document.createElement("div");
+
+
+        section.className =
+            "day-section";
+
+
+        section.dataset.day =
+            dayNumber;
+
+
+        section.innerHTML = `
+
+            <div class="day-header">
+
+                <div class="day-title">
+
+                    <div class="day-number">
+                        Day ${dayNumber}
+                    </div>
+
+                    <h2>
+                        Day ${dayNumber}
+                    </h2>
+
+                </div>
+
+                <div class="day-total">
+
+                    Total:
+
+                    <strong id="dayTotal${dayNumber}">
+                        ₹0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="activity-header">
+
+                <span></span>
+
+                <span>
+                    Physical Activity
+                </span>
+
+                <span>
+                    Expense
+                </span>
+
+                <span></span>
+
+            </div>
+
+
+            <div class="activities-container"></div>
+
+
+            <button class="add-activity">
+
+                <i class="fa-solid fa-plus"></i>
+
+                &nbsp; Add Physical Activity
+
+            </button>
+
+        `;
+
+
+        const activitiesContainer =
+            section.querySelector(
+                ".activities-container"
+            );
+
+
+        activities.forEach(
+            function (activity, index) {
+
+                createActivityRow(
+                    activitiesContainer,
+                    dayNumber,
+                    index,
+                    activity
+                );
+
+            }
+        );
+
+
+
+        section.querySelector(
+            ".add-activity"
+        ).addEventListener(
+            "click",
+            function () {
+
+                activities.push({
+
+                    activity:
+                        "City Walking Tour",
+
+                    expense: 0
+
+                });
+
+
+                renderDays();
+
+
+                const inputs =
+                    daysContainer.querySelectorAll(
+                        `[data-day="${dayNumber}"] .activity-select`
+                    );
+
+
+                if (inputs.length) {
+
+                    inputs[
+                        inputs.length - 1
+                    ].focus();
+
+                }
+
+            }
+        );
+
+
+        daysContainer.appendChild(
+            section
+        );
+
+    }
+
+
+
+    /* =====================================================
+       CREATE ACTIVITY ROW
+    ===================================================== */
+
+    function createActivityRow(
+        container,
+        dayNumber,
+        index,
+        activity
+    ) {
+
+        const row =
+            document.createElement("div");
+
+
+        row.className =
+            "activity-row";
+
+
+        const currentActivity =
+            activity.activity || "";
+
+
+        const isCustom =
+            currentActivity &&
+            !activityOptions.includes(
+                currentActivity
+            );
+
+
+        let activitySelectHTML = `
+
+            <select class="activity-select">
+
+                <option value="">
+                    Select physical activity
+                </option>
+        `;
+
+
+        activityOptions.forEach(
+            function (option) {
+
+                const selected =
+                    option === currentActivity
+                        ? "selected"
+                        : "";
+
+
+                activitySelectHTML += `
+
+                    <option
+                        value="${escapeHTML(option)}"
+                        ${selected}
+                    >
+                        ${escapeHTML(option)}
+                    </option>
+
+                `;
+
+            }
+        );
+
+
+        if (isCustom) {
+
+            activitySelectHTML += `
+
+                <option
+                    value="Custom Activity"
+                    selected
+                >
+                    Custom Activity
+                </option>
+
+            `;
+
+        }
+
+
+        activitySelectHTML += `
+            </select>
+        `;
+
+
+
+        row.innerHTML = `
+
+            <div class="activity-number">
+                ${index + 1}
+            </div>
+
+
+            <div class="activity-field">
+
+                ${activitySelectHTML}
+
+
+                <input
+                    type="text"
+                    class="custom-activity-input ${
+                        isCustom ? "show" : ""
+                    }"
+                    placeholder="Enter custom physical activity..."
+                    value="${
+                        isCustom
+                            ? escapeHTML(currentActivity)
+                            : ""
+                    }"
+                >
+
+            </div>
+
+
+            <div class="expense-wrapper">
+
+                <span>₹</span>
+
+                <input
+                    type="number"
+                    class="expense-input"
+                    min="0"
+                    placeholder="0"
+                    value="${Number(
+                        activity.expense || 0
+                    )}"
+                >
+
+            </div>
+
+
+            <button
+                class="delete-btn"
+                title="Delete activity"
+            >
+
+                <i class="fa-solid fa-trash"></i>
+
+            </button>
+
+        `;
+
+
+
+        const activitySelect =
+            row.querySelector(
+                ".activity-select"
+            );
+
+
+        const customInput =
+            row.querySelector(
+                ".custom-activity-input"
+            );
+
+
+        const expenseInput =
+            row.querySelector(
+                ".expense-input"
+            );
+
+
+
+        /* Activity dropdown */
+
+        activitySelect.addEventListener(
+            "change",
+            function () {
+
+                const value =
+                    this.value;
+
+
+                if (
+                    value ===
+                    "Custom Activity"
+                ) {
+
+                    customInput.classList.add(
+                        "show"
+                    );
+
+
+                    itineraryData[
+                        `day${dayNumber}`
+                    ][index].activity =
+                        customInput.value;
+
+
+                    customInput.focus();
+
+                } else {
+
+                    customInput.classList.remove(
+                        "show"
+                    );
+
+
+                    itineraryData[
+                        `day${dayNumber}`
+                    ][index].activity =
+                        value;
+
+                }
+
+
+                saveTemporary();
+
+            }
+        );
+
+
+
+        /* Custom activity */
+
+        customInput.addEventListener(
+            "input",
+            function () {
+
+                itineraryData[
+                    `day${dayNumber}`
+                ][index].activity =
+                    this.value;
+
+
+                saveTemporary();
+
+            }
+        );
+
+
+
+        /* Expense */
+
+        expenseInput.addEventListener(
+            "input",
+            function () {
+
+                itineraryData[
+                    `day${dayNumber}`
+                ][index].expense =
+                    Number(this.value) || 0;
+
+
+                updateTotals();
+
+                saveTemporary();
+
+            }
+        );
+
+
+
+        /* Delete */
+
+        row.querySelector(
+            ".delete-btn"
+        ).addEventListener(
+            "click",
+            function () {
+
+                itineraryData[
+                    `day${dayNumber}`
+                ].splice(
+                    index,
+                    1
+                );
+
+
+                renderDays();
+
+                saveTemporary();
+
+            }
+        );
+
+
+        container.appendChild(row);
+
+    }
+
+
+
+    /* =====================================================
+       ESCAPE HTML
+    ===================================================== */
+
+    function escapeHTML(value) {
+
+        return String(value)
+
+            .replace(
+                /&/g,
+                "&amp;"
+            )
+
+            .replace(
+                /</g,
+                "&lt;"
+            )
+
+            .replace(
+                />/g,
+                "&gt;"
+            )
+
+            .replace(
+                /"/g,
+                "&quot;"
+            )
+
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
+    }
+
+
+
+    /* =====================================================
+       TOTALS
+    ===================================================== */
+
+    function getDayTotal(day) {
+
+        return itineraryData[
+            `day${day}`
+        ].reduce(
+            function (total, item) {
+
+                return total +
+                    Number(
+                        item.expense || 0
+                    );
+
+            },
+            0
+        );
+
+    }
+
+
+
+    function updateTotals() {
+
+        const day1 =
+            getDayTotal(1);
+
+
+        const day2 =
+            getDayTotal(2);
+
+
+        const total =
+            day1 + day2;
+
+
+        document.getElementById(
+            "day1Total"
+        ).textContent =
+            formatCurrency(day1);
+
+
+        document.getElementById(
+            "day2Total"
+        ).textContent =
+            formatCurrency(day2);
+
+
+        document.getElementById(
+            "totalExpense"
+        ).textContent =
+            formatCurrency(total);
+
+
+        document.getElementById(
+            "circleTotal"
+        ).textContent =
+            formatCurrency(total);
+
+
+        const day1Element =
+            document.getElementById(
+                "dayTotal1"
+            );
+
+
+        const day2Element =
+            document.getElementById(
+                "dayTotal2"
+            );
+
+
+        if (day1Element) {
+
+            day1Element.textContent =
+                formatCurrency(day1);
+
+        }
+
+
+        if (day2Element) {
+
+            day2Element.textContent =
+                formatCurrency(day2);
+
+        }
+
+
+        updateBudgetCircle(total);
+
+    }
+
+
+
+    function formatCurrency(value) {
+
+        return "₹" +
+            Number(value || 0)
+                .toLocaleString("en-IN");
+
+    }
+
+
+
+    /* =====================================================
+       BUDGET CIRCLE
+    ===================================================== */
+
+    function updateBudgetCircle(total) {
+
+        const circle =
+            document.getElementById(
+                "budgetCircle"
+            );
+
+
+        if (!budget || budget <= 0) {
+
+            circle.style.background =
+                `
+                conic-gradient(
+                    #793ce2 0deg,
+                    #793ce2 235deg,
+                    #17283a 235deg,
+                    #17283a 360deg
+                )
+                `;
+
+            return;
+
+        }
+
+
+        const percentage =
+            Math.min(
+                total / budget * 100,
+                100
+            );
+
+
+        const degrees =
+            percentage * 3.6;
+
+
+        let color =
+            "#793ce2";
+
+
+        if (percentage >= 90) {
+
+            color = "#df6378";
+
+        } else if (percentage >= 70) {
+
+            color = "#d9964f";
+
+        }
+
+
+        circle.style.background =
+            `
+            conic-gradient(
+                ${color} 0deg,
+                ${color} ${degrees}deg,
+                #17283a ${degrees}deg,
+                #17283a 360deg
+            )
+            `;
+
+    }
+
+
+
+    /* =====================================================
+       TEMPORARY SAVE
+    ===================================================== */
+
+    function saveTemporary() {
+
+        localStorage.setItem(
+            "globalTrottersItinerary",
+            JSON.stringify(
+                itineraryData
+            )
+        );
+
+    }
+
+
+
+    /* =====================================================
+       INITIAL RENDER
+    ===================================================== */
+
+    renderDays();
+
+
+
+    /* =====================================================
+       BUDGET INPUT
+    ===================================================== */
+
+    document.getElementById(
+        "budgetInput"
+    ).addEventListener(
+        "input",
+        function () {
+
+            budget =
+                Number(this.value) || 0;
+
+
+            updateTotals();
+
+        }
+    );
+
+
+
+    /* =====================================================
+       SAVE ITINERARY
+    ===================================================== */
+
+    document.getElementById(
+        "saveButton"
+    ).addEventListener(
+        "click",
+        function () {
+
+            budget =
+                Number(
+                    document.getElementById(
+                        "budgetInput"
+                    ).value
+                ) || 0;
+
+
+            localStorage.setItem(
+                "globalTrottersItinerary",
+                JSON.stringify(
+                    itineraryData
+                )
+            );
+
+
+            localStorage.setItem(
+                "globalTrottersBudget",
+                budget
+            );
+
+
+            localStorage.setItem(
+                "selectedDestination",
+                JSON.stringify(
+                    selectedPlace
+                )
+            );
+
+
+            const message =
+                document.getElementById(
+                    "savedMessage"
+                );
+
+
+            message.textContent =
+                "Itinerary saved successfully!";
+
+
+            showToast(
+                "Your itinerary has been saved."
+            );
+
+
+            updateTotals();
+
+
+            setTimeout(
+                function () {
+
+                    message.textContent = "";
+
+                },
+                3000
+            );
+
+        }
+    );
+
+
+
+    /* =====================================================
+       SEARCH
+    ===================================================== */
+
+    document.getElementById(
+        "searchInput"
+    ).addEventListener(
+        "input",
+        function () {
+
+            const query =
+                this.value
+                    .toLowerCase()
+                    .trim();
+
+
+            document
+                .querySelectorAll(
+                    ".activity-row"
+                )
+                .forEach(
+                    function (row) {
+
+                        const text =
+                            row.textContent
+                                .toLowerCase();
+
+
+                        row.style.display =
+                            text.includes(query)
+                                ? "grid"
+                                : "none";
+
+                    }
+                );
+
+        }
+    );
+
+
+
+    /* =====================================================
+       SORT
+    ===================================================== */
+
+    document.getElementById(
+        "sortSelect"
+    ).addEventListener(
+        "change",
+        function () {
+
+            const value =
+                this.value;
+
+
+            if (value === "expenseHigh") {
+
+                itineraryData.day1.sort(
+                    (a, b) =>
+                        Number(b.expense || 0) -
+                        Number(a.expense || 0)
+                );
+
+
+                itineraryData.day2.sort(
+                    (a, b) =>
+                        Number(b.expense || 0) -
+                        Number(a.expense || 0)
+                );
+
+            }
+
+
+            if (value === "expenseLow") {
+
+                itineraryData.day1.sort(
+                    (a, b) =>
+                        Number(a.expense || 0) -
+                        Number(b.expense || 0)
+                );
+
+
+                itineraryData.day2.sort(
+                    (a, b) =>
+                        Number(a.expense || 0) -
+                        Number(b.expense || 0)
+                );
+
+            }
+
+
+            if (value === "activity") {
+
+                itineraryData.day1.sort(
+                    (a, b) =>
+                        String(
+                            a.activity || ""
+                        ).localeCompare(
+                            String(
+                                b.activity || ""
+                            )
+                        )
+                );
+
+
+                itineraryData.day2.sort(
+                    (a, b) =>
+                        String(
+                            a.activity || ""
+                        ).localeCompare(
+                            String(
+                                b.activity || ""
+                            )
+                        )
+                );
+
+            }
+
+
+            renderDays();
+
+            saveTemporary();
+
+        }
+    );
+
+
+
+    /* =====================================================
+       FILTER
+    ===================================================== */
+
+    document.getElementById(
+        "filterSelect"
+    ).addEventListener(
+        "change",
+        function () {
+
+            const value =
+                this.value;
+
+
+            document
+                .querySelectorAll(
+                    ".activity-row"
+                )
+                .forEach(
+                    function (row) {
+
+                        const expenseInput =
+                            row.querySelector(
+                                ".expense-input"
+                            );
+
+
+                        const expense =
+                            Number(
+                                expenseInput.value
+                            ) || 0;
+
+
+                        const activitySelect =
+                            row.querySelector(
+                                ".activity-select"
+                            );
+
+
+                        const customInput =
+                            row.querySelector(
+                                ".custom-activity-input"
+                            );
+
+
+                        let activity = "";
+
+
+                        if (
+                            activitySelect.value ===
+                            "Custom Activity"
+                        ) {
+
+                            activity =
+                                customInput.value.trim();
+
+                        } else {
+
+                            activity =
+                                activitySelect.value.trim();
+
+                        }
+
+
+                        if (
+                            value === "budget"
+                        ) {
+
+                            row.style.display =
+                                expense > 0
+                                    ? "grid"
+                                    : "none";
+
+                        }
+
+                        else if (
+                            value === "activities"
+                        ) {
+
+                            row.style.display =
+                                activity
+                                    ? "grid"
+                                    : "none";
+
+                        }
+
+                        else {
+
+                            row.style.display =
+                                "grid";
+
+                        }
+
+                    }
+                );
+
+        }
+    );
+
+
+
+    /* =====================================================
+       TOAST
+    ===================================================== */
+
+    function showToast(message) {
+
+        const toast =
+            document.getElementById(
+                "toast"
+            );
+
+
+        toast.textContent =
+            message;
+
+
+        toast.classList.add(
+            "show"
+        );
+
+
+        setTimeout(
+            function () {
+
+                toast.classList.remove(
+                    "show"
+                );
+
+            },
+            2500
+        );
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>
