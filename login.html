@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>GlobalTrotters | Login</title>
+    <title>GlobeTrotter | Login</title>
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 
     <!-- Font Awesome -->
@@ -22,504 +22,842 @@
 
     <style>
 
+        /* =========================
+           RESET
+        ========================= */
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+
+        /* =========================
+           BODY
+        ========================= */
+
         body {
-            font-family: "Poppins", sans-serif;
+
+            font-family: "Inter", Arial, sans-serif;
+
             min-height: 100vh;
 
             display: flex;
+
             justify-content: center;
+
             align-items: center;
 
             overflow: hidden;
 
+            color: #ffffff;
+
             background:
+                radial-gradient(
+                    circle at 15% 15%,
+                    rgba(91, 45, 190, 0.22),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 85% 85%,
+                    rgba(37, 99, 235, 0.15),
+                    transparent 30%
+                ),
                 linear-gradient(
                     135deg,
-                    #0f2027,
-                    #203a43,
-                    #2c5364
+                    #020a12,
+                    #041522,
+                    #061827
                 );
 
             position: relative;
         }
 
+
         /* =========================
-           BACKGROUND CIRCLES
+           BACKGROUND GLOW
         ========================= */
 
-        .circle {
+        .glow {
+
             position: fixed;
+
             border-radius: 50%;
+
+            pointer-events: none;
+
+            filter: blur(70px);
+
             opacity: 0.35;
-            filter: blur(1px);
-            z-index: 0;
         }
 
-        .circle.one {
+
+        .glow.one {
+
             width: 300px;
             height: 300px;
-            background: #4fd1c5;
-            top: -100px;
-            left: -80px;
+
+            background: #6d28d9;
+
+            top: -130px;
+            left: -100px;
         }
 
-        .circle.two {
-            width: 350px;
-            height: 350px;
-            background: #667eea;
-            right: -120px;
-            bottom: -120px;
+
+        .glow.two {
+
+            width: 320px;
+            height: 320px;
+
+            background: #2563eb;
+
+            right: -150px;
+            bottom: -150px;
         }
 
-        .circle.three {
-            width: 150px;
-            height: 150px;
-            background: #f6ad55;
-            right: 15%;
+
+        .glow.three {
+
+            width: 180px;
+            height: 180px;
+
+            background: #7c3aed;
+
+            right: 18%;
             top: 8%;
+
+            opacity: 0.18;
         }
+
 
         /* =========================
-           MAIN LOGIN CONTAINER
+           LOGIN CARD
         ========================= */
 
-        .main-container {
-            width: 1000px;
+        .login-card {
+
+            width: 980px;
+
             max-width: 92%;
-            min-height: 600px;
+
+            min-height: 580px;
 
             display: flex;
-
-            border-radius: 25px;
-            overflow: hidden;
-
-            background: rgba(255, 255, 255, 0.12);
-
-            backdrop-filter: blur(18px);
-            -webkit-backdrop-filter: blur(18px);
-
-            border: 1px solid rgba(255, 255, 255, 0.2);
-
-            box-shadow:
-                0 30px 70px rgba(0, 0, 0, 0.35);
 
             position: relative;
-            z-index: 2;
-        }
 
-        /* =========================
-           LEFT SECTION
-        ========================= */
+            z-index: 5;
 
-        .left-section {
-            width: 52%;
+            overflow: hidden;
 
-            padding: 45px;
+            border-radius: 12px;
 
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-
-            color: white;
+            border: 1px solid #183148;
 
             background:
                 linear-gradient(
                     145deg,
-                    rgba(0, 0, 0, 0.25),
-                    rgba(255, 255, 255, 0.05)
-                );
-        }
-
-        .logo {
-            width: 240px;
-            height: auto;
-
-            display: block;
-            object-fit: contain;
-
-            filter:
-                drop-shadow(
-                    0 8px 15px rgba(0, 0, 0, 0.25)
+                    rgba(6, 24, 39, 0.98),
+                    rgba(3, 15, 27, 0.98)
                 );
 
-            transition: 0.3s ease;
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.55),
+                0 0 60px rgba(70, 35, 150, 0.08);
         }
 
-        .logo:hover {
-            transform: scale(1.03);
-        }
-
-        .hero-content {
-            margin-top: 20px;
-        }
-
-        .hero-content h1 {
-            font-size: 44px;
-            line-height: 1.15;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .hero-content h1 span {
-            color: #4fd1c5;
-        }
-
-        .hero-content p {
-            font-size: 15px;
-            line-height: 1.8;
-
-            color: rgba(255, 255, 255, 0.75);
-
-            max-width: 430px;
-        }
 
         /* =========================
-           TRAVEL INFO
+           LEFT PANEL
         ========================= */
 
-        .travel-info {
-            display: flex;
-            gap: 30px;
-            margin-top: 30px;
-        }
+        .left-panel {
 
-        .info {
-            display: flex;
-            align-items: center;
-            gap: 9px;
+            width: 52%;
 
-            font-size: 13px;
-
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .info i {
-            color: #4fd1c5;
-            font-size: 18px;
-        }
-
-        .left-footer {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        /* =========================
-           RIGHT LOGIN SECTION
-        ========================= */
-
-        .right-section {
-            width: 48%;
-
-            background: rgba(255, 255, 255, 0.97);
-
-            padding: 55px 60px;
+            padding: 42px;
 
             display: flex;
+
             flex-direction: column;
-            justify-content: center;
-        }
 
-        .login-title {
-            margin-bottom: 30px;
-        }
+            justify-content: space-between;
 
-        .login-title h2 {
-            font-size: 30px;
-            color: #1a202c;
-            margin-bottom: 8px;
-        }
-
-        .login-title p {
-            font-size: 13px;
-            color: #718096;
-        }
-
-        /* =========================
-           INPUTS
-        ========================= */
-
-        .input-group {
-            margin-bottom: 20px;
             position: relative;
+
+            overflow: hidden;
+
+            border-right: 1px solid #183148;
+
+            background:
+                radial-gradient(
+                    circle at 80% 15%,
+                    rgba(124, 58, 237, 0.15),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    145deg,
+                    #071a2a,
+                    #04131f
+                );
         }
 
-        .input-group label {
-            display: block;
 
-            font-size: 13px;
-            font-weight: 500;
+        /* Decorative grid */
 
-            color: #4a5568;
+        .left-panel::before {
 
-            margin-bottom: 8px;
-        }
+            content: "";
 
-        .input-wrapper {
-            position: relative;
-        }
-
-        .input-wrapper > i:first-child {
             position: absolute;
 
-            left: 15px;
-            top: 50%;
+            inset: 0;
 
-            transform: translateY(-50%);
+            background-image:
+                linear-gradient(
+                    rgba(73, 111, 145, 0.06) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(73, 111, 145, 0.06) 1px,
+                    transparent 1px
+                );
 
-            color: #a0aec0;
-            font-size: 15px;
+            background-size: 45px 45px;
 
             pointer-events: none;
         }
 
-        .input-wrapper input {
-            width: 100%;
-            height: 50px;
-
-            border: 1px solid #e2e8f0;
-            border-radius: 12px;
-
-            padding: 0 45px;
-
-            font-family: "Poppins", sans-serif;
-            font-size: 13px;
-
-            color: #2d3748;
-
-            outline: none;
-
-            background: #f8fafc;
-
-            transition: 0.3s ease;
-        }
-
-        .input-wrapper input:focus {
-            border-color: #38b2ac;
-            background: white;
-
-            box-shadow:
-                0 0 0 4px rgba(56, 178, 172, 0.1);
-        }
 
         /* =========================
-           PASSWORD TOGGLE
+           BRAND
         ========================= */
 
-        .password-toggle {
+        .brand {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            position: relative;
+
+            z-index: 2;
+
+            width: fit-content;
+
+            color: white;
+
+            text-decoration: none;
+        }
+
+
+        .brand-icon {
+
+            width: 42px;
+
+            height: 42px;
+
+            border-radius: 9px;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #4f22b8
+                );
+
+            color: white;
+
+            font-size: 18px;
+
+            box-shadow:
+                0 8px 25px rgba(124, 58, 237, 0.3);
+
+            transform: rotate(-5deg);
+        }
+
+
+        .brand-name {
+
+            font-size: 24px;
+
+            font-weight: 700;
+
+            letter-spacing: -0.8px;
+        }
+
+
+        .brand-name span {
+
+            color: #a855f7;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+
+            position: relative;
+
+            z-index: 2;
+
+            max-width: 460px;
+        }
+
+
+        .hero h1 {
+
+            font-size: 46px;
+
+            line-height: 1.05;
+
+            letter-spacing: -2px;
+
+            font-weight: 800;
+
+            margin-bottom: 18px;
+        }
+
+
+        .hero h1 .purple {
+
+            color: #a855f7;
+        }
+
+
+        .hero h1 .blue {
+
+            color: #60a5fa;
+        }
+
+
+        .hero p {
+
+            max-width: 420px;
+
+            color: #8ca4b7;
+
+            font-size: 13px;
+
+            line-height: 1.8;
+        }
+
+
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .features {
+
+            display: flex;
+
+            gap: 10px;
+
+            margin-top: 28px;
+        }
+
+
+        .feature {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 9px 12px;
+
+            border-radius: 6px;
+
+            border: 1px solid #183148;
+
+            background: rgba(5, 22, 36, 0.75);
+
+            color: #a9bbca;
+
+            font-size: 11px;
+        }
+
+
+        .feature i {
+
+            color: #a855f7;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================
+           LEFT FOOTER
+        ========================= */
+
+        .left-footer {
+
+            position: relative;
+
+            z-index: 2;
+
+            color: #50677a;
+
+            font-size: 10px;
+
+            letter-spacing: 0.3px;
+        }
+
+
+        /* =========================
+           RIGHT PANEL
+        ========================= */
+
+        .right-panel {
+
+            width: 48%;
+
+            padding: 48px 55px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+
+            background: #071827;
+        }
+
+
+        /* =========================
+           LOGIN HEADER
+        ========================= */
+
+        .login-header {
+
+            margin-bottom: 28px;
+        }
+
+
+        .login-header h2 {
+
+            font-size: 25px;
+
+            font-weight: 700;
+
+            color: #ffffff;
+
+            margin-bottom: 7px;
+        }
+
+
+        .login-header p {
+
+            font-size: 12px;
+
+            color: #71889b;
+        }
+
+
+        /* =========================
+           INPUT
+        ========================= */
+
+        .input-group {
+
+            margin-bottom: 18px;
+        }
+
+
+        .input-group label {
+
+            display: block;
+
+            margin-bottom: 7px;
+
+            font-size: 11px;
+
+            font-weight: 500;
+
+            color: #a8b8c5;
+        }
+
+
+        .input-wrapper {
+
+            position: relative;
+        }
+
+
+        .input-icon {
+
             position: absolute;
 
-            right: 15px;
+            left: 13px;
+
             top: 50%;
 
             transform: translateY(-50%);
 
+            color: #536c7f;
+
+            font-size: 13px;
+
+            pointer-events: none;
+        }
+
+
+        .input-wrapper input {
+
+            width: 100%;
+
+            height: 45px;
+
+            padding: 0 40px;
+
+            outline: none;
+
+            border-radius: 6px;
+
+            border: 1px solid #1a354b;
+
+            background: #05131f;
+
+            color: #ffffff;
+
+            font-family: "Inter", sans-serif;
+
+            font-size: 12px;
+
+            transition: 0.2s ease;
+        }
+
+
+        .input-wrapper input::placeholder {
+
+            color: #506779;
+        }
+
+
+        .input-wrapper input:focus {
+
+            border-color: #6d28d9;
+
+            background: #061622;
+
+            box-shadow:
+                0 0 0 3px rgba(109, 40, 217, 0.12);
+        }
+
+
+        /* =========================
+           PASSWORD
+        ========================= */
+
+        .password-toggle {
+
+            position: absolute;
+
+            right: 14px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            color: #536c7f;
+
+            font-size: 13px;
+
             cursor: pointer;
 
-            color: #a0aec0;
-            font-size: 14px;
+            transition: 0.2s;
         }
 
+
         .password-toggle:hover {
-            color: #319795;
+
+            color: #a855f7;
         }
+
 
         /* =========================
            OPTIONS
         ========================= */
 
         .options {
+
             display: flex;
+
             justify-content: space-between;
+
             align-items: center;
 
-            margin: 5px 0 25px;
+            margin: 3px 0 22px;
 
-            font-size: 12px;
+            font-size: 10px;
         }
+
 
         .remember {
-            display: flex;
-            align-items: center;
-            gap: 7px;
 
-            color: #718096;
+            display: flex;
+
+            align-items: center;
+
+            gap: 6px;
+
+            color: #71889b;
+
             cursor: pointer;
         }
+
 
         .remember input {
-            accent-color: #38b2ac;
+
+            width: 12px;
+
+            height: 12px;
+
+            accent-color: #7c3aed;
+
             cursor: pointer;
         }
 
+
         .forgot {
-            color: #319795;
+
+            color: #a855f7;
 
             text-decoration: none;
+
             font-weight: 500;
         }
 
+
         .forgot:hover {
+
+            color: #c084fc;
+
             text-decoration: underline;
         }
+
 
         /* =========================
            LOGIN BUTTON
         ========================= */
 
         .login-btn {
+
             width: 100%;
-            height: 50px;
+
+            height: 45px;
 
             border: none;
-            border-radius: 12px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
 
             color: white;
 
-            font-family: "Poppins", sans-serif;
-            font-size: 14px;
-            font-weight: 600;
+            font-family: "Inter", sans-serif;
 
-            cursor: pointer;
+            font-size: 12px;
+
+            font-weight: 600;
 
             background:
                 linear-gradient(
                     135deg,
-                    #38b2ac,
-                    #319795
+                    #6d28d9,
+                    #7c3aed
                 );
 
             box-shadow:
-                0 8px 20px rgba(49, 151, 149, 0.3);
+                0 8px 20px rgba(109, 40, 217, 0.25);
 
-            transition: 0.3s ease;
+            transition: 0.2s ease;
         }
+
 
         .login-btn:hover {
-            transform: translateY(-2px);
+
+            transform: translateY(-1px);
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #8b5cf6
+                );
 
             box-shadow:
-                0 12px 25px rgba(49, 151, 149, 0.4);
+                0 10px 25px rgba(109, 40, 217, 0.35);
         }
 
+
         .login-btn:active {
+
             transform: translateY(0);
         }
+
 
         /* =========================
            MESSAGE
         ========================= */
 
         #message {
+
+            min-height: 16px;
+
+            margin-top: 9px;
+
             text-align: center;
 
-            min-height: 18px;
+            font-size: 10px;
 
-            margin-top: 12px;
-
-            font-size: 12px;
             font-weight: 500;
         }
+
 
         /* =========================
            DIVIDER
         ========================= */
 
         .divider {
+
             display: flex;
+
             align-items: center;
 
-            gap: 12px;
+            gap: 10px;
 
-            margin: 25px 0;
+            margin: 22px 0;
 
-            color: #a0aec0;
+            color: #4e6476;
 
-            font-size: 10px;
+            font-size: 9px;
+
+            letter-spacing: 0.5px;
         }
+
 
         .divider::before,
         .divider::after {
+
             content: "";
+
+            flex: 1;
 
             height: 1px;
 
-            flex: 1;
-
-            background: #e2e8f0;
+            background: #183148;
         }
 
+
         /* =========================
-           SOCIAL LOGIN
+           SOCIAL BUTTONS
         ========================= */
 
         .social-login {
+
             display: flex;
-            gap: 10px;
+
+            gap: 9px;
         }
 
+
         .social-btn {
+
             flex: 1;
 
-            height: 45px;
-
-            border: 1px solid #e2e8f0;
-
-            background: white;
-
-            border-radius: 10px;
-
-            cursor: pointer;
+            height: 40px;
 
             display: flex;
+
             justify-content: center;
+
             align-items: center;
 
-            gap: 8px;
+            gap: 7px;
 
-            font-family: "Poppins", sans-serif;
-            font-size: 12px;
+            border-radius: 6px;
 
-            color: #4a5568;
+            border: 1px solid #1a354b;
+
+            background: #05131f;
+
+            color: #91a5b5;
+
+            font-family: "Inter", sans-serif;
+
+            font-size: 10px;
+
+            cursor: pointer;
 
             transition: 0.2s;
         }
 
+
         .social-btn:hover {
-            background: #f7fafc;
+
+            border-color: #36506a;
+
+            background: #081c2b;
+
+            color: white;
+
             transform: translateY(-1px);
         }
 
+
+        .social-btn i {
+
+            font-size: 13px;
+        }
+
+
         /* =========================
-           SIGN UP
+           SIGNUP
         ========================= */
 
         .signup {
+
             text-align: center;
 
-            margin-top: 25px;
+            margin-top: 22px;
 
-            font-size: 12px;
+            color: #627a8c;
 
-            color: #718096;
+            font-size: 10px;
         }
 
+
         .signup a {
-            color: #319795;
+
+            color: #a855f7;
 
             font-weight: 600;
 
             text-decoration: none;
         }
 
+
         .signup a:hover {
+
+            color: #c084fc;
+
             text-decoration: underline;
         }
+
 
         /* =========================
            RESPONSIVE
@@ -528,62 +866,113 @@
         @media (max-width: 800px) {
 
             body {
+
                 overflow-y: auto;
-                padding: 30px 0;
+
+                padding: 25px 0;
             }
 
-            .main-container {
+
+            .login-card {
+
                 flex-direction: column;
 
-                max-width: 90%;
+                max-width: 92%;
 
-                margin: 20px auto;
+                margin: auto;
             }
 
-            .left-section {
+
+            .left-panel {
+
                 width: 100%;
+
+                min-height: 360px;
+
+                padding: 35px;
+            }
+
+
+            .right-panel {
+
+                width: 100%;
+
                 padding: 40px;
             }
 
-            .right-section {
-                width: 100%;
-                padding: 40px;
-            }
 
-            .hero-content h1 {
-                font-size: 36px;
+            .hero h1 {
+
+                font-size: 38px;
             }
         }
 
+
         @media (max-width: 500px) {
 
-            .left-section {
-                padding: 30px;
+            .left-panel {
+
+                padding: 28px;
+
+                min-height: 330px;
             }
 
-            .right-section {
-                padding: 30px 25px;
+
+            .right-panel {
+
+                padding: 32px 25px;
             }
 
-            .logo {
-                width: 200px;
+
+            .brand-name {
+
+                font-size: 21px;
             }
 
-            .hero-content h1 {
-                font-size: 30px;
+
+            .brand-icon {
+
+                width: 38px;
+
+                height: 38px;
+
+                font-size: 16px;
             }
 
-            .travel-info {
-                flex-direction: column;
-                gap: 15px;
+
+            .hero h1 {
+
+                font-size: 31px;
+
+                letter-spacing: -1.2px;
             }
+
+
+            .hero p {
+
+                font-size: 11px;
+            }
+
+
+            .features {
+
+                gap: 6px;
+
+                flex-wrap: wrap;
+            }
+
+
+            .feature {
+
+                font-size: 9px;
+
+                padding: 7px 9px;
+            }
+
 
             .social-login {
-                flex-direction: column;
-            }
 
-            .options {
-                font-size: 11px;
+                flex-direction: column;
             }
         }
 
@@ -594,105 +983,135 @@
 
 <body>
 
-    <!-- Decorative Background -->
 
-    <div class="circle one"></div>
-    <div class="circle two"></div>
-    <div class="circle three"></div>
+    <!-- =========================
+         BACKGROUND
+    ========================== -->
+
+    <div class="glow one"></div>
+    <div class="glow two"></div>
+    <div class="glow three"></div>
 
 
     <!-- =========================
-         MAIN CONTAINER
+         LOGIN CARD
     ========================== -->
 
-    <div class="main-container">
+    <main class="login-card">
 
 
         <!-- =========================
-             LEFT SECTION
+             LEFT PANEL
         ========================== -->
 
-        <section class="left-section">
-
-            <div>
-
-                <img
-                    src="c:\Users\maitr\Downloads\travel-tourism-logo-isolated-on-white-background-vector.webp"
-                    alt="GlobalTrotters Logo"
-                    class="logo">
-
-            </div>
+        <section class="left-panel">
 
 
-            <div class="hero-content">
+            <!-- BRAND -->
+
+            <a href="index.html" class="brand">
+
+                <div class="brand-icon">
+
+                    <i class="fa-solid fa-plane-departure"></i>
+
+                </div>
+
+
+                <div class="brand-name">
+
+                    Trav<span>io</span>
+
+                </div>
+
+            </a>
+
+
+            <!-- HERO -->
+
+            <div class="hero">
 
                 <h1>
-                    Your journey
+
+                    Explore
                     <br>
-                    starts
-                    <span>here.</span>
+
+                    <span class="blue">The</span>
+                    <span class="purple">World.</span>
+
                 </h1>
 
 
                 <p>
-                    Discover new destinations,
-                    plan unforgettable adventures,
-                    and keep all your travel memories
-                    in one beautiful place.
+
+                    Plan unforgettable journeys,
+                    discover amazing destinations,
+                    and keep every travel experience
+                    organized in one place.
+
                 </p>
 
 
-                <div class="travel-info">
+                <!-- FEATURES -->
 
-                    <div class="info">
+                <div class="features">
 
-                        <i class="fa-solid fa-plane-departure"></i>
 
-                        <span>Explore</span>
+                    <div class="feature">
+
+                        <i class="fa-solid fa-compass"></i>
+
+                        Explore
 
                     </div>
 
 
-                    <div class="info">
+                    <div class="feature">
 
                         <i class="fa-solid fa-map-location-dot"></i>
 
-                        <span>Plan</span>
+                        Plan
 
                     </div>
 
 
-                    <div class="info">
+                    <div class="feature">
 
                         <i class="fa-solid fa-heart"></i>
 
-                        <span>Enjoy</span>
+                        Enjoy
 
                     </div>
+
 
                 </div>
 
             </div>
 
 
+            <!-- FOOTER -->
+
             <div class="left-footer">
 
-                © 2026 GlobalTrotters ·
-                Explore the world 🌎
+                © 2026 GlobeTrotter ·
+                Your journey begins here.
 
             </div>
+
 
         </section>
 
 
         <!-- =========================
-             LOGIN SECTION
+             RIGHT PANEL
         ========================== -->
 
-        <section class="right-section">
+        <section class="right-panel">
 
 
-            <div class="login-title">
+            <!-- HEADER -->
+
+            <div class="login-header">
 
                 <h2>
                     Welcome back!
@@ -705,10 +1124,12 @@
             </div>
 
 
+            <!-- FORM -->
+
             <form id="loginForm">
 
 
-                <!-- Username -->
+                <!-- USERNAME -->
 
                 <div class="input-group">
 
@@ -716,9 +1137,13 @@
                         Username
                     </label>
 
+
                     <div class="input-wrapper">
 
-                        <i class="fa-regular fa-user"></i>
+                        <i
+                            class="fa-regular fa-user input-icon">
+                        </i>
+
 
                         <input
                             type="text"
@@ -731,7 +1156,7 @@
                 </div>
 
 
-                <!-- Password -->
+                <!-- PASSWORD -->
 
                 <div class="input-group">
 
@@ -739,15 +1164,20 @@
                         Password
                     </label>
 
+
                     <div class="input-wrapper">
 
-                        <i class="fa-solid fa-lock"></i>
+                        <i
+                            class="fa-solid fa-lock input-icon">
+                        </i>
+
 
                         <input
                             type="password"
                             id="password"
                             placeholder="Enter your password"
                             autocomplete="current-password">
+
 
                         <i
                             class="fa-regular fa-eye password-toggle"
@@ -759,9 +1189,10 @@
                 </div>
 
 
-                <!-- Remember / Forgot -->
+                <!-- OPTIONS -->
 
                 <div class="options">
+
 
                     <label class="remember">
 
@@ -786,7 +1217,7 @@
                 </div>
 
 
-                <!-- Login -->
+                <!-- LOGIN BUTTON -->
 
                 <button
                     type="submit"
@@ -801,19 +1232,23 @@
 
                 <div id="message"></div>
 
+
             </form>
 
 
-            <!-- Divider -->
+            <!-- DIVIDER -->
 
             <div class="divider">
+
                 OR CONTINUE WITH
+
             </div>
 
 
-            <!-- Social Login -->
+            <!-- SOCIAL LOGIN -->
 
             <div class="social-login">
+
 
                 <button
                     class="social-btn"
@@ -838,24 +1273,29 @@
 
                 </button>
 
+
             </div>
 
 
-            <!-- Register Link -->
+            <!-- REGISTER -->
 
             <div class="signup">
 
                 Don't have an account?
 
                 <a href="register.html">
+
                     Create Account
+
                 </a>
 
             </div>
 
+
         </section>
 
-    </div>
+
+    </main>
 
 
     <!-- =========================
@@ -864,21 +1304,29 @@
 
     <script>
 
+
+        /* =========================
+           ELEMENTS
+        ========================== */
+
         const loginForm =
             document.getElementById("loginForm");
+
 
         const username =
             document.getElementById("username");
 
+
         const password =
             document.getElementById("password");
+
 
         const message =
             document.getElementById("message");
 
 
         /* =========================
-           LOGIN VALIDATION
+           LOGIN
         ========================== */
 
         loginForm.addEventListener(
@@ -887,8 +1335,10 @@
 
                 event.preventDefault();
 
+
                 const usernameValue =
                     username.value.trim();
+
 
                 const passwordValue =
                     password.value.trim();
@@ -950,13 +1400,16 @@
 
             message.textContent = text;
 
+
             if (type === "error") {
 
-                message.style.color = "#e53e3e";
+                message.style.color =
+                    "#ef4444";
 
             } else {
 
-                message.style.color = "#319795";
+                message.style.color =
+                    "#22c55e";
 
             }
 
@@ -968,7 +1421,9 @@
         ========================== */
 
         const togglePassword =
-            document.getElementById("togglePassword");
+            document.getElementById(
+                "togglePassword"
+            );
 
 
         togglePassword.addEventListener(
@@ -979,9 +1434,11 @@
 
                     password.type = "text";
 
+
                     togglePassword.classList.remove(
                         "fa-eye"
                     );
+
 
                     togglePassword.classList.add(
                         "fa-eye-slash"
@@ -991,9 +1448,11 @@
 
                     password.type = "password";
 
+
                     togglePassword.classList.remove(
                         "fa-eye-slash"
                     );
+
 
                     togglePassword.classList.add(
                         "fa-eye"
@@ -1016,6 +1475,7 @@
                 function(event) {
 
                     event.preventDefault();
+
 
                     const email =
                         prompt(
@@ -1053,6 +1513,7 @@
         }
 
     </script>
+
 
 </body>
 
