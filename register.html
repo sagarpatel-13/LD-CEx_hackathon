@@ -1,1370 +1,758 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>GlobalTrotters | Register</title>
-
+<title>Travio - Register</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+    --bg:#020b16;
+    --sidebar:#06101e;
+    --panel:#081827;
+    --panel2:#0b1d2d;
+    --border:#1a3147;
+    --text:#f5f7fb;
+    --muted:#91a0b4;
+    --purple:#7629e8;
+    --purple2:#9a45f5;
+    --green:#1fd18b;
+}
+body{
+    font-family:"Poppins",sans-serif;
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 80% 10%,rgba(118,41,232,.13),transparent 30%),
+        radial-gradient(circle at 60% 90%,rgba(31,209,139,.06),transparent 28%),
+        var(--bg);
+    color:var(--text);
 }
 
-body {
-    font-family: "Poppins", sans-serif;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-    padding: 30px;
-    position: relative;
-    overflow-x: hidden;
+/* ================= LEFT SIDEBAR ================= */
+.sidebar{
+    display:none !important;
+    position:fixed;
+    left:0;
+    top:0;
+    width:285px;
+    height:100vh;
+    padding:24px 18px;
+    background:linear-gradient(180deg,#071222,#040c17);
+    border-right:1px solid #172a3d;
+    z-index:100;
+    display:flex;
+    flex-direction:column;
+    overflow-y:auto;
+}
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:0 10px 28px;
+    font-size:23px;
+    font-weight:700;
+}
+.brand-icon{
+    width:35px;height:35px;border-radius:9px;
+    display:grid;place-items:center;
+    background:linear-gradient(135deg,#7130e9,#b34eea);
+    box-shadow:0 8px 22px rgba(118,41,232,.35);
+    font-size:18px;
+}
+.menu-label{
+    color:#69788d;
+    font-size:11px;
+    letter-spacing:1.4px;
+    font-weight:600;
+    padding:0 15px 12px;
+}
+.nav{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+.nav a{
+    color:#aab5c5;
+    text-decoration:none;
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:12px 15px;
+    border-radius:9px;
+    font-size:14px;
+    transition:.2s;
+}
+.nav a i{width:18px;text-align:center;font-size:14px}
+.nav a:hover{color:#fff;background:#111e30}
+.nav a.active{
+    color:#fff;
+    background:linear-gradient(90deg,#6530dc,#7834e9);
+    box-shadow:0 8px 22px rgba(103,43,220,.28);
+}
+.sidebar-cta{
+    margin-top:auto;
+    padding:20px 16px;
+    min-height:142px;
+    border-radius:12px;
+    background:linear-gradient(145deg,#7b35e7,#d34eac);
+    position:relative;
+    overflow:hidden;
+}
+.sidebar-cta:after{
+    content:"✈";
+    position:absolute;
+    right:14px;
+    top:18px;
+    font-size:27px;
+    transform:rotate(-15deg);
+    opacity:.75;
+}
+.sidebar-cta h3{font-size:16px;line-height:1.35;margin-bottom:8px}
+.sidebar-cta p{font-size:11px;line-height:1.5;color:#f4eaff}
+.sidebar-cta button{
+    margin-top:12px;
+    border:0;
+    padding:8px 13px;
+    border-radius:7px;
+    background:#fff;
+    color:#6530c9;
+    font-weight:700;
+    font-size:11px;
 }
 
-.circle {
-    position: fixed;
-    border-radius: 50%;
-    opacity: 0.35;
-    z-index: 0;
+/* ================= MAIN ================= */
+.main{
+    margin-left:0;
+    min-height:100vh;
+    padding:34px 42px 45px;
+}
+.topbar{
+    display:none;
+    justify-content:flex-end;
+    align-items:center;
+    margin-bottom:25px;
+}
+.user{
+    display:flex;align-items:center;gap:10px;
+    color:#dce3ed;font-size:13px;font-weight:600;
+}
+.user-avatar{
+    width:38px;height:38px;border-radius:50%;
+    display:grid;place-items:center;
+    background:linear-gradient(135deg,#f2a77e,#8d4cbd);
+    border:2px solid #314359;
 }
 
-.circle.one {
-    width: 300px;
-    height: 300px;
-    background: #4fd1c5;
-    top: -120px;
-    left: -100px;
+/* ================= REGISTER LAYOUT ================= */
+.register-shell{
+    width:min(1080px,100%);
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:360px 1fr;
+    border:1px solid var(--border);
+    border-radius:18px;
+    overflow:hidden;
+    background:rgba(7,20,33,.94);
+    box-shadow:0 25px 70px rgba(0,0,0,.35);
+}
+.intro{
+    padding:42px 35px;
+    background:
+        linear-gradient(145deg,rgba(118,41,232,.25),rgba(4,15,26,.7)),
+        #071524;
+    border-right:1px solid var(--border);
+    position:relative;
+    overflow:hidden;
+}
+.intro:before{
+    content:"";
+    width:210px;height:210px;
+    border-radius:50%;
+    position:absolute;
+    right:-105px;top:-80px;
+    background:rgba(159,69,245,.18);
+}
+.intro-logo{
+    display:flex;align-items:center;gap:10px;
+    font-size:20px;font-weight:700;
+    margin-bottom:70px;
+}
+.intro-logo-icon{
+    width:36px;height:36px;border-radius:10px;
+    display:grid;place-items:center;
+    background:linear-gradient(135deg,#702de1,#a842ed);
+}
+.intro h1{
+    font-size:35px;
+    line-height:1.15;
+    margin-bottom:17px;
+}
+.intro h1 span{
+    background:linear-gradient(90deg,#a85cff,#e78bd5);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+.intro > p{
+    color:#9aa9ba;
+    font-size:13px;
+    line-height:1.8;
+    margin-bottom:30px;
+}
+.benefit{
+    display:flex;align-items:center;gap:12px;
+    color:#c4cedb;
+    font-size:12px;
+    margin:17px 0;
+}
+.benefit i{
+    width:35px;height:35px;
+    display:grid;place-items:center;
+    border-radius:9px;
+    color:#b56bff;
+    background:rgba(118,41,232,.15);
+    border:1px solid rgba(149,76,244,.18);
+}
+.intro-footer{
+    position:absolute;
+    bottom:25px;
+    color:#5f7186;
+    font-size:10px;
 }
 
-.circle.two {
-    width: 350px;
-    height: 350px;
-    background: #667eea;
-    right: -130px;
-    bottom: -150px;
+/* ================= FORM ================= */
+.form-section{
+    padding:38px 42px;
+    background:rgba(5,16,28,.92);
 }
-
-.circle.three {
-    width: 140px;
-    height: 140px;
-    background: #f6ad55;
-    right: 18%;
-    top: 5%;
+.header{
+    margin-bottom:25px;
 }
+.header h2{font-size:27px;margin-bottom:5px}
+.header p{color:var(--muted);font-size:12px}
 
-.main-container {
-    width: 1050px;
-    max-width: 100%;
-    min-height: 650px;
-    display: flex;
-    overflow: hidden;
-    border-radius: 25px;
-    background: rgba(255,255,255,0.12);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
-    border: 1px solid rgba(255,255,255,0.2);
-    box-shadow: 0 30px 70px rgba(0,0,0,0.35);
-    position: relative;
-    z-index: 2;
+.photo-row{
+    display:flex;align-items:center;gap:15px;
+    padding:13px 15px;
+    margin-bottom:23px;
+    border:1px solid var(--border);
+    border-radius:11px;
+    background:#091a2a;
 }
-
-.left-section {
-    width: 38%;
-    padding: 45px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    color: white;
-    background: linear-gradient(145deg, rgba(0,0,0,0.28), rgba(255,255,255,0.05));
+.photo-preview{
+    width:58px;height:58px;
+    border-radius:50%;
+    border:1px dashed #7137d9;
+    display:grid;place-items:center;
+    overflow:hidden;
+    color:#a965f7;
+    background:#0d2033;
+    flex-shrink:0;
 }
-
-.logo {
-    width: 220px;
-    height: auto;
-    object-fit: contain;
-    filter: drop-shadow(0 8px 15px rgba(0,0,0,0.25));
-    transition: 0.3s ease;
+.photo-preview img{width:100%;height:100%;object-fit:cover}
+.photo-info h4{font-size:12px;margin-bottom:3px}
+.photo-info p{font-size:10px;color:#718196;margin-bottom:7px}
+.upload-btn{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:6px;
+    background:#21123b;
+    color:#bb83ff;
+    border:1px solid #482080;
+    font-size:10px;
+    cursor:pointer;
 }
+#photoInput{display:none}
 
-.logo:hover {
-    transform: scale(1.03);
+.two-column{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
 }
-
-.left-content {
-    margin-top: 20px;
+.form-group{margin-bottom:15px}
+.form-group label{
+    display:block;
+    color:#aebaca;
+    font-size:10px;
+    font-weight:500;
+    margin-bottom:6px;
 }
-
-.left-content h1 {
-    font-size: 38px;
-    line-height: 1.2;
-    margin-bottom: 18px;
+.input-wrapper{position:relative}
+.input-wrapper>i:first-child{
+    position:absolute;
+    left:13px;top:50%;
+    transform:translateY(-50%);
+    color:#64768a;
+    font-size:12px;
+    pointer-events:none;
+    z-index:2;
 }
-
-.left-content h1 span {
-    color: #4fd1c5;
-}
-
-.left-content p {
-    font-size: 14px;
-    line-height: 1.8;
-    color: rgba(255,255,255,0.75);
-}
-
-.benefits {
-    margin-top: 30px;
-}
-
-.benefit {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 16px;
-    font-size: 13px;
-    color: rgba(255,255,255,0.8);
-}
-
-.benefit i {
-    width: 35px;
-    height: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    background: rgba(79,209,197,0.15);
-    color: #4fd1c5;
-}
-
-.left-footer {
-    font-size: 11px;
-    color: rgba(255,255,255,0.5);
-}
-
-.right-section {
-    width: 62%;
-    background: rgba(255,255,255,0.97);
-    padding: 40px 50px;
-    overflow-y: auto;
-}
-
-.register-header {
-    margin-bottom: 25px;
-}
-
-.register-header h2 {
-    font-size: 29px;
-    color: #1a202c;
-    margin-bottom: 6px;
-}
-
-.register-header p {
-    font-size: 13px;
-    color: #718096;
-}
-
-.photo-section {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    margin-bottom: 25px;
-}
-
-.photo-preview {
-    width: 75px;
-    height: 75px;
-    border-radius: 50%;
-    border: 2px dashed #38b2ac;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    background: #f0fdfa;
-    color: #319795;
-    flex-shrink: 0;
-}
-
-.photo-preview i {
-    font-size: 25px;
-}
-
-.photo-preview img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.photo-info h4 {
-    font-size: 13px;
-    color: #2d3748;
-    margin-bottom: 4px;
-}
-
-.photo-info p {
-    font-size: 11px;
-    color: #a0aec0;
-    margin-bottom: 8px;
-}
-
-.upload-btn {
-    display: inline-block;
-    padding: 6px 12px;
-    background: #e6fffa;
-    color: #319795;
-    border-radius: 7px;
-    font-size: 11px;
-    font-weight: 500;
-    cursor: pointer;
-}
-
-.upload-btn:hover {
-    background: #b2f5ea;
-}
-
-#photoInput {
-    display: none;
-}
-
-.form-group {
-    margin-bottom: 16px;
-    position: relative;
-}
-
-.form-group label {
-    display: block;
-    font-size: 12px;
-    font-weight: 500;
-    color: #4a5568;
-    margin-bottom: 7px;
-}
-
-.two-column {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
-}
-
-.input-wrapper {
-    position: relative;
-}
-
-.input-wrapper > i:first-child {
-    position: absolute;
-    left: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #a0aec0;
-    font-size: 14px;
-    pointer-events: none;
-    z-index: 2;
-}
-
 .input-wrapper input,
-.input-wrapper select {
-    width: 100%;
-    height: 45px;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 0 40px;
-    outline: none;
-    background: #f8fafc;
-    font-family: "Poppins", sans-serif;
-    font-size: 12px;
-    color: #2d3748;
-    transition: 0.3s ease;
+.input-wrapper select{
+    width:100%;
+    height:43px;
+    border:1px solid #1c344a;
+    border-radius:8px;
+    outline:none;
+    background:#071522;
+    color:#dce4ee;
+    padding:0 38px;
+    font-family:inherit;
+    font-size:11px;
+    transition:.2s;
 }
-
+.input-wrapper input::placeholder{color:#53657a}
 .input-wrapper input:focus,
-.input-wrapper select:focus {
-    border-color: #38b2ac;
-    background: white;
-    box-shadow: 0 0 0 3px rgba(56,178,172,0.1);
+.input-wrapper select:focus,
+textarea:focus{
+    border-color:#7538e4;
+    box-shadow:0 0 0 3px rgba(118,41,232,.1);
 }
-
-.input-wrapper select {
-    appearance: none;
-    cursor: pointer;
-    padding-right: 38px;
+.input-wrapper select{
+    appearance:none;
+    cursor:pointer;
+    padding-right:35px;
 }
-
-.input-wrapper select:disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
+.input-wrapper select option{background:#081827;color:#fff}
+.dropdown-arrow{
+    position:absolute!important;
+    right:13px;
+    left:auto!important;
+    top:50%;
+    transform:translateY(-50%);
+    color:#65778b!important;
+    pointer-events:none!important;
 }
-
-.input-wrapper select option {
-    color: #2d3748;
-    background: white;
+.password-toggle{
+    position:absolute!important;
+    right:13px;
+    left:auto!important;
+    top:50%;
+    transform:translateY(-50%);
+    color:#65778b!important;
+    cursor:pointer;
+    pointer-events:auto!important;
 }
-
-.dropdown-arrow {
-    position: absolute !important;
-    right: 14px;
-    left: auto !important;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #a0aec0;
-    font-size: 11px;
-    pointer-events: none;
+.password-input{padding-right:38px!important}
+textarea{
+    width:100%;
+    min-height:75px;
+    resize:vertical;
+    border:1px solid #1c344a;
+    border-radius:8px;
+    outline:none;
+    background:#071522;
+    color:#dce4ee;
+    padding:11px 13px;
+    font-family:inherit;
+    font-size:11px;
 }
+textarea::placeholder{color:#53657a}
 
-textarea {
-    width: 100%;
-    min-height: 80px;
-    resize: vertical;
-    border: 1px solid #e2e8f0;
-    border-radius: 10px;
-    padding: 12px 14px;
-    outline: none;
-    background: #f8fafc;
-    font-family: "Poppins", sans-serif;
-    font-size: 12px;
-    color: #2d3748;
-    transition: 0.3s ease;
+.register-btn{
+    width:100%;
+    height:45px;
+    border:0;
+    border-radius:8px;
+    background:linear-gradient(90deg,#6724d8,#8737e9);
+    color:#fff;
+    font-family:inherit;
+    font-size:12px;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 8px 24px rgba(104,38,215,.25);
+    transition:.2s;
 }
+.register-btn:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(104,38,215,.35)}
+#message{text-align:center;min-height:17px;margin-top:9px;font-size:10px;font-weight:500}
+.login-link{text-align:center;margin-top:17px;color:#75869a;font-size:11px}
+.login-link a{color:#a95bfa;text-decoration:none;font-weight:600}
+.login-link a:hover{text-decoration:underline}
+.terms{text-align:center;color:#53657a;font-size:9px;line-height:1.5;margin-top:10px}
+.terms a{color:#8c52d5;text-decoration:none}
 
-textarea:focus {
-    border-color: #38b2ac;
-    background: white;
-    box-shadow: 0 0 0 3px rgba(56,178,172,0.1);
+/* ================= RESPONSIVE ================= */
+@media(max-width:1000px){
+    .sidebar{width:235px}
+    .main{margin-left:235px;padding:25px}
+    .register-shell{grid-template-columns:300px 1fr}
 }
-
-.password-toggle {
-    position: absolute !important;
-    right: 14px;
-    left: auto !important;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #a0aec0;
-    cursor: pointer;
-    font-size: 13px;
-    z-index: 3;
-    pointer-events: auto !important;
-}
-
-.password-input {
-    padding-right: 40px !important;
-}
-
-.register-btn {
-    width: 100%;
-    height: 48px;
-    border: none;
-    border-radius: 11px;
-    background: linear-gradient(135deg, #38b2ac, #319795);
-    color: white;
-    font-family: "Poppins", sans-serif;
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(49,151,149,0.25);
-    transition: 0.3s ease;
-    margin-top: 5px;
-}
-
-.register-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 25px rgba(49,151,149,0.35);
-}
-
-#message {
-    text-align: center;
-    min-height: 18px;
-    margin-top: 10px;
-    font-size: 11px;
-    font-weight: 500;
-}
-
-.login-link {
-    text-align: center;
-    margin-top: 18px;
-    font-size: 12px;
-    color: #718096;
-}
-
-.login-link a {
-    color: #319795;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.login-link a:hover {
-    text-decoration: underline;
-}
-
-.terms {
-    text-align: center;
-    font-size: 10px;
-    color: #a0aec0;
-    margin-top: 12px;
-    line-height: 1.5;
-}
-
-.terms a {
-    color: #319795;
-    text-decoration: none;
-}
-
-@media (max-width: 850px) {
-
-    body {
-        padding: 20px;
-        align-items: flex-start;
-        overflow-y: auto;
+@media(max-width:760px){
+    .sidebar{
+        width:72px;
+        padding:18px 10px;
     }
-
-    .main-container {
-        flex-direction: column;
-        margin: 20px auto;
+    .brand{justify-content:center;padding:0 0 25px}
+    .brand span,.menu-label,.nav a span,.sidebar-cta{display:none}
+    .nav a{justify-content:center;padding:12px}
+    .nav a i{margin:0}
+    .main{margin-left:72px;padding:18px}
+    .register-shell{grid-template-columns:1fr}
+    .intro{
+        border-right:0;
+        border-bottom:1px solid var(--border);
+        padding:30px;
     }
-
-    .left-section {
-        width: 100%;
-        padding: 35px;
-    }
-
-    .right-section {
-        width: 100%;
-        padding: 35px;
-    }
+    .intro-logo{margin-bottom:35px}
+    .intro-footer{display:none}
+}
+@media(max-width:560px){
+    .main{padding:12px}
+    .form-section{padding:27px 20px}
+    .two-column{grid-template-columns:1fr;gap:0}
+    .intro h1{font-size:29px}
+    .photo-row{align-items:flex-start}
 }
 
-@media (max-width: 550px) {
+/* ================= MENU REMOVED ================= */
+.sidebar{display:none !important;}
+.main{
+    margin-left:0 !important;
+    padding:34px 42px 45px !important;
+}
+.topbar{display:none !important;}
 
-    .two-column {
-        grid-template-columns: 1fr;
-        gap: 0;
-    }
-
-    .left-section {
-        padding: 30px;
-    }
-
-    .right-section {
-        padding: 30px 25px;
-    }
-
-    .logo {
-        width: 190px;
-    }
-
-    .left-content h1 {
-        font-size: 30px;
-    }
-
-    .photo-section {
-        align-items: flex-start;
-    }
+@media (max-width:760px){
+    .main{padding:22px 16px 30px !important;}
 }
 
 </style>
-
 </head>
 
 <body>
 
-<div class="circle one"></div>
-
-<div class="circle two"></div>
-
-<div class="circle three"></div>
-
-<div class="main-container">
-
-<section class="left-section">
-
-<div>
-
-<img
-src="c:\Users\maitr\Downloads\travel-tourism-logo-isolated-on-white-background-vector.webp"
-alt="GlobalTrotters Logo"
-class="logo">
-
-</div>
-
-<div class="left-content">
-
-<h1>
-Start your
-<br>
-<span>adventure.</span>
-</h1>
-
-<p>
-Create your GlobalTrotters account
-and start planning amazing journeys
-around the world.
-</p>
-
-<div class="benefits">
-
-<div class="benefit">
-<i class="fa-solid fa-map-location-dot"></i>
-<span>Plan and organize your trips</span>
-</div>
-
-<div class="benefit">
-<i class="fa-solid fa-earth-americas"></i>
-<span>Discover amazing destinations</span>
-</div>
-
-<div class="benefit">
-<i class="fa-solid fa-wallet"></i>
-<span>Track your travel budget</span>
-</div>
-
-<div class="benefit">
-<i class="fa-solid fa-heart"></i>
-<span>Save your favorite places</span>
-</div>
-
-</div>
-
-</div>
-
-<div class="left-footer">
-© 2026 GlobalTrotters · Plan • Explore • Travel
-</div>
-
-</section>
-
-<section class="right-section">
-
-<div class="register-header">
-
-<h2>Create your account</h2>
-
-<p>
-Join GlobalTrotters and start your journey.
-</p>
-
-</div>
-
-<div class="photo-section">
-
-<div class="photo-preview" id="photoPreview">
-
-<i class="fa-regular fa-user"></i>
-
-</div>
-
-<div class="photo-info">
-
-<h4>Profile Photo</h4>
-
-<p>
-Add a photo to personalize your profile.
-</p>
-
-<label
-for="photoInput"
-class="upload-btn">
-
-<i class="fa-solid fa-upload"></i>
-Upload Photo
-
-</label>
-
-<input
-type="file"
-id="photoInput"
-accept="image/*">
-
-</div>
-
-</div>
-
-<form id="registerForm">
-
-<div class="two-column">
-
-<div class="form-group">
-
-<label for="firstName">
-First Name *
-</label>
-
-<div class="input-wrapper">
-
-<i class="fa-regular fa-user"></i>
-
-<input
-type="text"
-id="firstName"
-placeholder="First Name"
-required>
-
-</div>
-
-</div>
-
-<div class="form-group">
-
-<label for="lastName">
-Last Name *
-</label>
-
-<div class="input-wrapper">
-
-<i class="fa-regular fa-user"></i>
-
-<input
-type="text"
-id="lastName"
-placeholder="Last Name"
-required>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="two-column">
-
-<div class="form-group">
-
-<label for="email">
-Email Address *
-</label>
-
-<div class="input-wrapper">
-
-<i class="fa-regular fa-envelope"></i>
-
-<input
-type="email"
-id="email"
-placeholder="Email Address"
-required>
-
-</div>
-
-</div>
-
-<div class="form-group">
-
-<label for="phone">
-Phone Number *
-</label>
-
-<div class="input-wrapper">
-
-<i class="fa-solid fa-phone"></i>
-
-<input
-type="tel"
-id="phone"
-placeholder="10-digit Phone Number"
-maxlength="10"
-required>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="two-column">
-
-<div class="form-group">
-
-<label for="country">
-Country *
-</label>
-
-<div class="input-wrapper">
-
-<i class="fa-solid fa-earth-americas"></i>
-
-<select id="country" required>
-
-<option value="" selected disabled>
-Select Country
-</option>
-
-<option value="India">India</option>
-<option value="United States">United States</option>
-<option value="United Kingdom">United Kingdom</option>
-<option value="Canada">Canada</option>
-<option value="Australia">Australia</option>
-<option value="Germany">Germany</option>
-<option value="France">France</option>
-<option value="Italy">Italy</option>
-<option value="Spain">Spain</option>
-<option value="Japan">Japan</option>
-<option value="China">China</option>
-<option value="Singapore">Singapore</option>
-<option value="United Arab Emirates">United Arab Emirates</option>
-<option value="Thailand">Thailand</option>
-<option value="Malaysia">Malaysia</option>
-<option value="Nepal">Nepal</option>
-<option value="Sri Lanka">Sri Lanka</option>
-<option value="New Zealand">New Zealand</option>
-<option value="South Africa">South Africa</option>
-<option value="Brazil">Brazil</option>
-
-</select>
-
-<i class="fa-solid fa-chevron-down dropdown-arrow"></i>
-
-</div>
-
-</div>
-
-<div class="form-group">
-
-<label for="city">
-City *
-</label>
-
-<div class="input-wrapper">
-
-<i class="fa-solid fa-city"></i>
-
-<select
-id="city"
-required
-disabled>
-
-<option value="" selected disabled>
-Select City
-</option>
-
-</select>
-
-<i class="fa-solid fa-chevron-down dropdown-arrow"></i>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="two-column">
-
-<div class="form-group">
-
-<label for="password">
-Password *
-</label>
-
-<div class="input-wrapper">
-
-<i class="fa-solid fa-lock"></i>
-
-<input
-type="password"
-id="password"
-class="password-input"
-placeholder="Create password"
-required>
-
-<i
-class="fa-regular fa-eye password-toggle"
-data-target="password">
-</i>
-
-</div>
-
-</div>
-
-<div class="form-group">
-
-<label for="confirmPassword">
-Confirm Password *
-</label>
-
-<div class="input-wrapper">
-
-<i class="fa-solid fa-lock"></i>
-
-<input
-type="password"
-id="confirmPassword"
-class="password-input"
-placeholder="Confirm password"
-required>
-
-<i
-class="fa-regular fa-eye password-toggle"
-data-target="confirmPassword">
-</i>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="form-group">
-
-<label for="additionalInfo">
-Additional Information
-</label>
-
-<textarea
-id="additionalInfo"
-placeholder="Tell us a little about yourself, your travel interests, or anything else..."></textarea>
-
-</div>
-
-<button
-type="submit"
-class="register-btn">
-
-<i class="fa-solid fa-user-plus"></i>
-
-&nbsp; Register User
-
-</button>
-
-<div id="message"></div>
-
-</form>
-
-<div class="login-link">
-
-Already have an account?
-
-<a href="login.html">
-Login
-</a>
-
-</div>
-
-<div class="terms">
-
-By creating an account, you agree to our
-
-<a href="#">
-Terms of Service
-</a>
-
-and
-
-<a href="#">
-Privacy Policy
-</a>
-
-</div>
-
-</section>
-
-</div>
+<!-- ================= LEFT MENU ================= -->
+<aside class="sidebar">
+    <div class="brand">
+        <div class="brand-icon">✈</div>
+        <span>Travio</span>
+    </div>
+
+    <div class="menu-label">MAIN MENU</div>
+
+    <nav class="nav">
+        <a href="#"><i class="fa-solid fa-house"></i><span>Dashboard</span></a>
+        <a href="#"><i class="fa-solid fa-pen-to-square"></i><span>Create Trip</span></a>
+        <a href="#"><i class="fa-solid fa-suitcase"></i><span>My Trips</span></a>
+        <a href="#"><i class="fa-solid fa-route"></i><span>Itinerary Builder</span></a>
+        <a href="#"><i class="fa-solid fa-list-check"></i><span>Itinerary View</span></a>
+        <a href="#"><i class="fa-solid fa-magnifying-glass"></i><span>City Search</span></a>
+        <a href="#"><i class="fa-solid fa-person-hiking"></i><span>Activities</span></a>
+        <a href="#"><i class="fa-solid fa-wallet"></i><span>Budget</span></a>
+        <a href="#"><i class="fa-regular fa-calendar"></i><span>Calendar</span></a>
+        <a href="#"><i class="fa-solid fa-share-nodes"></i><span>Shared Trip</span></a>
+        <a href="#"><i class="fa-solid fa-gear"></i><span>Settings</span></a>
+    </nav>
+
+    <div class="sidebar-cta">
+        <h3>Let's make your dream journey come true!</h3>
+        <p>Plan unforgettable adventures with Travio.</p>
+        <button type="button">Get Started</button>
+    </div>
+</aside>
+
+<!-- ================= MAIN ================= -->
+<main class="main">
+    <div class="topbar">
+        <div class="user">
+            <div class="user-avatar"><i class="fa-solid fa-user"></i></div>
+        </div>
+    </div>
+
+    <div class="register-shell">
+
+        <section class="intro">
+            <div>
+                <div class="intro-logo">
+                    <div class="intro-logo-icon">✈</div>
+                    Travio
+                </div>
+
+                <h1>Start your<br><span>adventure.</span></h1>
+
+                <p>
+                    Create your Travio account and start
+                    planning amazing journeys around the world.
+                </p>
+
+                <div class="benefit">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <span>Plan and organize your trips</span>
+                </div>
+
+                <div class="benefit">
+                    <i class="fa-solid fa-earth-americas"></i>
+                    <span>Discover amazing destinations</span>
+                </div>
+
+                <div class="benefit">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Track your travel budget</span>
+                </div>
+
+                <div class="benefit">
+                    <i class="fa-solid fa-heart"></i>
+                    <span>Save your favorite places</span>
+                </div>
+            </div>
+
+            <div class="intro-footer">
+                © 2026 Travio · Plan • Explore • Travel
+            </div>
+        </section>
+
+        <section class="form-section">
+            <div class="header">
+                <h2>Create your account</h2>
+                <p>Join Travio and start your journey.</p>
+            </div>
+
+            <div class="photo-row">
+                <div class="photo-preview" id="photoPreview">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+                <div class="photo-info">
+                    <h4>Profile Photo</h4>
+                    <p>Add a photo to personalize your profile.</p>
+                    <label for="photoInput" class="upload-btn">
+                        <i class="fa-solid fa-upload"></i> Upload Photo
+                    </label>
+                    <input type="file" id="photoInput" accept="image/*">
+                </div>
+            </div>
+
+            <form id="registerForm">
+                <div class="two-column">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" id="firstName" placeholder="First Name" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-user"></i>
+                            <input type="text" id="lastName" placeholder="Last Name" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two-column">
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <div class="input-wrapper">
+                            <i class="fa-regular fa-envelope"></i>
+                            <input type="email" id="email" placeholder="Email Address" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-phone"></i>
+                            <input type="tel" id="phone" placeholder="10-digit Phone Number" maxlength="10" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two-column">
+                    <div class="form-group">
+                        <label for="country">Country *</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-earth-americas"></i>
+                            <select id="country" required>
+                                <option value="" selected disabled>Select Country</option>
+                                <option>India</option>
+                                <option>United States</option>
+                                <option>United Kingdom</option>
+                                <option>Canada</option>
+                                <option>Australia</option>
+                                <option>Germany</option>
+                                <option>France</option>
+                                <option>Italy</option>
+                                <option>Spain</option>
+                                <option>Japan</option>
+                                <option>China</option>
+                                <option>Singapore</option>
+                                <option>United Arab Emirates</option>
+                                <option>Thailand</option>
+                                <option>Malaysia</option>
+                                <option>Nepal</option>
+                                <option>Sri Lanka</option>
+                                <option>New Zealand</option>
+                                <option>South Africa</option>
+                                <option>Brazil</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">City *</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-city"></i>
+                            <select id="city" required disabled>
+                                <option value="" selected disabled>Select City</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="two-column">
+                    <div class="form-group">
+                        <label for="password">Password *</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="password" class="password-input" placeholder="Create password" required>
+                            <i class="fa-regular fa-eye password-toggle" data-target="password"></i>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password *</label>
+                        <div class="input-wrapper">
+                            <i class="fa-solid fa-lock"></i>
+                            <input type="password" id="confirmPassword" class="password-input" placeholder="Confirm password" required>
+                            <i class="fa-regular fa-eye password-toggle" data-target="confirmPassword"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="additionalInfo">Additional Information</label>
+                    <textarea id="additionalInfo" placeholder="Tell us a little about yourself, your travel interests, or anything else..."></textarea>
+                </div>
+
+                <button type="submit" class="register-btn">
+                    <i class="fa-solid fa-user-plus"></i>&nbsp; Register User
+                </button>
+
+                <div id="message"></div>
+            </form>
+
+            <div class="login-link">
+                Already have an account? <a href="login.html">Login</a>
+            </div>
+
+            <div class="terms">
+                By creating an account, you agree to our
+                <a href="#">Terms of Service</a> and
+                <a href="#">Privacy Policy</a>
+            </div>
+        </section>
+    </div>
+</main>
 
 <script>
-
-const countrySelect =
-document.getElementById("country");
-
-const citySelect =
-document.getElementById("city");
+const countrySelect = document.getElementById("country");
+const citySelect = document.getElementById("city");
 
 const cities = {
-
-India: [
-"Ahmedabad",
-"Gandhinagar",
-"Mumbai",
-"Delhi",
-"Bangalore",
-"Chennai",
-"Hyderabad",
-"Kolkata",
-"Pune",
-"Jaipur",
-"Surat",
-"Vadodara",
-"Goa"
-],
-
-"United States": [
-"New York",
-"Los Angeles",
-"Chicago",
-"San Francisco",
-"Las Vegas",
-"Miami",
-"Boston",
-"Seattle",
-"Washington D.C."
-],
-
-"United Kingdom": [
-"London",
-"Manchester",
-"Birmingham",
-"Liverpool",
-"Edinburgh",
-"Glasgow",
-"Bristol",
-"Oxford"
-],
-
-Canada: [
-"Toronto",
-"Vancouver",
-"Montreal",
-"Calgary",
-"Ottawa",
-"Edmonton",
-"Quebec City"
-],
-
-Australia: [
-"Sydney",
-"Melbourne",
-"Brisbane",
-"Perth",
-"Adelaide",
-"Canberra",
-"Gold Coast"
-],
-
-Germany: [
-"Berlin",
-"Munich",
-"Hamburg",
-"Frankfurt",
-"Cologne",
-"Stuttgart"
-],
-
-France: [
-"Paris",
-"Nice",
-"Lyon",
-"Marseille",
-"Bordeaux",
-"Toulouse"
-],
-
-Italy: [
-"Rome",
-"Milan",
-"Venice",
-"Florence",
-"Naples",
-"Turin"
-],
-
-Spain: [
-"Madrid",
-"Barcelona",
-"Valencia",
-"Seville",
-"Malaga",
-"Bilbao"
-],
-
-Japan: [
-"Tokyo",
-"Osaka",
-"Kyoto",
-"Yokohama",
-"Nagoya",
-"Sapporo"
-],
-
-China: [
-"Beijing",
-"Shanghai",
-"Guangzhou",
-"Shenzhen",
-"Chengdu",
-"Hong Kong"
-],
-
-Singapore: [
-"Singapore"
-],
-
-"United Arab Emirates": [
-"Dubai",
-"Abu Dhabi",
-"Sharjah",
-"Ajman"
-],
-
-Thailand: [
-"Bangkok",
-"Phuket",
-"Pattaya",
-"Chiang Mai",
-"Krabi"
-],
-
-Malaysia: [
-"Kuala Lumpur",
-"George Town",
-"Johor Bahru",
-"Malacca",
-"Kota Kinabalu"
-],
-
-Nepal: [
-"Kathmandu",
-"Pokhara",
-"Lalitpur",
-"Bhaktapur"
-],
-
-"Sri Lanka": [
-"Colombo",
-"Kandy",
-"Galle",
-"Jaffna",
-"Negombo"
-],
-
-"New Zealand": [
-"Auckland",
-"Wellington",
-"Christchurch",
-"Queenstown",
-"Hamilton"
-],
-
-"South Africa": [
-"Cape Town",
-"Johannesburg",
-"Durban",
-"Pretoria",
-"Port Elizabeth"
-],
-
-Brazil: [
-"São Paulo",
-"Rio de Janeiro",
-"Brasília",
-"Salvador",
-"Fortaleza"
-]
-
+    India:["Ahmedabad","Gandhinagar","Mumbai","Delhi","Bangalore","Chennai","Hyderabad","Kolkata","Pune","Jaipur","Surat","Vadodara","Goa"],
+    "United States":["New York","Los Angeles","Chicago","San Francisco","Las Vegas","Miami","Boston","Seattle","Washington D.C."],
+    "United Kingdom":["London","Manchester","Birmingham","Liverpool","Edinburgh","Glasgow","Bristol","Oxford"],
+    Canada:["Toronto","Vancouver","Montreal","Calgary","Ottawa","Edmonton","Quebec City"],
+    Australia:["Sydney","Melbourne","Brisbane","Perth","Adelaide","Canberra","Gold Coast"],
+    Germany:["Berlin","Munich","Hamburg","Frankfurt","Cologne","Stuttgart"],
+    France:["Paris","Nice","Lyon","Marseille","Bordeaux","Toulouse"],
+    Italy:["Rome","Milan","Venice","Florence","Naples","Turin"],
+    Spain:["Madrid","Barcelona","Valencia","Seville","Malaga","Bilbao"],
+    Japan:["Tokyo","Osaka","Kyoto","Yokohama","Nagoya","Sapporo"],
+    China:["Beijing","Shanghai","Guangzhou","Shenzhen","Chengdu","Hong Kong"],
+    Singapore:["Singapore"],
+    "United Arab Emirates":["Dubai","Abu Dhabi","Sharjah","Ajman"],
+    Thailand:["Bangkok","Phuket","Pattaya","Chiang Mai","Krabi"],
+    Malaysia:["Kuala Lumpur","George Town","Johor Bahru","Malacca","Kota Kinabalu"],
+    Nepal:["Kathmandu","Pokhara","Lalitpur","Bhaktapur"],
+    "Sri Lanka":["Colombo","Kandy","Galle","Jaffna","Negombo"],
+    "New Zealand":["Auckland","Wellington","Christchurch","Queenstown","Hamilton"],
+    "South Africa":["Cape Town","Johannesburg","Durban","Pretoria","Port Elizabeth"],
+    Brazil:["São Paulo","Rio de Janeiro","Brasília","Salvador","Fortaleza"]
 };
 
-countrySelect.addEventListener("change", function() {
-
-const selectedCountry = this.value;
-
-citySelect.innerHTML =
-'<option value="" selected disabled>Select City</option>';
-
-if (cities[selectedCountry]) {
-
-cities[selectedCountry].forEach(function(city) {
-
-const option =
-document.createElement("option");
-
-option.value = city;
-
-option.textContent = city;
-
-citySelect.appendChild(option);
-
+countrySelect.addEventListener("change",function(){
+    const country=this.value;
+    citySelect.innerHTML='<option value="" selected disabled>Select City</option>';
+    (cities[country]||[]).forEach(city=>{
+        const option=document.createElement("option");
+        option.value=city;
+        option.textContent=city;
+        citySelect.appendChild(option);
+    });
+    citySelect.disabled=!(cities[country] && cities[country].length);
 });
 
-citySelect.disabled = false;
-
-} else {
-
-citySelect.disabled = true;
-
-}
-
+document.getElementById("photoInput").addEventListener("change",function(){
+    const file=this.files[0];
+    if(!file) return;
+    if(!file.type.startsWith("image/")){
+        alert("Please select an image file.");
+        this.value="";
+        return;
+    }
+    const reader=new FileReader();
+    reader.onload=e=>{
+        document.getElementById("photoPreview").innerHTML=
+            `<img src="${e.target.result}" alt="Profile Preview">`;
+    };
+    reader.readAsDataURL(file);
 });
 
-const photoInput =
-document.getElementById("photoInput");
-
-const photoPreview =
-document.getElementById("photoPreview");
-
-photoInput.addEventListener("change", function() {
-
-const file = this.files[0];
-
-if (!file) {
-return;
-}
-
-if (!file.type.startsWith("image/")) {
-
-alert("Please select an image file.");
-
-this.value = "";
-
-return;
-
-}
-
-const reader = new FileReader();
-
-reader.onload = function(event) {
-
-photoPreview.innerHTML =
-`<img src="${event.target.result}" alt="Profile Preview">`;
-
-};
-
-reader.readAsDataURL(file);
-
+document.querySelectorAll(".password-toggle").forEach(toggle=>{
+    toggle.addEventListener("click",function(){
+        const input=document.getElementById(this.dataset.target);
+        const show=input.type==="password";
+        input.type=show?"text":"password";
+        this.classList.toggle("fa-eye",!show);
+        this.classList.toggle("fa-eye-slash",show);
+    });
 });
 
-const passwordToggles =
-document.querySelectorAll(".password-toggle");
+const form=document.getElementById("registerForm");
+const message=document.getElementById("message");
 
-passwordToggles.forEach(function(toggle) {
+form.addEventListener("submit",function(e){
+    e.preventDefault();
 
-toggle.addEventListener("click", function() {
+    const firstName=document.getElementById("firstName").value.trim();
+    const lastName=document.getElementById("lastName").value.trim();
+    const email=document.getElementById("email").value.trim();
+    const phone=document.getElementById("phone").value.trim();
+    const country=document.getElementById("country").value;
+    const city=document.getElementById("city").value;
+    const password=document.getElementById("password").value;
+    const confirmPassword=document.getElementById("confirmPassword").value;
 
-const targetId =
-this.dataset.target;
+    if(!firstName) return showMessage("Please enter your first name.","error");
+    if(!lastName) return showMessage("Please enter your last name.","error");
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+        return showMessage("Please enter a valid email address.","error");
+    if(!/^[0-9]{10}$/.test(phone))
+        return showMessage("Please enter a valid 10-digit phone number.","error");
+    if(!country) return showMessage("Please select your country.","error");
+    if(!city) return showMessage("Please select your city.","error");
+    if(password.length<6)
+        return showMessage("Password must contain at least 6 characters.","error");
+    if(password!==confirmPassword)
+        return showMessage("Passwords do not match.","error");
 
-const input =
-document.getElementById(targetId);
+    showMessage("Registration successful! ✈️","success");
 
-if (input.type === "password") {
-
-input.type = "text";
-
-this.classList.remove("fa-eye");
-
-this.classList.add("fa-eye-slash");
-
-} else {
-
-input.type = "password";
-
-this.classList.remove("fa-eye-slash");
-
-this.classList.add("fa-eye");
-
-}
-
+    setTimeout(()=>{
+        window.location.href="login.html";
+    },2000);
 });
 
-});
-
-const registerForm =
-document.getElementById("registerForm");
-
-const message =
-document.getElementById("message");
-
-registerForm.addEventListener("submit", function(event) {
-
-event.preventDefault();
-
-const firstName =
-document.getElementById("firstName").value.trim();
-
-const lastName =
-document.getElementById("lastName").value.trim();
-
-const email =
-document.getElementById("email").value.trim();
-
-const phone =
-document.getElementById("phone").value.trim();
-
-const country =
-document.getElementById("country").value;
-
-const city =
-document.getElementById("city").value;
-
-const password =
-document.getElementById("password").value;
-
-const confirmPassword =
-document.getElementById("confirmPassword").value;
-
-if (firstName === "") {
-
-showMessage(
-"Please enter your first name.",
-"error"
-);
-
-return;
-
+function showMessage(text,type){
+    message.textContent=text;
+    message.style.color=type==="error" ? "#ff6b7a" : "#20d891";
 }
-
-if (lastName === "") {
-
-showMessage(
-"Please enter your last name.",
-"error"
-);
-
-return;
-
-}
-
-if (email === "") {
-
-showMessage(
-"Please enter your email address.",
-"error"
-);
-
-return;
-
-}
-
-const emailPattern =
-/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-if (!emailPattern.test(email)) {
-
-showMessage(
-"Please enter a valid email address.",
-"error"
-);
-
-return;
-
-}
-
-if (phone === "") {
-
-showMessage(
-"Please enter your phone number.",
-"error"
-);
-
-return;
-
-}
-
-const phonePattern =
-/^[0-9]{10}$/;
-
-if (!phonePattern.test(phone)) {
-
-showMessage(
-"Please enter a valid 10-digit phone number.",
-"error"
-);
-
-return;
-
-}
-
-if (country === "") {
-
-showMessage(
-"Please select your country.",
-"error"
-);
-
-return;
-
-}
-
-if (city === "") {
-
-showMessage(
-"Please select your city.",
-"error"
-);
-
-return;
-
-}
-
-if (password === "") {
-
-showMessage(
-"Please create a password.",
-"error"
-);
-
-return;
-
-}
-
-if (password.length < 6) {
-
-showMessage(
-"Password must contain at least 6 characters.",
-"error"
-);
-
-return;
-
-}
-
-if (confirmPassword === "") {
-
-showMessage(
-"Please confirm your password.",
-"error"
-);
-
-return;
-
-}
-
-if (password !== confirmPassword) {
-
-showMessage(
-"Passwords do not match.",
-"error"
-);
-
-return;
-
-}
-
-showMessage(
-"Registration successful! ✈️",
-"success"
-);
-
-setTimeout(function() {
-
-window.location.href = "login.html";
-
-}, 2000);
-
-});
-
-function showMessage(text, type) {
-
-message.textContent = text;
-
-if (type === "error") {
-
-message.style.color = "#e53e3e";
-
-} else {
-
-message.style.color = "#319795";
-
-}
-
-}
-
 </script>
-
 </body>
-
 </html>
