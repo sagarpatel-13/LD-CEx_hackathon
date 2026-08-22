@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Travio — Loading</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            min-height: 100vh;
+            overflow: hidden;
+            background: #081c24;
+            color: white;
+        }
+
+        /* =========================
+           MAIN LOADING SCREEN
+        ========================== */
+
+        .loading-page {
+            width: 100%;
+            height: 100vh;
+            position: relative;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background:
+                radial-gradient(
+                    circle at 50% 40%,
+                    rgba(28, 126, 140, 0.35),
+                    transparent 40%
+                ),
+                linear-gradient(
+                    135deg,
+                    #06151c,
+                    #0a2933,
+                    #073944
+                );
+        }
+
+        /* Decorative circles */
+
+        .circle {
+            position: absolute;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+
+        .circle.one {
+            width: 500px;
+            height: 500px;
+            animation: rotate 20s linear infinite;
+        }
+
+        .circle.two {
+            width: 750px;
+            height: 750px;
+            animation: rotateReverse 30s linear infinite;
+        }
+
+        .circle.three {
+            width: 1000px;
+            height: 1000px;
+            animation: rotate 40s linear infinite;
+        }
+
+        /* =========================
+           CONTENT
+        ========================== */
+
+        .content {
+            position: relative;
+            z-index: 5;
+
+            text-align: center;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Logo */
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            margin-bottom: 15px;
+
+            animation: fadeDown 1s ease;
+        }
+
+        .logo-icon {
+            width: 55px;
+            height: 55px;
+
+            border-radius: 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                #42d9c8,
+                #1ba6b8
+            );
+
+            font-size: 27px;
+
+            box-shadow:
+                0 10px 35px rgba(40, 210, 195, 0.25);
+        }
+
+        .logo-name {
+            font-size: 42px;
+            font-weight: 700;
+            letter-spacing: -1.5px;
+        }
+
+        .logo-name span {
+            color: #42d9c8;
+        }
+
+        /* Tagline */
+
+        .tagline {
+            color: #a9c4c9;
+            font-size: 15px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+
+            margin-bottom: 45px;
+
+            animation: fadeUp 1s ease 0.2s both;
+        }
+
+        /* =========================
+           LOADING ANIMATION
+        ========================== */
+
+        .loader {
+            width: 260px;
+            height: 5px;
+
+            background: rgba(255,255,255,0.1);
+
+            border-radius: 20px;
+
+            overflow: hidden;
+
+            margin-bottom: 15px;
+        }
+
+        .loader-bar {
+            width: 0%;
+            height: 100%;
+
+            border-radius: 20px;
+
+            background: linear-gradient(
+                90deg,
+                #42d9c8,
+                #6be8da
+            );
+
+            animation: loading 3.2s ease-in-out forwards;
+        }
+
+        .loading-text {
+            color: #8baeb4;
+            font-size: 13px;
+
+            letter-spacing: 1px;
+        }
+
+        /* =========================
+           PLANE
+        ========================== */
+
+        .plane {
+            position: absolute;
+
+            font-size: 22px;
+
+            color: #42d9c8;
+
+            animation: fly 4s ease-in-out infinite;
+
+            opacity: 0.8;
+        }
+
+        .plane.one {
+            top: 22%;
+            left: 12%;
+        }
+
+        .plane.two {
+            bottom: 23%;
+            right: 14%;
+
+            font-size: 17px;
+
+            animation-delay: 1.5s;
+        }
+
+        /* =========================
+           BOTTOM TEXT
+        ========================== */
+
+        .bottom-text {
+            position: absolute;
+
+            bottom: 30px;
+
+            left: 50%;
+
+            transform: translateX(-50%);
+
+            color: rgba(255,255,255,0.45);
+
+            font-size: 12px;
+
+            letter-spacing: 1px;
+
+            z-index: 5;
+        }
+
+        /* =========================
+           ANIMATIONS
+        ========================== */
+
+        @keyframes loading {
+
+            0% {
+                width: 0%;
+            }
+
+            30% {
+                width: 35%;
+            }
+
+            60% {
+                width: 65%;
+            }
+
+            85% {
+                width: 85%;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+
+        @keyframes fadeDown {
+
+            from {
+                opacity: 0;
+                transform: translateY(-25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes rotate {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes rotateReverse {
+
+            from {
+                transform: rotate(360deg);
+            }
+
+            to {
+                transform: rotate(0deg);
+            }
+        }
+
+        @keyframes fly {
+
+            0% {
+                transform: translate(0, 0) rotate(-10deg);
+            }
+
+            50% {
+                transform: translate(35px, -20px) rotate(-5deg);
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(-10deg);
+            }
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 600px) {
+
+            .logo-name {
+                font-size: 34px;
+            }
+
+            .logo-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 23px;
+            }
+
+            .tagline {
+                font-size: 11px;
+                letter-spacing: 1.5px;
+            }
+
+            .loader {
+                width: 210px;
+            }
+
+            .circle.one {
+                width: 350px;
+                height: 350px;
+            }
+
+            .circle.two {
+                width: 550px;
+                height: 550px;
+            }
+
+            .circle.three {
+                width: 750px;
+                height: 750px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="loading-page">
+
+        <!-- Decorative circles -->
+        <div class="circle one"></div>
+        <div class="circle two"></div>
+        <div class="circle three"></div>
+
+        <!-- Flying planes -->
+        <div class="plane one">✈</div>
+        <div class="plane two">✈</div>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <div class="logo">
+
+                <div class="logo-icon">
+                    ✦
+                </div>
+
+                <div class="logo-name">
+                    Trav<span>io</span>
+                </div>
+
+            </div>
+
+            <p class="tagline">
+                Your journey. Your way.
+            </p>
+
+            <div class="loader">
+                <div class="loader-bar"></div>
+            </div>
+
+            <p class="loading-text">
+                Preparing your journey...
+            </p>
+
+        </section>
+
+        <div class="bottom-text">
+            PLAN • EXPLORE • TRAVEL
+        </div>
+
+    </main>
+
+
+    <script>
+
+        /*
+         * Travio Loading Screen
+         * Automatically redirects to the main page.
+         */
+
+        window.addEventListener("load", function () {
+
+            setTimeout(function () {
+
+                window.location.href = "index.html";
+
+            }, 3500);
+
+        });
+
+    </script>
+
+</body>
+</html>
