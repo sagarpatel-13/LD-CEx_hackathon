@@ -1,0 +1,2702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Travio - Activities</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+:root{
+    --bg:#020914;
+    --sidebar:#06101d;
+    --card:#071524;
+    --border:#193149;
+    --text:#f5f7fb;
+    --muted:#8c9caf;
+    --purple:#792cff;
+    --purple2:#a52cff;
+}
+
+body{
+    background:
+        radial-gradient(
+            circle at 70% 10%,
+            rgba(92,35,180,.16),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(0,130,255,.08),
+            transparent 28%
+        ),
+        var(--bg);
+
+    color:var(--text);
+    min-height:100vh;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar{
+
+    width:235px;
+
+    position:fixed;
+
+    left:0;
+    top:0;
+    bottom:0;
+
+    background:
+        linear-gradient(
+            180deg,
+            #071322,
+            #040b14
+        );
+
+    border-right:1px solid #15263a;
+
+    padding:20px 14px;
+
+    z-index:100;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:8px 10px 25px;
+}
+
+.logo-icon{
+
+    width:42px;
+    height:42px;
+
+    border-radius:12px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:22px;
+
+    font-weight:900;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #792cff,
+            #d83bbd
+        );
+
+    box-shadow:
+        0 8px 25px rgba(120,35,255,.35);
+}
+
+.logo-text{
+
+    font-size:21px;
+
+    font-weight:800;
+
+    letter-spacing:-.6px;
+}
+
+
+/* =====================================================
+   MENU
+===================================================== */
+
+.menu-title{
+
+    color:#53677e;
+
+    font-size:10px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:1.2px;
+
+    padding:0 12px;
+
+    margin:10px 0;
+}
+
+.menu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:5px;
+}
+
+.menu-item{
+
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:0 12px;
+
+    border-radius:8px;
+
+    color:#94a4b7;
+
+    font-size:13px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+    text-decoration:none;
+}
+
+.menu-item:hover{
+
+    background:#101e30;
+
+    color:white;
+}
+
+.menu-item.active{
+
+    background:
+        linear-gradient(
+            90deg,
+            #6924e9,
+            #7f30f5
+        );
+
+    color:white;
+
+    box-shadow:
+        0 8px 20px rgba(110,40,240,.25);
+}
+
+.menu-icon{
+
+    width:19px;
+
+    text-align:center;
+
+    font-size:15px;
+}
+
+
+/* =====================================================
+   SIDEBAR PROMO
+===================================================== */
+
+.sidebar-promo{
+
+    position:absolute;
+
+    left:14px;
+    right:14px;
+
+    bottom:18px;
+
+    border-radius:12px;
+
+    padding:17px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7730dd,
+            #f05a91
+        );
+
+    overflow:hidden;
+}
+
+.sidebar-promo h3{
+
+    font-size:14px;
+
+    line-height:1.35;
+
+    margin-bottom:10px;
+}
+
+.sidebar-promo p{
+
+    font-size:10px;
+
+    opacity:.85;
+
+    margin-bottom:12px;
+}
+
+.promo-button{
+
+    display:inline-block;
+
+    background:white;
+
+    color:#6821c8;
+
+    border-radius:6px;
+
+    padding:7px 12px;
+
+    font-size:10px;
+
+    font-weight:800;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main{
+
+    margin-left:235px;
+
+    min-height:100vh;
+
+    padding:20px 28px 45px;
+}
+
+
+/* =====================================================
+   TOP BAR
+===================================================== */
+
+.topbar{
+
+    height:55px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:18px;
+}
+
+.page-title h1{
+
+    font-size:20px;
+
+    font-weight:700;
+
+    letter-spacing:-.4px;
+}
+
+.page-title p{
+
+    color:#718197;
+
+    font-size:11px;
+
+    margin-top:3px;
+}
+
+.top-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+}
+
+.top-icon{
+
+    width:34px;
+    height:34px;
+
+    border:1px solid #1a3045;
+
+    background:#081523;
+
+    border-radius:8px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#a9b7c7;
+
+    cursor:pointer;
+}
+
+.profile{
+
+    width:35px;
+    height:35px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7429ed,
+            #d23891
+        );
+
+    font-size:12px;
+
+    font-weight:800;
+}
+
+
+/* =====================================================
+   SEARCH HERO
+===================================================== */
+
+.search-card{
+
+    position:relative;
+
+    min-height:185px;
+
+    border:1px solid #183149;
+
+    border-radius:12px;
+
+    padding:25px;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            110deg,
+            rgba(13,33,55,.96),
+            rgba(7,20,34,.97)
+        );
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.25);
+}
+
+.search-card:before{
+
+    content:"";
+
+    position:absolute;
+
+    width:350px;
+    height:350px;
+
+    right:-120px;
+    top:-180px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(117,39,240,.25),
+            transparent 65%
+        );
+}
+
+.search-content{
+
+    position:relative;
+
+    z-index:2;
+}
+
+.search-label{
+
+    color:#9e73ff;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    text-transform:uppercase;
+
+    letter-spacing:1.4px;
+
+    margin-bottom:8px;
+}
+
+.search-card h2{
+
+    font-size:27px;
+
+    letter-spacing:-1px;
+
+    margin-bottom:6px;
+}
+
+.search-card p{
+
+    color:#8293a7;
+
+    font-size:12px;
+
+    margin-bottom:20px;
+}
+
+
+/* =====================================================
+   SEARCH ROW
+===================================================== */
+
+.search-row{
+
+    display:grid;
+
+    grid-template-columns:
+        1.2fr
+        1.2fr
+        auto;
+
+    gap:10px;
+
+    max-width:850px;
+}
+
+.field{
+
+    position:relative;
+}
+
+.field-icon{
+
+    position:absolute;
+
+    left:12px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#6e8197;
+
+    font-size:13px;
+
+    z-index:2;
+}
+
+input,
+select{
+
+    width:100%;
+
+    height:42px;
+
+    border-radius:7px;
+
+    border:1px solid #1b344d;
+
+    background:#081827;
+
+    color:#dfe7f1;
+
+    padding:0 12px 0 36px;
+
+    outline:none;
+
+    font-size:11px;
+
+    transition:.2s;
+}
+
+select{
+
+    cursor:pointer;
+}
+
+input:focus,
+select:focus{
+
+    border-color:#7c35ee;
+
+    box-shadow:
+        0 0 0 3px rgba(124,53,238,.12);
+}
+
+input::placeholder{
+
+    color:#607287;
+}
+
+.search-btn{
+
+    height:42px;
+
+    border:none;
+
+    border-radius:7px;
+
+    padding:0 22px;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7026ee,
+            #9a2df0
+        );
+
+    font-size:11px;
+
+    font-weight:800;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 7px 18px rgba(113,39,237,.25);
+
+    transition:.2s;
+}
+
+.search-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(113,39,237,.4);
+}
+
+
+/* =====================================================
+   SECTION HEADER
+===================================================== */
+
+.section-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin:24px 0 13px;
+}
+
+.section-title h2{
+
+    font-size:16px;
+
+    margin-bottom:3px;
+}
+
+.section-title p{
+
+    color:#697c91;
+
+    font-size:10px;
+}
+
+.filters{
+
+    display:flex;
+
+    gap:7px;
+
+    align-items:center;
+}
+
+.filter-select select{
+
+    height:34px;
+
+    min-width:112px;
+
+    padding:0 10px;
+
+    font-size:10px;
+
+    background:#071522;
+}
+
+
+/* =====================================================
+   ACTIVITY GRID
+===================================================== */
+
+.activity-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,1fr);
+
+    gap:12px;
+}
+
+
+/* =====================================================
+   ACTIVITY CARD
+===================================================== */
+
+.activity-card{
+
+    background:
+        linear-gradient(
+            145deg,
+            #091928,
+            #06111d
+        );
+
+    border:1px solid #183149;
+
+    border-radius:9px;
+
+    overflow:hidden;
+
+    transition:
+        transform .25s,
+        border .25s,
+        box-shadow .25s;
+
+    min-width:0;
+}
+
+.activity-card:hover{
+
+    transform:translateY(-4px);
+
+    border-color:#6330c8;
+
+    box-shadow:
+        0 15px 30px rgba(0,0,0,.35),
+        0 0 25px rgba(103,42,215,.08);
+}
+
+
+/* =====================================================
+   IMAGE
+===================================================== */
+
+.card-image{
+
+    height:125px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    background:#101b28;
+}
+
+.card-image img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.4s;
+}
+
+.activity-card:hover
+.card-image img{
+
+    transform:scale(1.07);
+}
+
+
+/* =====================================================
+   BADGE
+===================================================== */
+
+.badge{
+
+    position:absolute;
+
+    left:8px;
+    top:8px;
+
+    padding:4px 7px;
+
+    border-radius:5px;
+
+    background:
+        rgba(5,12,21,.82);
+
+    border:1px solid rgba(255,255,255,.1);
+
+    color:#d6c5ff;
+
+    font-size:8px;
+
+    font-weight:800;
+
+    backdrop-filter:blur(6px);
+}
+
+
+/* =====================================================
+   HEART
+===================================================== */
+
+.heart{
+
+    position:absolute;
+
+    right:8px;
+    top:8px;
+
+    width:27px;
+    height:27px;
+
+    border-radius:50%;
+
+    background:
+        rgba(3,10,18,.82);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#9aaabd;
+
+    cursor:pointer;
+
+    font-size:14px;
+}
+
+.heart.active{
+
+    color:#ff4c87;
+}
+
+
+/* =====================================================
+   CARD CONTENT
+===================================================== */
+
+.card-content{
+
+    padding:11px;
+}
+
+.card-location{
+
+    color:#6f8399;
+
+    font-size:8px;
+
+    margin-bottom:5px;
+}
+
+.card-title{
+
+    font-size:12px;
+
+    font-weight:700;
+
+    margin-bottom:5px;
+
+    color:#f2f5f9;
+}
+
+.card-description{
+
+    color:#75879a;
+
+    font-size:9px;
+
+    line-height:1.5;
+
+    height:27px;
+
+    overflow:hidden;
+
+    margin-bottom:10px;
+}
+
+
+/* =====================================================
+   CARD FOOTER
+===================================================== */
+
+.card-footer{
+
+    border-top:1px solid #152a3e;
+
+    padding-top:9px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+.rating{
+
+    font-size:9px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:3px;
+}
+
+.star{
+
+    color:#f6b91c;
+}
+
+.review{
+
+    color:#65788d;
+}
+
+.price{
+
+    font-size:11px;
+
+    font-weight:800;
+
+    color:#dfe8f2;
+}
+
+
+/* =====================================================
+   EMPTY
+===================================================== */
+
+.empty{
+
+    display:none;
+
+    text-align:center;
+
+    padding:60px;
+
+    border:1px solid #193149;
+
+    border-radius:10px;
+
+    background:#071523;
+}
+
+.empty-icon{
+
+    font-size:32px;
+
+    margin-bottom:10px;
+}
+
+.empty h3{
+
+    font-size:15px;
+
+    margin-bottom:5px;
+}
+
+.empty p{
+
+    color:#718397;
+
+    font-size:10px;
+}
+
+
+/* =====================================================
+   POPULAR CITIES
+===================================================== */
+
+.city-section{
+
+    margin-top:25px;
+}
+
+.city-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(6,1fr);
+
+    gap:10px;
+}
+
+.city-card{
+
+    height:75px;
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:8px;
+
+    border:1px solid #173048;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.city-card:hover{
+
+    transform:translateY(-3px);
+
+    border-color:#7734dd;
+}
+
+.city-card img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    filter:brightness(.55);
+
+    transition:.3s;
+}
+
+.city-card:hover img{
+
+    filter:brightness(.72);
+
+    transform:scale(1.06);
+}
+
+.city-name{
+
+    position:absolute;
+
+    bottom:7px;
+    left:9px;
+
+    font-size:10px;
+
+    font-weight:700;
+}
+
+.city-count{
+
+    position:absolute;
+
+    top:7px;
+    right:7px;
+
+    font-size:7px;
+
+    color:#d4dce6;
+
+    background:rgba(0,0,0,.55);
+
+    padding:3px 5px;
+
+    border-radius:4px;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media(max-width:1200px){
+
+    .activity-grid{
+
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+    .city-grid{
+
+        grid-template-columns:
+            repeat(4,1fr);
+    }
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:850px){
+
+    .sidebar{
+
+        width:65px;
+
+        padding:15px 9px;
+    }
+
+    .logo-text,
+    .menu-item span:not(.menu-icon),
+    .menu-title,
+    .sidebar-promo{
+
+        display:none;
+    }
+
+    .logo{
+
+        justify-content:center;
+
+        padding-bottom:20px;
+    }
+
+    .menu-item{
+
+        justify-content:center;
+
+        padding:0;
+    }
+
+    .main{
+
+        margin-left:65px;
+
+        padding:16px;
+    }
+
+    .activity-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .search-row{
+
+        grid-template-columns:1fr;
+    }
+
+    .city-grid{
+
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+}
+
+
+@media(max-width:560px){
+
+    .topbar{
+
+        align-items:flex-start;
+    }
+
+    .page-title h1{
+
+        font-size:17px;
+    }
+
+    .top-actions{
+
+        gap:5px;
+    }
+
+    .activity-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .city-grid{
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .section-header{
+
+        align-items:flex-start;
+
+        flex-direction:column;
+
+        gap:10px;
+    }
+
+    .filters{
+
+        width:100%;
+    }
+
+    .filter-select{
+
+        flex:1;
+    }
+
+    .filter-select select{
+
+        width:100%;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+
+    <!-- LOGO -->
+
+    <div class="logo">
+
+        <div class="logo-icon">
+            ✈
+        </div>
+
+        <div class="logo-text">
+            Travio
+        </div>
+
+    </div>
+
+
+    <!-- MENU TITLE -->
+
+    <div class="menu-title">
+        Main Menu
+    </div>
+
+
+    <!-- MENU -->
+
+    <div class="menu">
+
+
+        <a class="menu-item" href="#">
+
+            <span class="menu-icon">
+                ▦
+            </span>
+
+            <span>
+                Dashboard
+            </span>
+
+        </a>
+
+
+        <a class="menu-item" href="#">
+
+            <span class="menu-icon">
+                ＋
+            </span>
+
+            <span>
+                Create Trip
+            </span>
+
+        </a>
+
+
+        <a class="menu-item" href="#">
+
+            <span class="menu-icon">
+                ▤
+            </span>
+
+            <span>
+                My Trips
+            </span>
+
+        </a>
+
+
+        <a class="menu-item" href="#">
+
+            <span class="menu-icon">
+                ⌘
+            </span>
+
+            <span>
+                Itinerary Builder
+            </span>
+
+        </a>
+
+
+        <a class="menu-item" href="#">
+
+            <span class="menu-icon">
+                ◫
+            </span>
+
+            <span>
+                Itinerary View
+            </span>
+
+        </a>
+
+
+        <!-- CITY SEARCH REMOVED -->
+
+
+        <!-- ACTIVITIES ACTIVE -->
+
+        <a class="menu-item active" href="#">
+
+            <span class="menu-icon">
+                ♧
+            </span>
+
+            <span>
+                Activities
+            </span>
+
+        </a>
+
+
+        <a class="menu-item" href="#">
+
+            <span class="menu-icon">
+                ◒
+            </span>
+
+            <span>
+                Budget
+            </span>
+
+        </a>
+
+
+        <a class="menu-item" href="#">
+
+            <span class="menu-icon">
+                ▣
+            </span>
+
+            <span>
+                Calendar
+            </span>
+
+        </a>
+
+
+        <a class="menu-item" href="#">
+
+            <span class="menu-icon">
+                ♙
+            </span>
+
+            <span>
+                Shared Trip
+            </span>
+
+        </a>
+
+
+        <a class="menu-item" href="#">
+
+            <span class="menu-icon">
+                ⚙
+            </span>
+
+            <span>
+                Settings
+            </span>
+
+        </a>
+
+
+    </div>
+
+
+    <!-- PROMO -->
+
+    <div class="sidebar-promo">
+
+        <h3>
+            Let's make your dream journey come true!
+        </h3>
+
+        <p>
+            Discover amazing places and experiences.
+        </p>
+
+        <div class="promo-button">
+            Get Started
+        </div>
+
+    </div>
+
+
+</aside>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+        <div class="page-title">
+
+            <h1>
+                Activities
+            </h1>
+
+            <p>
+                Discover amazing experiences by city
+            </p>
+
+        </div>
+
+
+        <div class="top-actions">
+
+            <div class="top-icon">
+                ♡
+            </div>
+
+            <div class="top-icon">
+                ◉
+            </div>
+
+            <div class="profile">
+                S
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         SEARCH
+    ================================================= -->
+
+    <section class="search-card">
+
+        <div class="search-content">
+
+
+            <div class="search-label">
+                Explore India
+            </div>
+
+
+            <h2>
+                Find activities in your city
+            </h2>
+
+
+            <p>
+                Select a city and search for the activity you want to explore.
+            </p>
+
+
+            <div class="search-row">
+
+
+                <!-- CITY -->
+
+                <div class="field">
+
+                    <span class="field-icon">
+                        📍
+                    </span>
+
+
+                    <select id="citySelect">
+
+                        <option value="all">
+                            Select City
+                        </option>
+
+                        <option value="ahmedabad">
+                            Ahmedabad
+                        </option>
+
+                        <option value="rishikesh">
+                            Rishikesh
+                        </option>
+
+                        <option value="udaipur">
+                            Udaipur
+                        </option>
+
+                        <option value="mumbai">
+                            Mumbai
+                        </option>
+
+                        <option value="delhi">
+                            Delhi
+                        </option>
+
+                        <option value="jaipur">
+                            Jaipur
+                        </option>
+
+                        <option value="goa">
+                            Goa
+                        </option>
+
+                        <option value="manali">
+                            Manali
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- ACTIVITY -->
+
+                <div class="field">
+
+                    <span class="field-icon">
+                        🔎
+                    </span>
+
+
+                    <input
+                        id="searchInput"
+                        type="text"
+                        placeholder="Search activity..."
+                    >
+
+                </div>
+
+
+                <button
+                    class="search-btn"
+                    onclick="filterActivities()"
+                >
+                    Search
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         ACTIVITY HEADER
+    ================================================= -->
+
+    <div class="section-header">
+
+
+        <div class="section-title">
+
+            <h2 id="resultHeading">
+                Popular Activities
+            </h2>
+
+            <p id="resultCount">
+                Discover experiences across India
+            </p>
+
+        </div>
+
+
+        <div class="filters">
+
+
+            <!-- FILTER -->
+
+            <div class="filter-select">
+
+                <select
+                    id="filterSelect"
+                    onchange="filterActivities()"
+                >
+
+                    <option value="all">
+                        Filter
+                    </option>
+
+                    <option value="adventure">
+                        Adventure
+                    </option>
+
+                    <option value="water">
+                        Water Sports
+                    </option>
+
+                    <option value="culture">
+                        Culture
+                    </option>
+
+                    <option value="nature">
+                        Nature
+                    </option>
+
+                    <option value="sightseeing">
+                        Sightseeing
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- SORT -->
+
+            <div class="filter-select">
+
+                <select
+                    id="sortSelect"
+                    onchange="sortActivities()"
+                >
+
+                    <option value="default">
+                        Sort By
+                    </option>
+
+                    <option value="rating">
+                        Highest Rated
+                    </option>
+
+                    <option value="priceLow">
+                        Price Low
+                    </option>
+
+                    <option value="priceHigh">
+                        Price High
+                    </option>
+
+                </select>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =================================================
+         ACTIVITY GRID
+    ================================================= -->
+
+    <div
+        class="activity-grid"
+        id="activityGrid"
+    ></div>
+
+
+
+    <!-- EMPTY -->
+
+    <div
+        class="empty"
+        id="emptyState"
+    >
+
+        <div class="empty-icon">
+            🔎
+        </div>
+
+        <h3>
+            No activities found
+        </h3>
+
+        <p>
+            Try another city or activity.
+        </p>
+
+    </div>
+
+
+
+    <!-- =================================================
+         POPULAR CITIES
+    ================================================= -->
+
+    <section class="city-section">
+
+
+        <div class="section-header">
+
+            <div class="section-title">
+
+                <h2>
+                    Popular Cities
+                </h2>
+
+                <p>
+                    Select a city to explore its activities
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="city-grid">
+
+
+            <!-- AHMEDABAD -->
+
+            <div
+                class="city-card"
+                onclick="selectCity('ahmedabad')"
+            >
+
+                <img
+                    src="https://lp-cms-production.imgix.net/image_browser/Adalaj_Vav_G.jpg?auto=format&q=85"
+                    alt="Ahmedabad"
+                >
+
+                <div class="city-name">
+                    Ahmedabad
+                </div>
+
+                <div class="city-count">
+                    3 Activities
+                </div>
+
+            </div>
+
+
+            <!-- RISHIKESH -->
+
+            <div
+                class="city-card"
+                onclick="selectCity('rishikesh')"
+            >
+
+                <img
+                    src="https://staybook.in/_next/image?q=75&url=https%3A%2F%2Fimages.staybook.in%2Fthings-to-do%2Frishikesh-white-water-rafting-trip-for-all-levels%2F3.jpg&w=1080"
+                    alt="Rishikesh"
+                >
+
+                <div class="city-name">
+                    Rishikesh
+                </div>
+
+                <div class="city-count">
+                    4 Activities
+                </div>
+
+            </div>
+
+
+            <!-- UDAIPUR -->
+
+            <div
+                class="city-card"
+                onclick="selectCity('udaipur')"
+            >
+
+                <img
+                    src="https://www.civitatis.com/f/india/udaipur/galeria/paseo-barco-lago-pichola.jpg"
+                    alt="Udaipur"
+                >
+
+                <div class="city-name">
+                    Udaipur
+                </div>
+
+                <div class="city-count">
+                    2 Activities
+                </div>
+
+            </div>
+
+
+            <!-- MUMBAI -->
+
+            <div
+                class="city-card"
+                onclick="selectCity('mumbai')"
+            >
+
+                <img
+                    src="https://images.unsplash.com/photo-1595658658481-d53d3f999875?auto=format&fit=crop&w=1200&q=85"
+                    alt="Mumbai"
+                >
+
+                <div class="city-name">
+                    Mumbai
+                </div>
+
+                <div class="city-count">
+                    2 Activities
+                </div>
+
+            </div>
+
+
+            <!-- DELHI -->
+
+            <div
+                class="city-card"
+                onclick="selectCity('delhi')"
+            >
+
+                <img
+                    src="https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=85"
+                    alt="Delhi"
+                >
+
+                <div class="city-name">
+                    Delhi
+                </div>
+
+                <div class="city-count">
+                    2 Activities
+                </div>
+
+            </div>
+
+
+            <!-- JAIPUR -->
+
+            <div
+                class="city-card"
+                onclick="selectCity('jaipur')"
+            >
+
+                <img
+                    src="https://static.wixstatic.com/media/2bebb0_7d13946d4de4459aa2488987f0601e53~mv2.jpg/v1/fill/w_980%2Ch_490%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/2bebb0_7d13946d4de4459aa2488987f0601e53~mv2.jpg"
+                    alt="Jaipur"
+                >
+
+                <div class="city-name">
+                    Jaipur
+                </div>
+
+                <div class="city-count">
+                    2 Activities
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+
+<script>
+
+
+/* =====================================================
+   ACTIVITY DATA
+===================================================== */
+
+const activities = [
+
+
+    /* AHMEDABAD */
+
+    {
+        city:"ahmedabad",
+        cityName:"Ahmedabad",
+        title:"Adalaj Stepwell",
+        category:"culture",
+        location:"Adalaj, Gujarat",
+        description:
+        "Explore the beautiful historic architecture of the famous Adalaj Stepwell.",
+        rating:4.8,
+        reviews:760,
+        price:50,
+        image:
+        "https://lp-cms-production.imgix.net/image_browser/Adalaj_Vav_G.jpg?auto=format&q=85"
+    },
+
+
+    {
+        city:"ahmedabad",
+        cityName:"Ahmedabad",
+        title:"Sabarmati Riverfront",
+        category:"sightseeing",
+        location:"Ahmedabad, Gujarat",
+        description:
+        "Enjoy a relaxing walk along the famous Sabarmati Riverfront.",
+        rating:4.6,
+        reviews:980,
+        price:100,
+        image:
+        "https://cityalongbanks.wordpress.com/wp-content/uploads/2012/08/041.jpeg"
+    },
+
+
+    {
+        city:"ahmedabad",
+        cityName:"Ahmedabad",
+        title:"Sabarmati Ashram",
+        category:"culture",
+        location:"Ahmedabad, Gujarat",
+        description:
+        "Visit the historic Sabarmati Ashram and explore its peaceful surroundings.",
+        rating:4.7,
+        reviews:1240,
+        price:0,
+        image:
+        "https://www.theweek.in/content/dam/week/magazine/theweek/current/images/2023/6/24/36-Sabarmati-Ashram.jpg"
+    },
+
+
+    /* RISHIKESH */
+
+    {
+        city:"rishikesh",
+        cityName:"Rishikesh",
+        title:"River Rafting",
+        category:"water",
+        location:"Rishikesh, Uttarakhand",
+        description:
+        "Experience thrilling white-water rafting through the rapids of the Ganges.",
+        rating:4.9,
+        reviews:2150,
+        price:1000,
+        image:
+        "https://staybook.in/_next/image?q=75&url=https%3A%2F%2Fimages.staybook.in%2Fthings-to-do%2Frishikesh-white-water-rafting-trip-for-all-levels%2F3.jpg&w=1080"
+    },
+
+
+    {
+        city:"rishikesh",
+        cityName:"Rishikesh",
+        title:"Bungee Jumping",
+        category:"adventure",
+        location:"Rishikesh, Uttarakhand",
+        description:
+        "Take an unforgettable bungee jump surrounded by the Himalayan landscape.",
+        rating:4.8,
+        reviews:1640,
+        price:3500,
+        image:
+        "https://images.unsplash.com/photo-1559677624-3c956f10d431?auto=format&fit=crop&w=1200&q=85"
+    },
+
+
+    {
+        city:"rishikesh",
+        cityName:"Rishikesh",
+        title:"Ganga Aarti",
+        category:"culture",
+        location:"Rishikesh, Uttarakhand",
+        description:
+        "Experience the spiritual atmosphere of the famous evening Ganga Aarti.",
+        rating:4.9,
+        reviews:3210,
+        price:0,
+        image:
+        "https://www.exibartstreet.com/wp-content/uploads/formidable/3/photos/f79/Ganga-Arti-Rishikesh-1038x786.jpg"
+    },
+
+
+    {
+        city:"rishikesh",
+        cityName:"Rishikesh",
+        title:"Riverside Camping",
+        category:"nature",
+        location:"Shivpuri, Rishikesh",
+        description:
+        "Spend a peaceful night camping beside the river with beautiful mountain views.",
+        rating:4.7,
+        reviews:850,
+        price:1800,
+        image:
+        "https://media1.thrillophilia.com/filestore/kl1vtw3h6qerysx8q2nykh300vwo_good-morning-tours-and-ganga-beach-camp-rishikesh-ho-rishikesh-river-rafting-organisers-50t43znlt3.jpg"
+    },
+
+
+    /* UDAIPUR */
+
+    {
+        city:"udaipur",
+        cityName:"Udaipur",
+        title:"Lake Pichola Boat Ride",
+        category:"nature",
+        location:"Udaipur, Rajasthan",
+        description:
+        "Enjoy a peaceful boat ride across the beautiful waters of Lake Pichola.",
+        rating:4.9,
+        reviews:1980,
+        price:800,
+        image:
+        "https://www.civitatis.com/f/india/udaipur/galeria/paseo-barco-lago-pichola.jpg"
+    },
+
+
+    {
+        city:"udaipur",
+        cityName:"Udaipur",
+        title:"City Palace",
+        category:"culture",
+        location:"Udaipur, Rajasthan",
+        description:
+        "Explore the magnificent palace complex overlooking Lake Pichola.",
+        rating:4.8,
+        reviews:2300,
+        price:400,
+        image:
+        "https://tripnavigate.com/_next/image?q=75&url=https%3A%2F%2Fres.cloudinary.com%2Fdwtx25blt%2Fimage%2Fupload%2Fv1758796028%2Fgeneral%2Fimages%2Fec1k6xiishr8uozrfgxw.jpg&w=3840"
+    },
+
+
+    /* MUMBAI */
+
+    {
+        city:"mumbai",
+        cityName:"Mumbai",
+        title:"Marine Drive",
+        category:"sightseeing",
+        location:"Mumbai, Maharashtra",
+        description:
+        "Take an evening walk along Mumbai's famous Queen's Necklace.",
+        rating:4.8,
+        reviews:2870,
+        price:0,
+        image:
+        "https://images.unsplash.com/photo-1595658658481-d53d3f999875?auto=format&fit=crop&w=1200&q=85"
+    },
+
+
+    {
+        city:"mumbai",
+        cityName:"Mumbai",
+        title:"Gateway of India",
+        category:"sightseeing",
+        location:"Mumbai, Maharashtra",
+        description:
+        "Visit Mumbai's iconic waterfront monument overlooking the Arabian Sea.",
+        rating:4.7,
+        reviews:3200,
+        price:0,
+        image:
+        "https://images.unsplash.com/photo-1570168007204-dfb528c6958f?auto=format&fit=crop&w=1200&q=85"
+    },
+
+
+    /* DELHI */
+
+    {
+        city:"delhi",
+        cityName:"Delhi",
+        title:"India Gate",
+        category:"sightseeing",
+        location:"New Delhi, India",
+        description:
+        "Visit one of India's most recognizable national monuments.",
+        rating:4.7,
+        reviews:3100,
+        price:0,
+        image:
+        "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=1200&q=85"
+    },
+
+
+    {
+        city:"delhi",
+        cityName:"Delhi",
+        title:"Red Fort",
+        category:"culture",
+        location:"Delhi, India",
+        description:
+        "Explore the magnificent Mughal-era Red Fort and its historic architecture.",
+        rating:4.8,
+        reviews:2700,
+        price:100,
+        image:
+        "https://www.india-a2z.com/images/redfort.jpg"
+    },
+
+
+    /* JAIPUR */
+
+    {
+        city:"jaipur",
+        cityName:"Jaipur",
+        title:"Amber Fort",
+        category:"sightseeing",
+        location:"Jaipur, Rajasthan",
+        description:
+        "Explore the grand courtyards and historic architecture of Amber Fort.",
+        rating:4.8,
+        reviews:2800,
+        price:200,
+        image:
+        "https://static.wixstatic.com/media/2bebb0_7d13946d4de4459aa2488987f0601e53~mv2.jpg/v1/fill/w_980%2Ch_490%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/2bebb0_7d13946d4de4459aa2488987f0601e53~mv2.jpg"
+    },
+
+
+    {
+        city:"jaipur",
+        cityName:"Jaipur",
+        title:"City Palace",
+        category:"culture",
+        location:"Jaipur, Rajasthan",
+        description:
+        "Discover Jaipur's royal architecture inside the magnificent City Palace.",
+        rating:4.7,
+        reviews:1920,
+        price:300,
+        image:
+        "https://www.agoda.com/wp-content/uploads/2024/05/City-Palace-Jaipur-India.jpg"
+    },
+
+
+    /* GOA */
+
+    {
+        city:"goa",
+        cityName:"Goa",
+        title:"Scuba Diving",
+        category:"water",
+        location:"Goa, India",
+        description:
+        "Explore colorful coral reefs and marine life beneath Goa's waters.",
+        rating:4.8,
+        reviews:1350,
+        price:2500,
+        image:
+        "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=85"
+    },
+
+
+    /* MANALI */
+
+    {
+        city:"manali",
+        cityName:"Manali",
+        title:"Mountain Trekking",
+        category:"adventure",
+        location:"Manali, Himachal Pradesh",
+        description:
+        "Trek through breathtaking Himalayan landscapes.",
+        rating:4.9,
+        reviews:1170,
+        price:1800,
+        image:
+        "https://captureatrip-cms-storage.s3.ap-south-1.amazonaws.com/Nature_Walks_in_Old_Manali_bc9a5c1ede.webp"
+    }
+
+];
+
+
+
+/* =====================================================
+   DISPLAY ACTIVITIES
+===================================================== */
+
+function displayActivities(data){
+
+    const grid =
+        document.getElementById("activityGrid");
+
+    const empty =
+        document.getElementById("emptyState");
+
+    const count =
+        document.getElementById("resultCount");
+
+
+    grid.innerHTML="";
+
+
+    if(data.length===0){
+
+        grid.style.display="none";
+
+        empty.style.display="block";
+
+        count.innerText=
+            "No activities match your search.";
+
+        return;
+
+    }
+
+
+    grid.style.display="grid";
+
+    empty.style.display="none";
+
+
+    count.innerText=
+        `${data.length} ${
+            data.length===1
+            ?"activity"
+            :"activities"
+        } found`;
+
+
+    data.forEach(activity=>{
+
+        const card =
+            document.createElement("div");
+
+
+        card.className =
+            "activity-card";
+
+
+        card.innerHTML = `
+
+            <div class="card-image">
+
+                <img
+                    src="${activity.image}"
+                    alt="${activity.title}"
+                    loading="lazy"
+
+                    onerror="
+                        this.src='https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=85'
+                    "
+                >
+
+
+                <div class="badge">
+
+                    ${formatCategory(activity.category)}
+
+                </div>
+
+
+                <div
+                    class="heart"
+                    onclick="toggleHeart(this)"
+                >
+
+                    ♡
+
+                </div>
+
+            </div>
+
+
+            <div class="card-content">
+
+
+                <div class="card-location">
+
+                    📍 ${activity.location}
+
+                </div>
+
+
+                <div class="card-title">
+
+                    ${activity.title}
+
+                </div>
+
+
+                <div class="card-description">
+
+                    ${activity.description}
+
+                </div>
+
+
+                <div class="card-footer">
+
+
+                    <div class="rating">
+
+                        <span class="star">
+                            ★
+                        </span>
+
+                        <strong>
+                            ${activity.rating}
+                        </strong>
+
+                        <span class="review">
+                            (${activity.reviews})
+                        </span>
+
+                    </div>
+
+
+                    <div class="price">
+
+                        ${
+                            activity.price===0
+
+                            ? "Free"
+
+                            : "₹"+activity.price.toLocaleString("en-IN")
+                        }
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        `;
+
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+
+
+/* =====================================================
+   FORMAT CATEGORY
+===================================================== */
+
+function formatCategory(category){
+
+    const categories={
+
+        adventure:"Adventure",
+
+        nature:"Nature",
+
+        culture:"Culture",
+
+        water:"Water Sports",
+
+        sightseeing:"Sightseeing"
+
+    };
+
+
+    return categories[category] || category;
+
+}
+
+
+
+/* =====================================================
+   FILTER ACTIVITIES
+===================================================== */
+
+function filterActivities(){
+
+    const city =
+        document
+        .getElementById("citySelect")
+        .value;
+
+
+    const search =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    const category =
+        document
+        .getElementById("filterSelect")
+        .value;
+
+
+    let filtered =
+        activities.filter(activity=>{
+
+
+            const cityMatch =
+
+                city==="all" ||
+
+                activity.city===city;
+
+
+            const categoryMatch =
+
+                category==="all" ||
+
+                activity.category===category;
+
+
+            const searchMatch =
+
+                search==="" ||
+
+                activity.title
+                .toLowerCase()
+                .includes(search)
+
+                ||
+
+                activity.description
+                .toLowerCase()
+                .includes(search)
+
+                ||
+
+                activity.cityName
+                .toLowerCase()
+                .includes(search)
+
+                ||
+
+                activity.category
+                .toLowerCase()
+                .includes(search);
+
+
+            return(
+
+                cityMatch &&
+
+                categoryMatch &&
+
+                searchMatch
+
+            );
+
+        });
+
+
+    document
+        .getElementById("resultHeading")
+        .innerText =
+
+        city==="all"
+
+        ? "Popular Activities"
+
+        : `Activities in ${getCityName(city)}`;
+
+
+    displayActivities(filtered);
+
+}
+
+
+
+/* =====================================================
+   SORT ACTIVITIES
+===================================================== */
+
+function sortActivities(){
+
+    const sort =
+        document
+        .getElementById("sortSelect")
+        .value;
+
+
+    const city =
+        document
+        .getElementById("citySelect")
+        .value;
+
+
+    const category =
+        document
+        .getElementById("filterSelect")
+        .value;
+
+
+    const search =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+
+    let filtered =
+        activities.filter(activity=>{
+
+
+            const cityMatch =
+
+                city==="all" ||
+
+                activity.city===city;
+
+
+            const categoryMatch =
+
+                category==="all" ||
+
+                activity.category===category;
+
+
+            const searchMatch =
+
+                search==="" ||
+
+                activity.title
+                .toLowerCase()
+                .includes(search)
+
+                ||
+
+                activity.description
+                .toLowerCase()
+                .includes(search);
+
+
+            return(
+
+                cityMatch &&
+
+                categoryMatch &&
+
+                searchMatch
+
+            );
+
+        });
+
+
+    if(sort==="rating"){
+
+        filtered.sort(
+            (a,b)=>b.rating-a.rating
+        );
+
+    }
+
+
+    if(sort==="priceLow"){
+
+        filtered.sort(
+            (a,b)=>a.price-b.price
+        );
+
+    }
+
+
+    if(sort==="priceHigh"){
+
+        filtered.sort(
+            (a,b)=>b.price-a.price
+        );
+
+    }
+
+
+    displayActivities(filtered);
+
+}
+
+
+
+/* =====================================================
+   GET CITY NAME
+===================================================== */
+
+function getCityName(city){
+
+    const names={
+
+        ahmedabad:"Ahmedabad",
+
+        rishikesh:"Rishikesh",
+
+        udaipur:"Udaipur",
+
+        mumbai:"Mumbai",
+
+        delhi:"Delhi",
+
+        jaipur:"Jaipur",
+
+        goa:"Goa",
+
+        manali:"Manali"
+
+    };
+
+
+    return names[city] || "India";
+
+}
+
+
+
+/* =====================================================
+   SELECT CITY
+===================================================== */
+
+function selectCity(city){
+
+    document
+        .getElementById("citySelect")
+        .value=city;
+
+
+    document
+        .getElementById("searchInput")
+        .value="";
+
+
+    document
+        .getElementById("filterSelect")
+        .value="all";
+
+
+    document
+        .getElementById("sortSelect")
+        .value="default";
+
+
+    filterActivities();
+
+
+    window.scrollTo({
+
+        top:0,
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+
+/* =====================================================
+   HEART
+===================================================== */
+
+function toggleHeart(element){
+
+    element
+        .classList
+        .toggle("active");
+
+
+    if(
+        element
+        .classList
+        .contains("active")
+    ){
+
+        element.innerHTML="♥";
+
+    }
+
+    else{
+
+        element.innerHTML="♡";
+
+    }
+
+}
+
+
+
+/* =====================================================
+   CITY DROPDOWN
+===================================================== */
+
+document
+    .getElementById("citySelect")
+    .addEventListener(
+        "change",
+        function(){
+
+            document
+                .getElementById("searchInput")
+                .value="";
+
+
+            document
+                .getElementById("filterSelect")
+                .value="all";
+
+
+            document
+                .getElementById("sortSelect")
+                .value="default";
+
+
+            filterActivities();
+
+        }
+    );
+
+
+
+/* =====================================================
+   ENTER SEARCH
+===================================================== */
+
+document
+    .getElementById("searchInput")
+    .addEventListener(
+        "keyup",
+        function(event){
+
+            if(event.key==="Enter"){
+
+                filterActivities();
+
+            }
+
+        }
+    );
+
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
+
+displayActivities(activities);
+
+</script>
+
+</body>
+</html>
