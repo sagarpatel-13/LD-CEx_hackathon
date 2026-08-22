@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>GlobalTrotters | Register</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    padding: 30px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.circle {
+    position: fixed;
+    border-radius: 50%;
+    opacity: 0.35;
+    z-index: 0;
+}
+
+.circle.one {
+    width: 300px;
+    height: 300px;
+    background: #4fd1c5;
+    top: -120px;
+    left: -100px;
+}
+
+.circle.two {
+    width: 350px;
+    height: 350px;
+    background: #667eea;
+    right: -130px;
+    bottom: -150px;
+}
+
+.circle.three {
+    width: 140px;
+    height: 140px;
+    background: #f6ad55;
+    right: 18%;
+    top: 5%;
+}
+
+.main-container {
+    width: 1050px;
+    max-width: 100%;
+    min-height: 650px;
+    display: flex;
+    overflow: hidden;
+    border-radius: 25px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 0 30px 70px rgba(0,0,0,0.35);
+    position: relative;
+    z-index: 2;
+}
+
+.left-section {
+    width: 38%;
+    padding: 45px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: white;
+    background: linear-gradient(145deg, rgba(0,0,0,0.28), rgba(255,255,255,0.05));
+}
+
+.logo {
+    width: 220px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 15px rgba(0,0,0,0.25));
+    transition: 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.03);
+}
+
+.left-content {
+    margin-top: 20px;
+}
+
+.left-content h1 {
+    font-size: 38px;
+    line-height: 1.2;
+    margin-bottom: 18px;
+}
+
+.left-content h1 span {
+    color: #4fd1c5;
+}
+
+.left-content p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.75);
+}
+
+.benefits {
+    margin-top: 30px;
+}
+
+.benefit {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+}
+
+.benefit i {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background: rgba(79,209,197,0.15);
+    color: #4fd1c5;
+}
+
+.left-footer {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+}
+
+.right-section {
+    width: 62%;
+    background: rgba(255,255,255,0.97);
+    padding: 40px 50px;
+    overflow-y: auto;
+}
+
+.register-header {
+    margin-bottom: 25px;
+}
+
+.register-header h2 {
+    font-size: 29px;
+    color: #1a202c;
+    margin-bottom: 6px;
+}
+
+.register-header p {
+    font-size: 13px;
+    color: #718096;
+}
+
+.photo-section {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 25px;
+}
+
+.photo-preview {
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    border: 2px dashed #38b2ac;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: #f0fdfa;
+    color: #319795;
+    flex-shrink: 0;
+}
+
+.photo-preview i {
+    font-size: 25px;
+}
+
+.photo-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-info h4 {
+    font-size: 13px;
+    color: #2d3748;
+    margin-bottom: 4px;
+}
+
+.photo-info p {
+    font-size: 11px;
+    color: #a0aec0;
+    margin-bottom: 8px;
+}
+
+.upload-btn {
+    display: inline-block;
+    padding: 6px 12px;
+    background: #e6fffa;
+    color: #319795;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.upload-btn:hover {
+    background: #b2f5ea;
+}
+
+#photoInput {
+    display: none;
+}
+
+.form-group {
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    font-weight: 500;
+    color: #4a5568;
+    margin-bottom: 7px;
+}
+
+.two-column {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.input-wrapper {
+    position: relative;
+}
+
+.input-wrapper > i:first-child {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0aec0;
+    font-size: 14px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.input-wrapper input,
+.input-wrapper select {
+    width: 100%;
+    height: 45px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 0 40px;
+    outline: none;
+    background: #f8fafc;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    color: #2d3748;
+    transition: 0.3s ease;
+}
+
+.input-wrapper input:focus,
+.input-wrapper select:focus {
+    border-color: #38b2ac;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(56,178,172,0.1);
+}
+
+.input-wrapper select {
+    appearance: none;
+    cursor: pointer;
+    padding-right: 38px;
+}
+
+.input-wrapper select:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.input-wrapper select option {
+    color: #2d3748;
+    background: white;
+}
+
+.dropdown-arrow {
+    position: absolute !important;
+    right: 14px;
+    left: auto !important;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0aec0;
+    font-size: 11px;
+    pointer-events: none;
+}
+
+textarea {
+    width: 100%;
+    min-height: 80px;
+    resize: vertical;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 12px 14px;
+    outline: none;
+    background: #f8fafc;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    color: #2d3748;
+    transition: 0.3s ease;
+}
+
+textarea:focus {
+    border-color: #38b2ac;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(56,178,172,0.1);
+}
+
+.password-toggle {
+    position: absolute !important;
+    right: 14px;
+    left: auto !important;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0aec0;
+    cursor: pointer;
+    font-size: 13px;
+    z-index: 3;
+    pointer-events: auto !important;
+}
+
+.password-input {
+    padding-right: 40px !important;
+}
+
+.register-btn {
+    width: 100%;
+    height: 48px;
+    border: none;
+    border-radius: 11px;
+    background: linear-gradient(135deg, #38b2ac, #319795);
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(49,151,149,0.25);
+    transition: 0.3s ease;
+    margin-top: 5px;
+}
+
+.register-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 25px rgba(49,151,149,0.35);
+}
+
+#message {
+    text-align: center;
+    min-height: 18px;
+    margin-top: 10px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 18px;
+    font-size: 12px;
+    color: #718096;
+}
+
+.login-link a {
+    color: #319795;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+.terms {
+    text-align: center;
+    font-size: 10px;
+    color: #a0aec0;
+    margin-top: 12px;
+    line-height: 1.5;
+}
+
+.terms a {
+    color: #319795;
+    text-decoration: none;
+}
+
+@media (max-width: 850px) {
+
+    body {
+        padding: 20px;
+        align-items: flex-start;
+        overflow-y: auto;
+    }
+
+    .main-container {
+        flex-direction: column;
+        margin: 20px auto;
+    }
+
+    .left-section {
+        width: 100%;
+        padding: 35px;
+    }
+
+    .right-section {
+        width: 100%;
+        padding: 35px;
+    }
+}
+
+@media (max-width: 550px) {
+
+    .two-column {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .left-section {
+        padding: 30px;
+    }
+
+    .right-section {
+        padding: 30px 25px;
+    }
+
+    .logo {
+        width: 190px;
+    }
+
+    .left-content h1 {
+        font-size: 30px;
+    }
+
+    .photo-section {
+        align-items: flex-start;
+    }
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="circle one"></div>
+
+<div class="circle two"></div>
+
+<div class="circle three"></div>
+
+<div class="main-container">
+
+<section class="left-section">
+
+<div>
+
+<img
+src="c:\Users\maitr\Downloads\travel-tourism-logo-isolated-on-white-background-vector.webp"
+alt="GlobalTrotters Logo"
+class="logo">
+
+</div>
+
+<div class="left-content">
+
+<h1>
+Start your
+<br>
+<span>adventure.</span>
+</h1>
+
+<p>
+Create your GlobalTrotters account
+and start planning amazing journeys
+around the world.
+</p>
+
+<div class="benefits">
+
+<div class="benefit">
+<i class="fa-solid fa-map-location-dot"></i>
+<span>Plan and organize your trips</span>
+</div>
+
+<div class="benefit">
+<i class="fa-solid fa-earth-americas"></i>
+<span>Discover amazing destinations</span>
+</div>
+
+<div class="benefit">
+<i class="fa-solid fa-wallet"></i>
+<span>Track your travel budget</span>
+</div>
+
+<div class="benefit">
+<i class="fa-solid fa-heart"></i>
+<span>Save your favorite places</span>
+</div>
+
+</div>
+
+</div>
+
+<div class="left-footer">
+© 2026 GlobalTrotters · Plan • Explore • Travel
+</div>
+
+</section>
+
+<section class="right-section">
+
+<div class="register-header">
+
+<h2>Create your account</h2>
+
+<p>
+Join GlobalTrotters and start your journey.
+</p>
+
+</div>
+
+<div class="photo-section">
+
+<div class="photo-preview" id="photoPreview">
+
+<i class="fa-regular fa-user"></i>
+
+</div>
+
+<div class="photo-info">
+
+<h4>Profile Photo</h4>
+
+<p>
+Add a photo to personalize your profile.
+</p>
+
+<label
+for="photoInput"
+class="upload-btn">
+
+<i class="fa-solid fa-upload"></i>
+Upload Photo
+
+</label>
+
+<input
+type="file"
+id="photoInput"
+accept="image/*">
+
+</div>
+
+</div>
+
+<form id="registerForm">
+
+<div class="two-column">
+
+<div class="form-group">
+
+<label for="firstName">
+First Name *
+</label>
+
+<div class="input-wrapper">
+
+<i class="fa-regular fa-user"></i>
+
+<input
+type="text"
+id="firstName"
+placeholder="First Name"
+required>
+
+</div>
+
+</div>
+
+<div class="form-group">
+
+<label for="lastName">
+Last Name *
+</label>
+
+<div class="input-wrapper">
+
+<i class="fa-regular fa-user"></i>
+
+<input
+type="text"
+id="lastName"
+placeholder="Last Name"
+required>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="two-column">
+
+<div class="form-group">
+
+<label for="email">
+Email Address *
+</label>
+
+<div class="input-wrapper">
+
+<i class="fa-regular fa-envelope"></i>
+
+<input
+type="email"
+id="email"
+placeholder="Email Address"
+required>
+
+</div>
+
+</div>
+
+<div class="form-group">
+
+<label for="phone">
+Phone Number *
+</label>
+
+<div class="input-wrapper">
+
+<i class="fa-solid fa-phone"></i>
+
+<input
+type="tel"
+id="phone"
+placeholder="10-digit Phone Number"
+maxlength="10"
+required>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="two-column">
+
+<div class="form-group">
+
+<label for="country">
+Country *
+</label>
+
+<div class="input-wrapper">
+
+<i class="fa-solid fa-earth-americas"></i>
+
+<select id="country" required>
+
+<option value="" selected disabled>
+Select Country
+</option>
+
+<option value="India">India</option>
+<option value="United States">United States</option>
+<option value="United Kingdom">United Kingdom</option>
+<option value="Canada">Canada</option>
+<option value="Australia">Australia</option>
+<option value="Germany">Germany</option>
+<option value="France">France</option>
+<option value="Italy">Italy</option>
+<option value="Spain">Spain</option>
+<option value="Japan">Japan</option>
+<option value="China">China</option>
+<option value="Singapore">Singapore</option>
+<option value="United Arab Emirates">United Arab Emirates</option>
+<option value="Thailand">Thailand</option>
+<option value="Malaysia">Malaysia</option>
+<option value="Nepal">Nepal</option>
+<option value="Sri Lanka">Sri Lanka</option>
+<option value="New Zealand">New Zealand</option>
+<option value="South Africa">South Africa</option>
+<option value="Brazil">Brazil</option>
+
+</select>
+
+<i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+
+</div>
+
+</div>
+
+<div class="form-group">
+
+<label for="city">
+City *
+</label>
+
+<div class="input-wrapper">
+
+<i class="fa-solid fa-city"></i>
+
+<select
+id="city"
+required
+disabled>
+
+<option value="" selected disabled>
+Select City
+</option>
+
+</select>
+
+<i class="fa-solid fa-chevron-down dropdown-arrow"></i>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="two-column">
+
+<div class="form-group">
+
+<label for="password">
+Password *
+</label>
+
+<div class="input-wrapper">
+
+<i class="fa-solid fa-lock"></i>
+
+<input
+type="password"
+id="password"
+class="password-input"
+placeholder="Create password"
+required>
+
+<i
+class="fa-regular fa-eye password-toggle"
+data-target="password">
+</i>
+
+</div>
+
+</div>
+
+<div class="form-group">
+
+<label for="confirmPassword">
+Confirm Password *
+</label>
+
+<div class="input-wrapper">
+
+<i class="fa-solid fa-lock"></i>
+
+<input
+type="password"
+id="confirmPassword"
+class="password-input"
+placeholder="Confirm password"
+required>
+
+<i
+class="fa-regular fa-eye password-toggle"
+data-target="confirmPassword">
+</i>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="form-group">
+
+<label for="additionalInfo">
+Additional Information
+</label>
+
+<textarea
+id="additionalInfo"
+placeholder="Tell us a little about yourself, your travel interests, or anything else..."></textarea>
+
+</div>
+
+<button
+type="submit"
+class="register-btn">
+
+<i class="fa-solid fa-user-plus"></i>
+
+&nbsp; Register User
+
+</button>
+
+<div id="message"></div>
+
+</form>
+
+<div class="login-link">
+
+Already have an account?
+
+<a href="login.html">
+Login
+</a>
+
+</div>
+
+<div class="terms">
+
+By creating an account, you agree to our
+
+<a href="#">
+Terms of Service
+</a>
+
+and
+
+<a href="#">
+Privacy Policy
+</a>
+
+</div>
+
+</section>
+
+</div>
+
+<script>
+
+const countrySelect =
+document.getElementById("country");
+
+const citySelect =
+document.getElementById("city");
+
+const cities = {
+
+India: [
+"Ahmedabad",
+"Gandhinagar",
+"Mumbai",
+"Delhi",
+"Bangalore",
+"Chennai",
+"Hyderabad",
+"Kolkata",
+"Pune",
+"Jaipur",
+"Surat",
+"Vadodara",
+"Goa"
+],
+
+"United States": [
+"New York",
+"Los Angeles",
+"Chicago",
+"San Francisco",
+"Las Vegas",
+"Miami",
+"Boston",
+"Seattle",
+"Washington D.C."
+],
+
+"United Kingdom": [
+"London",
+"Manchester",
+"Birmingham",
+"Liverpool",
+"Edinburgh",
+"Glasgow",
+"Bristol",
+"Oxford"
+],
+
+Canada: [
+"Toronto",
+"Vancouver",
+"Montreal",
+"Calgary",
+"Ottawa",
+"Edmonton",
+"Quebec City"
+],
+
+Australia: [
+"Sydney",
+"Melbourne",
+"Brisbane",
+"Perth",
+"Adelaide",
+"Canberra",
+"Gold Coast"
+],
+
+Germany: [
+"Berlin",
+"Munich",
+"Hamburg",
+"Frankfurt",
+"Cologne",
+"Stuttgart"
+],
+
+France: [
+"Paris",
+"Nice",
+"Lyon",
+"Marseille",
+"Bordeaux",
+"Toulouse"
+],
+
+Italy: [
+"Rome",
+"Milan",
+"Venice",
+"Florence",
+"Naples",
+"Turin"
+],
+
+Spain: [
+"Madrid",
+"Barcelona",
+"Valencia",
+"Seville",
+"Malaga",
+"Bilbao"
+],
+
+Japan: [
+"Tokyo",
+"Osaka",
+"Kyoto",
+"Yokohama",
+"Nagoya",
+"Sapporo"
+],
+
+China: [
+"Beijing",
+"Shanghai",
+"Guangzhou",
+"Shenzhen",
+"Chengdu",
+"Hong Kong"
+],
+
+Singapore: [
+"Singapore"
+],
+
+"United Arab Emirates": [
+"Dubai",
+"Abu Dhabi",
+"Sharjah",
+"Ajman"
+],
+
+Thailand: [
+"Bangkok",
+"Phuket",
+"Pattaya",
+"Chiang Mai",
+"Krabi"
+],
+
+Malaysia: [
+"Kuala Lumpur",
+"George Town",
+"Johor Bahru",
+"Malacca",
+"Kota Kinabalu"
+],
+
+Nepal: [
+"Kathmandu",
+"Pokhara",
+"Lalitpur",
+"Bhaktapur"
+],
+
+"Sri Lanka": [
+"Colombo",
+"Kandy",
+"Galle",
+"Jaffna",
+"Negombo"
+],
+
+"New Zealand": [
+"Auckland",
+"Wellington",
+"Christchurch",
+"Queenstown",
+"Hamilton"
+],
+
+"South Africa": [
+"Cape Town",
+"Johannesburg",
+"Durban",
+"Pretoria",
+"Port Elizabeth"
+],
+
+Brazil: [
+"São Paulo",
+"Rio de Janeiro",
+"Brasília",
+"Salvador",
+"Fortaleza"
+]
+
+};
+
+countrySelect.addEventListener("change", function() {
+
+const selectedCountry = this.value;
+
+citySelect.innerHTML =
+'<option value="" selected disabled>Select City</option>';
+
+if (cities[selectedCountry]) {
+
+cities[selectedCountry].forEach(function(city) {
+
+const option =
+document.createElement("option");
+
+option.value = city;
+
+option.textContent = city;
+
+citySelect.appendChild(option);
+
+});
+
+citySelect.disabled = false;
+
+} else {
+
+citySelect.disabled = true;
+
+}
+
+});
+
+const photoInput =
+document.getElementById("photoInput");
+
+const photoPreview =
+document.getElementById("photoPreview");
+
+photoInput.addEventListener("change", function() {
+
+const file = this.files[0];
+
+if (!file) {
+return;
+}
+
+if (!file.type.startsWith("image/")) {
+
+alert("Please select an image file.");
+
+this.value = "";
+
+return;
+
+}
+
+const reader = new FileReader();
+
+reader.onload = function(event) {
+
+photoPreview.innerHTML =
+`<img src="${event.target.result}" alt="Profile Preview">`;
+
+};
+
+reader.readAsDataURL(file);
+
+});
+
+const passwordToggles =
+document.querySelectorAll(".password-toggle");
+
+passwordToggles.forEach(function(toggle) {
+
+toggle.addEventListener("click", function() {
+
+const targetId =
+this.dataset.target;
+
+const input =
+document.getElementById(targetId);
+
+if (input.type === "password") {
+
+input.type = "text";
+
+this.classList.remove("fa-eye");
+
+this.classList.add("fa-eye-slash");
+
+} else {
+
+input.type = "password";
+
+this.classList.remove("fa-eye-slash");
+
+this.classList.add("fa-eye");
+
+}
+
+});
+
+});
+
+const registerForm =
+document.getElementById("registerForm");
+
+const message =
+document.getElementById("message");
+
+registerForm.addEventListener("submit", function(event) {
+
+event.preventDefault();
+
+const firstName =
+document.getElementById("firstName").value.trim();
+
+const lastName =
+document.getElementById("lastName").value.trim();
+
+const email =
+document.getElementById("email").value.trim();
+
+const phone =
+document.getElementById("phone").value.trim();
+
+const country =
+document.getElementById("country").value;
+
+const city =
+document.getElementById("city").value;
+
+const password =
+document.getElementById("password").value;
+
+const confirmPassword =
+document.getElementById("confirmPassword").value;
+
+if (firstName === "") {
+
+showMessage(
+"Please enter your first name.",
+"error"
+);
+
+return;
+
+}
+
+if (lastName === "") {
+
+showMessage(
+"Please enter your last name.",
+"error"
+);
+
+return;
+
+}
+
+if (email === "") {
+
+showMessage(
+"Please enter your email address.",
+"error"
+);
+
+return;
+
+}
+
+const emailPattern =
+/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+if (!emailPattern.test(email)) {
+
+showMessage(
+"Please enter a valid email address.",
+"error"
+);
+
+return;
+
+}
+
+if (phone === "") {
+
+showMessage(
+"Please enter your phone number.",
+"error"
+);
+
+return;
+
+}
+
+const phonePattern =
+/^[0-9]{10}$/;
+
+if (!phonePattern.test(phone)) {
+
+showMessage(
+"Please enter a valid 10-digit phone number.",
+"error"
+);
+
+return;
+
+}
+
+if (country === "") {
+
+showMessage(
+"Please select your country.",
+"error"
+);
+
+return;
+
+}
+
+if (city === "") {
+
+showMessage(
+"Please select your city.",
+"error"
+);
+
+return;
+
+}
+
+if (password === "") {
+
+showMessage(
+"Please create a password.",
+"error"
+);
+
+return;
+
+}
+
+if (password.length < 6) {
+
+showMessage(
+"Password must contain at least 6 characters.",
+"error"
+);
+
+return;
+
+}
+
+if (confirmPassword === "") {
+
+showMessage(
+"Please confirm your password.",
+"error"
+);
+
+return;
+
+}
+
+if (password !== confirmPassword) {
+
+showMessage(
+"Passwords do not match.",
+"error"
+);
+
+return;
+
+}
+
+showMessage(
+"Registration successful! ✈️",
+"success"
+);
+
+setTimeout(function() {
+
+window.location.href = "login.html";
+
+}, 2000);
+
+});
+
+function showMessage(text, type) {
+
+message.textContent = text;
+
+if (type === "error") {
+
+message.style.color = "#e53e3e";
+
+} else {
+
+message.style.color = "#319795";
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>
