@@ -1,0 +1,1505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>GlobeTrotter - Build Itinerary</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            background: #f6f8fb;
+            color: #172033;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 72px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 55px;
+            border-bottom: 1px solid #edf0f4;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 23px;
+            font-weight: 700;
+            color: #1c7ed6;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: #e8f4ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #687386;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .nav-links a.active,
+        .nav-links a:hover {
+            color: #1976d2;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .profile span {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 90%;
+            max-width: 1250px;
+            margin: 35px auto 70px;
+        }
+
+
+        /* ================= TRIP HEADER ================= */
+
+        .trip-header {
+            background: white;
+            border: 1px solid #edf0f4;
+            border-radius: 17px;
+            padding: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .trip-heading {
+            display: flex;
+            align-items: center;
+            gap: 17px;
+        }
+
+        .trip-icon {
+            width: 58px;
+            height: 58px;
+            border-radius: 14px;
+            background: #e8f4ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+
+        .trip-heading h1 {
+            font-size: 25px;
+            margin-bottom: 5px;
+        }
+
+        .trip-heading p {
+            color: #7d8796;
+            font-size: 13px;
+        }
+
+        .save-btn {
+            background: #1976d2;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .save-btn:hover {
+            background: #125da8;
+        }
+
+
+        /* ================= LAYOUT ================= */
+
+        .layout {
+            display: grid;
+            grid-template-columns: 1fr 330px;
+            gap: 25px;
+            align-items: start;
+        }
+
+
+        /* ================= ITINERARY ================= */
+
+        .itinerary-card {
+            background: white;
+            border: 1px solid #edf0f4;
+            border-radius: 17px;
+            padding: 25px;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 23px;
+        }
+
+        .section-heading h2 {
+            font-size: 18px;
+        }
+
+        .add-day-btn {
+            border: 1px solid #cfe5f8;
+            background: #edf7ff;
+            color: #1976d2;
+            padding: 9px 13px;
+            border-radius: 9px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+
+        /* ================= DAY ================= */
+
+        .day {
+            border: 1px solid #e9edf2;
+            border-radius: 13px;
+            margin-bottom: 18px;
+            overflow: hidden;
+        }
+
+        .day:last-child {
+            margin-bottom: 0;
+        }
+
+        .day-header {
+            background: #f8fafc;
+            padding: 15px 17px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #edf0f4;
+        }
+
+        .day-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .day-number {
+            width: 31px;
+            height: 31px;
+            border-radius: 9px;
+            background: #1976d2;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .day-title h3 {
+            font-size: 14px;
+        }
+
+        .day-title span {
+            display: block;
+            color: #8a94a3;
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        .day-cost {
+            font-size: 12px;
+            font-weight: 600;
+            color: #687386;
+        }
+
+
+        /* ================= ACTIVITIES ================= */
+
+        .activities {
+            padding: 17px;
+        }
+
+        .activity {
+            display: grid;
+            grid-template-columns: 65px 1fr auto;
+            gap: 14px;
+            padding: 15px 0;
+            border-bottom: 1px solid #edf0f4;
+        }
+
+        .activity:first-child {
+            padding-top: 0;
+        }
+
+        .activity:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .activity-time {
+            color: #1976d2;
+            font-size: 12px;
+            font-weight: 700;
+            padding-top: 3px;
+        }
+
+        .activity-main {
+            display: flex;
+            gap: 11px;
+        }
+
+        .activity-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 9px;
+            background: #f0f7fc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+            flex-shrink: 0;
+        }
+
+        .activity-info h4 {
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .activity-info p {
+            color: #8992a1;
+            font-size: 11px;
+            line-height: 1.5;
+        }
+
+        .activity-cost {
+            font-size: 12px;
+            font-weight: 600;
+            color: #687386;
+            white-space: nowrap;
+        }
+
+        .add-activity {
+            width: 100%;
+            margin-top: 16px;
+            border: 1px dashed #cbd9e6;
+            background: #fafcfe;
+            color: #1976d2;
+            padding: 10px;
+            border-radius: 9px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .add-activity:hover {
+            background: #edf7ff;
+        }
+
+
+        /* ================= SIDEBAR ================= */
+
+        .sidebar-card {
+            background: white;
+            border: 1px solid #edf0f4;
+            border-radius: 17px;
+            padding: 22px;
+            margin-bottom: 18px;
+        }
+
+        .sidebar-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .sidebar-card h3 {
+            font-size: 16px;
+            margin-bottom: 18px;
+        }
+
+
+        /* ================= COST SUMMARY ================= */
+
+        .cost-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 11px 0;
+            border-bottom: 1px solid #edf0f4;
+            font-size: 12px;
+        }
+
+        .cost-item span:first-child {
+            color: #7f8998;
+        }
+
+        .cost-item span:last-child {
+            font-weight: 600;
+        }
+
+        .total-cost {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #edf0f4;
+        }
+
+        .total-cost span:first-child {
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        .total-cost span:last-child {
+            color: #1976d2;
+            font-weight: 700;
+            font-size: 17px;
+        }
+
+
+        /* ================= QUICK INFO ================= */
+
+        .quick-info {
+            display: grid;
+            gap: 13px;
+        }
+
+        .quick-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quick-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            background: #edf7ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+        }
+
+        .quick-text small {
+            display: block;
+            color: #949dab;
+            font-size: 10px;
+            margin-bottom: 2px;
+        }
+
+        .quick-text span {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+
+        /* ================= TIPS ================= */
+
+        .tip {
+            background: #f1f8fd;
+            border-radius: 10px;
+            padding: 13px;
+            color: #687386;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 950px) {
+
+            .layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar-card {
+                margin-bottom: 18px;
+            }
+
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 0 18px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .profile span {
+                display: none;
+            }
+
+            .container {
+                width: 92%;
+                margin-top: 22px;
+            }
+
+            .trip-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 18px;
+            }
+
+            .save-btn {
+                width: 100%;
+            }
+
+            .itinerary-card {
+                padding: 18px;
+            }
+
+            .activity {
+                grid-template-columns: 55px 1fr;
+            }
+
+            .activity-cost {
+                grid-column: 2;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🌍
+            </div>
+
+            GlobeTrotter
+
+        </div>
+
+
+        <div class="nav-links">
+
+            <a href="#">
+                Home
+            </a>
+
+            <a href="#">
+                My Trips
+            </a>
+
+            <a href="#" class="active">
+                Itinerary
+            </a>
+
+            <a href="#">
+                Explore
+            </a>
+
+            <a href="#">
+                Profile
+            </a>
+
+        </div>
+
+
+        <div class="profile">
+
+            <img
+                src="https://i.pravatar.cc/100?img=12"
+                alt="Profile"
+            >
+
+            <span>
+                Parth
+            </span>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+
+        <!-- ================= TRIP HEADER ================= -->
+
+        <div class="trip-header">
+
+            <div class="trip-heading">
+
+                <div class="trip-icon">
+                    🇯🇵
+                </div>
+
+                <div>
+
+                    <h1>
+                        Japan Discovery
+                    </h1>
+
+                    <p>
+                        📍 Tokyo, Kyoto & Osaka
+                        &nbsp; • &nbsp;
+                        Nov 02 - Nov 12, 2026
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="save-btn"
+                onclick="saveItinerary()"
+            >
+                Save Itinerary
+            </button>
+
+        </div>
+
+
+
+        <!-- ================= CONTENT LAYOUT ================= -->
+
+        <div class="layout">
+
+
+            <!-- ================= ITINERARY ================= -->
+
+            <div class="itinerary-card">
+
+                <div class="section-heading">
+
+                    <h2>
+                        Build Your Itinerary
+                    </h2>
+
+                    <button
+                        class="add-day-btn"
+                        onclick="addDay()"
+                    >
+                        + Add Day
+                    </button>
+
+                </div>
+
+
+
+                <!-- ================= DAY 1 ================= -->
+
+                <div class="day">
+
+                    <div class="day-header">
+
+                        <div class="day-title">
+
+                            <div class="day-number">
+                                1
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Arrival in Tokyo
+                                </h3>
+
+                                <span>
+                                    Monday, November 2
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="day-cost">
+                            ₹8,500
+                        </div>
+
+                    </div>
+
+
+                    <div class="activities">
+
+
+                        <div class="activity">
+
+                            <div class="activity-time">
+                                09:00 AM
+                            </div>
+
+                            <div class="activity-main">
+
+                                <div class="activity-icon">
+                                    ✈️
+                                </div>
+
+                                <div class="activity-info">
+
+                                    <h4>
+                                        Arrive at Narita Airport
+                                    </h4>
+
+                                    <p>
+                                        Airport pickup and transfer
+                                        to your hotel.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="activity-cost">
+                                ₹3,500
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="activity">
+
+                            <div class="activity-time">
+                                12:30 PM
+                            </div>
+
+                            <div class="activity-main">
+
+                                <div class="activity-icon">
+                                    🏨
+                                </div>
+
+                                <div class="activity-info">
+
+                                    <h4>
+                                        Hotel Check-in
+                                    </h4>
+
+                                    <p>
+                                        Check-in and settle into
+                                        your accommodation.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="activity-cost">
+                                ₹4,000
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="activity">
+
+                            <div class="activity-time">
+                                06:00 PM
+                            </div>
+
+                            <div class="activity-main">
+
+                                <div class="activity-icon">
+                                    🍜
+                                </div>
+
+                                <div class="activity-info">
+
+                                    <h4>
+                                        Tokyo Food Tour
+                                    </h4>
+
+                                    <p>
+                                        Explore local Japanese cuisine
+                                        around Shinjuku.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="activity-cost">
+                                ₹1,000
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="add-activity"
+                            onclick="addActivity(this)"
+                        >
+                            + Add Activity
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ================= DAY 2 ================= -->
+
+                <div class="day">
+
+                    <div class="day-header">
+
+                        <div class="day-title">
+
+                            <div class="day-number">
+                                2
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Explore Tokyo
+                                </h3>
+
+                                <span>
+                                    Tuesday, November 3
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="day-cost">
+                            ₹6,200
+                        </div>
+
+                    </div>
+
+
+                    <div class="activities">
+
+
+                        <div class="activity">
+
+                            <div class="activity-time">
+                                08:00 AM
+                            </div>
+
+                            <div class="activity-main">
+
+                                <div class="activity-icon">
+                                    ⛩️
+                                </div>
+
+                                <div class="activity-info">
+
+                                    <h4>
+                                        Senso-ji Temple
+                                    </h4>
+
+                                    <p>
+                                        Visit Tokyo's famous
+                                        ancient Buddhist temple.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="activity-cost">
+                                ₹800
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="activity">
+
+                            <div class="activity-time">
+                                12:00 PM
+                            </div>
+
+                            <div class="activity-main">
+
+                                <div class="activity-icon">
+                                    🍣
+                                </div>
+
+                                <div class="activity-info">
+
+                                    <h4>
+                                        Traditional Sushi Lunch
+                                    </h4>
+
+                                    <p>
+                                        Experience authentic
+                                        Japanese sushi.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="activity-cost">
+                                ₹1,500
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="activity">
+
+                            <div class="activity-time">
+                                03:00 PM
+                            </div>
+
+                            <div class="activity-main">
+
+                                <div class="activity-icon">
+                                    🗼
+                                </div>
+
+                                <div class="activity-info">
+
+                                    <h4>
+                                        Tokyo Skytree
+                                    </h4>
+
+                                    <p>
+                                        Enjoy panoramic views
+                                        of Tokyo city.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="activity-cost">
+                                ₹1,900
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="activity">
+
+                            <div class="activity-time">
+                                07:00 PM
+                            </div>
+
+                            <div class="activity-main">
+
+                                <div class="activity-icon">
+                                    🛍️
+                                </div>
+
+                                <div class="activity-info">
+
+                                    <h4>
+                                        Shibuya Shopping
+                                    </h4>
+
+                                    <p>
+                                        Explore Shibuya Crossing
+                                        and nearby stores.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="activity-cost">
+                                ₹2,000
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="add-activity"
+                            onclick="addActivity(this)"
+                        >
+                            + Add Activity
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ================= DAY 3 ================= -->
+
+                <div class="day">
+
+                    <div class="day-header">
+
+                        <div class="day-title">
+
+                            <div class="day-number">
+                                3
+                            </div>
+
+                            <div>
+
+                                <h3>
+                                    Tokyo → Kyoto
+                                </h3>
+
+                                <span>
+                                    Wednesday, November 4
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="day-cost">
+                            ₹9,800
+                        </div>
+
+                    </div>
+
+
+                    <div class="activities">
+
+
+                        <div class="activity">
+
+                            <div class="activity-time">
+                                08:30 AM
+                            </div>
+
+                            <div class="activity-main">
+
+                                <div class="activity-icon">
+                                    🚄
+                                </div>
+
+                                <div class="activity-info">
+
+                                    <h4>
+                                        Shinkansen to Kyoto
+                                    </h4>
+
+                                    <p>
+                                        High-speed bullet train
+                                        from Tokyo to Kyoto.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="activity-cost">
+                                ₹7,000
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="activity">
+
+                            <div class="activity-time">
+                                01:30 PM
+                            </div>
+
+                            <div class="activity-main">
+
+                                <div class="activity-icon">
+                                    🏯
+                                </div>
+
+                                <div class="activity-info">
+
+                                    <h4>
+                                        Fushimi Inari Shrine
+                                    </h4>
+
+                                    <p>
+                                        Walk through the famous
+                                        red torii gates.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="activity-cost">
+                                ₹500
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="activity">
+
+                            <div class="activity-time">
+                                06:00 PM
+                            </div>
+
+                            <div class="activity-main">
+
+                                <div class="activity-icon">
+                                    🍱
+                                </div>
+
+                                <div class="activity-info">
+
+                                    <h4>
+                                        Kyoto Dinner
+                                    </h4>
+
+                                    <p>
+                                        Enjoy a traditional
+                                        Kyoto-style dinner.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="activity-cost">
+                                ₹2,300
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="add-activity"
+                            onclick="addActivity(this)"
+                        >
+                            + Add Activity
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ================= SIDEBAR ================= -->
+
+            <aside>
+
+
+                <!-- COST SUMMARY -->
+
+                <div class="sidebar-card">
+
+                    <h3>
+                        💰 Trip Cost
+                    </h3>
+
+
+                    <div class="cost-item">
+
+                        <span>
+                            Activities
+                        </span>
+
+                        <span>
+                            ₹12,000
+                        </span>
+
+                    </div>
+
+
+                    <div class="cost-item">
+
+                        <span>
+                            Accommodation
+                        </span>
+
+                        <span>
+                            ₹32,000
+                        </span>
+
+                    </div>
+
+
+                    <div class="cost-item">
+
+                        <span>
+                            Transportation
+                        </span>
+
+                        <span>
+                            ₹18,500
+                        </span>
+
+                    </div>
+
+
+                    <div class="cost-item">
+
+                        <span>
+                            Food
+                        </span>
+
+                        <span>
+                            ₹14,000
+                        </span>
+
+                    </div>
+
+
+                    <div class="total-cost">
+
+                        <span>
+                            Estimated Total
+                        </span>
+
+                        <span>
+                            ₹76,500
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- QUICK INFO -->
+
+                <div class="sidebar-card">
+
+                    <h3>
+                        Trip Information
+                    </h3>
+
+
+                    <div class="quick-info">
+
+
+                        <div class="quick-item">
+
+                            <div class="quick-icon">
+                                📅
+                            </div>
+
+                            <div class="quick-text">
+
+                                <small>
+                                    DURATION
+                                </small>
+
+                                <span>
+                                    10 Days
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="quick-item">
+
+                            <div class="quick-icon">
+                                👥
+                            </div>
+
+                            <div class="quick-text">
+
+                                <small>
+                                    TRAVELLERS
+                                </small>
+
+                                <span>
+                                    3 People
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="quick-item">
+
+                            <div class="quick-icon">
+                                🏯
+                            </div>
+
+                            <div class="quick-text">
+
+                                <small>
+                                    TRIP TYPE
+                                </small>
+
+                                <span>
+                                    Cultural
+                                </span>
+
+                            </div>
+
+                        </div>
+
+
+
+                        <div class="quick-item">
+
+                            <div class="quick-icon">
+                                💳
+                            </div>
+
+                            <div class="quick-text">
+
+                                <small>
+                                    BUDGET
+                                </small>
+
+                                <span>
+                                    ₹1,20,000
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- TIP -->
+
+                <div class="sidebar-card">
+
+                    <div class="tip">
+
+                        💡 <strong>Planning Tip</strong>
+
+                        <br><br>
+
+                        Keep your daily activities realistic.
+                        Leave some free time to explore places
+                        you discover during your journey.
+
+                    </div>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </main>
+
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        function saveItinerary() {
+
+            alert(
+                "✅ Your itinerary has been saved successfully!"
+            );
+
+        }
+
+
+        function addActivity(button) {
+
+            const activityName =
+                prompt(
+                    "Enter the activity name:"
+                );
+
+            if (!activityName) {
+                return;
+            }
+
+            const activityLocation =
+                prompt(
+                    "Enter location or short description:"
+                );
+
+            const activityCost =
+                prompt(
+                    "Enter estimated cost (₹):"
+                );
+
+
+            const activityContainer =
+                button.parentElement;
+
+
+            const newActivity =
+                document.createElement("div");
+
+            newActivity.className =
+                "activity";
+
+
+            newActivity.innerHTML = `
+
+                <div class="activity-time">
+                    Flexible
+                </div>
+
+                <div class="activity-main">
+
+                    <div class="activity-icon">
+                        📍
+                    </div>
+
+                    <div class="activity-info">
+
+                        <h4>
+                            ${activityName}
+                        </h4>
+
+                        <p>
+                            ${activityLocation || "Custom activity"}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="activity-cost">
+                    ₹${activityCost || "0"}
+                </div>
+
+            `;
+
+
+            activityContainer.insertBefore(
+                newActivity,
+                button
+            );
+
+        }
+
+
+        function addDay() {
+
+            const days =
+                document.querySelectorAll(".day");
+
+            const dayNumber =
+                days.length + 1;
+
+
+            const newDay =
+                document.createElement("div");
+
+            newDay.className =
+                "day";
+
+
+            newDay.innerHTML = `
+
+                <div class="day-header">
+
+                    <div class="day-title">
+
+                        <div class="day-number">
+                            ${dayNumber}
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                New Day
+                            </h3>
+
+                            <span>
+                                Add your date
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="day-cost">
+                        ₹0
+                    </div>
+
+                </div>
+
+
+                <div class="activities">
+
+                    <button
+                        class="add-activity"
+                        onclick="addActivity(this)"
+                    >
+                        + Add Activity
+                    </button>
+
+                </div>
+
+            `;
+
+
+            document
+                .querySelector(".itinerary-card")
+                .appendChild(newDay);
+
+        }
+
+    </script>
+
+</body>
+</html>

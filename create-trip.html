@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobeTrotter - Create New Trip</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            background: #f6f8fb;
+            color: #172033;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 72px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 55px;
+            border-bottom: 1px solid #edf0f4;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 23px;
+            font-weight: 700;
+            color: #1c7ed6;
+        }
+
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: #e8f4ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #687386;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .nav-links a.active,
+        .nav-links a:hover {
+            color: #1976d2;
+        }
+
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .profile span {
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        /* ================= PAGE ================= */
+
+        .container {
+            width: 90%;
+            max-width: 1180px;
+            margin: 40px auto 70px;
+        }
+
+        .page-heading {
+            margin-bottom: 30px;
+        }
+
+        .page-heading h1 {
+            font-size: 32px;
+            margin-bottom: 7px;
+        }
+
+        .page-heading p {
+            color: #7b8494;
+            font-size: 15px;
+        }
+
+        /* ================= LAYOUT ================= */
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 25px;
+            align-items: start;
+        }
+
+        /* ================= FORM CARD ================= */
+
+        .form-card,
+        .summary-card {
+            background: white;
+            border: 1px solid #edf0f4;
+            border-radius: 17px;
+        }
+
+        .form-card {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .section-number {
+            width: 29px;
+            height: 29px;
+            border-radius: 9px;
+            background: #e8f4ff;
+            color: #1976d2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .section-title h2 {
+            font-size: 17px;
+        }
+
+        /* ================= INPUTS ================= */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #e05b5b;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            border: 1px solid #dfe5ec;
+            border-radius: 10px;
+            padding: 12px 13px;
+            font-size: 14px;
+            color: #293345;
+            outline: none;
+            background: white;
+            transition: 0.2s;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #65a9e5;
+            box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.07);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .input-icon {
+            position: relative;
+        }
+
+        .input-icon span {
+            position: absolute;
+            left: 13px;
+            top: 12px;
+            font-size: 15px;
+        }
+
+        .input-icon input {
+            padding-left: 40px;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 17px;
+        }
+
+        /* ================= TRIP TYPE ================= */
+
+        .trip-types {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .type-option {
+            position: relative;
+        }
+
+        .type-option input {
+            display: none;
+        }
+
+        .type-option label {
+            border: 1px solid #e2e7ed;
+            border-radius: 11px;
+            padding: 13px 8px;
+            text-align: center;
+            cursor: pointer;
+            margin: 0;
+            transition: 0.2s;
+            font-size: 12px;
+            color: #687386;
+        }
+
+        .type-option label span {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 6px;
+        }
+
+        .type-option input:checked + label {
+            border-color: #66abe5;
+            background: #edf7ff;
+            color: #1976d2;
+        }
+
+        /* ================= INTERESTS ================= */
+
+        .interests {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .interest {
+            position: relative;
+        }
+
+        .interest input {
+            display: none;
+        }
+
+        .interest label {
+            display: block;
+            padding: 9px 13px;
+            border: 1px solid #e1e6ed;
+            border-radius: 20px;
+            color: #697386;
+            cursor: pointer;
+            font-size: 12px;
+            margin: 0;
+            transition: 0.2s;
+        }
+
+        .interest input:checked + label {
+            background: #e8f4ff;
+            color: #1976d2;
+            border-color: #b9dcf7;
+        }
+
+        /* ================= BUTTONS ================= */
+
+        .form-actions {
+            border-top: 1px solid #edf0f4;
+            margin-top: 30px;
+            padding-top: 23px;
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .cancel-btn,
+        .create-btn {
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .cancel-btn {
+            background: #f5f7fa;
+            border: 1px solid #e5e9ee;
+            color: #687386;
+        }
+
+        .create-btn {
+            background: #1976d2;
+            border: none;
+            color: white;
+        }
+
+        .create-btn:hover {
+            background: #125da8;
+        }
+
+        /* ================= SUMMARY ================= */
+
+        .summary-card {
+            padding: 23px;
+            position: sticky;
+            top: 95px;
+        }
+
+        .summary-title {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .summary-subtitle {
+            color: #929baa;
+            font-size: 12px;
+            margin-bottom: 20px;
+        }
+
+        .preview-image {
+            height: 155px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 18px;
+            background: #edf2f6;
+        }
+
+        .preview-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-title {
+            font-size: 19px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .preview-location {
+            color: #7d8796;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #edf0f4;
+            font-size: 13px;
+        }
+
+        .summary-item:last-child {
+            border-bottom: none;
+        }
+
+        .summary-item span:first-child {
+            color: #8a94a3;
+        }
+
+        .summary-item span:last-child {
+            font-weight: 600;
+        }
+
+        .tip {
+            margin-top: 20px;
+            background: #f1f8fd;
+            border-radius: 11px;
+            padding: 13px;
+            color: #687386;
+            font-size: 11px;
+            line-height: 1.6;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 950px) {
+
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-card {
+                position: static;
+            }
+
+            .trip-types {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .navbar {
+                padding: 0 18px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .profile span {
+                display: none;
+            }
+
+            .container {
+                width: 92%;
+                margin-top: 25px;
+            }
+
+            .form-card {
+                padding: 20px;
+            }
+
+            .two-columns {
+                grid-template-columns: 1fr;
+            }
+
+            .trip-types {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+            }
+
+            .cancel-btn,
+            .create-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            <div class="logo-icon">🌍</div>
+            GlobeTrotter
+        </div>
+
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">My Trips</a>
+            <a href="#" class="active">Create Trip</a>
+            <a href="#">Explore</a>
+            <a href="#">Profile</a>
+        </div>
+
+        <div class="profile">
+            <img
+                src="https://i.pravatar.cc/100?img=12"
+                alt="Profile"
+            >
+            <span>Parth</span>
+        </div>
+
+    </nav>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="container">
+
+        <div class="page-heading">
+            <h1>Create a New Trip</h1>
+            <p>Tell us about your journey and we'll help you plan the perfect trip.</p>
+        </div>
+
+
+        <div class="content">
+
+
+            <!-- ================= FORM ================= -->
+
+            <div class="form-card">
+
+                <!-- BASIC INFORMATION -->
+
+                <div class="section">
+
+                    <div class="section-title">
+                        <div class="section-number">1</div>
+                        <h2>Trip Information</h2>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Trip Name <span class="required">*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="tripName"
+                            placeholder="e.g. European Summer Adventure"
+                            oninput="updatePreview()"
+                        >
+
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Destination <span class="required">*</span>
+                        </label>
+
+                        <div class="input-icon">
+
+                            <span>📍</span>
+
+                            <input
+                                type="text"
+                                id="destination"
+                                placeholder="e.g. Paris, France"
+                                oninput="updatePreview()"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- DATE AND TRAVELLERS -->
+
+                <div class="section">
+
+                    <div class="section-title">
+                        <div class="section-number">2</div>
+                        <h2>When are you travelling?</h2>
+                    </div>
+
+                    <div class="two-columns">
+
+                        <div class="form-group">
+
+                            <label>
+                                Start Date <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="date"
+                                id="startDate"
+                                onchange="updatePreview()"
+                            >
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                End Date <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="date"
+                                id="endDate"
+                                onchange="updatePreview()"
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <div class="two-columns">
+
+                        <div class="form-group">
+
+                            <label>
+                                Number of Travellers
+                            </label>
+
+                            <input
+                                type="number"
+                                id="travellers"
+                                value="1"
+                                min="1"
+                                max="50"
+                                onchange="updatePreview()"
+                            >
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Estimated Budget
+                            </label>
+
+                            <input
+                                type="number"
+                                id="budget"
+                                placeholder="₹ 50,000"
+                                min="0"
+                                onchange="updatePreview()"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TRIP TYPE -->
+
+                <div class="section">
+
+                    <div class="section-title">
+                        <div class="section-number">3</div>
+                        <h2>What kind of trip is this?</h2>
+                    </div>
+
+                    <div class="trip-types">
+
+                        <div class="type-option">
+
+                            <input
+                                type="radio"
+                                name="tripType"
+                                id="adventure"
+                                value="Adventure"
+                                checked
+                                onchange="updatePreview()"
+                            >
+
+                            <label for="adventure">
+                                <span>🏔️</span>
+                                Adventure
+                            </label>
+
+                        </div>
+
+                        <div class="type-option">
+
+                            <input
+                                type="radio"
+                                name="tripType"
+                                id="leisure"
+                                value="Leisure"
+                                onchange="updatePreview()"
+                            >
+
+                            <label for="leisure">
+                                <span>🏝️</span>
+                                Leisure
+                            </label>
+
+                        </div>
+
+                        <div class="type-option">
+
+                            <input
+                                type="radio"
+                                name="tripType"
+                                id="cultural"
+                                value="Cultural"
+                                onchange="updatePreview()"
+                            >
+
+                            <label for="cultural">
+                                <span>🏛️</span>
+                                Cultural
+                            </label>
+
+                        </div>
+
+                        <div class="type-option">
+
+                            <input
+                                type="radio"
+                                name="tripType"
+                                id="business"
+                                value="Business"
+                                onchange="updatePreview()"
+                            >
+
+                            <label for="business">
+                                <span>💼</span>
+                                Business
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- INTERESTS -->
+
+                <div class="section">
+
+                    <div class="section-title">
+                        <div class="section-number">4</div>
+                        <h2>Your Interests</h2>
+                    </div>
+
+                    <div class="interests">
+
+                        <div class="interest">
+                            <input type="checkbox" id="food">
+                            <label for="food">🍜 Food</label>
+                        </div>
+
+                        <div class="interest">
+                            <input type="checkbox" id="nature">
+                            <label for="nature">🌿 Nature</label>
+                        </div>
+
+                        <div class="interest">
+                            <input type="checkbox" id="history">
+                            <label for="history">🏛️ History</label>
+                        </div>
+
+                        <div class="interest">
+                            <input type="checkbox" id="shopping">
+                            <label for="shopping">🛍️ Shopping</label>
+                        </div>
+
+                        <div class="interest">
+                            <input type="checkbox" id="photography">
+                            <label for="photography">📸 Photography</label>
+                        </div>
+
+                        <div class="interest">
+                            <input type="checkbox" id="nightlife">
+                            <label for="nightlife">🌃 Nightlife</label>
+                        </div>
+
+                        <div class="interest">
+                            <input type="checkbox" id="beaches">
+                            <label for="beaches">🏖️ Beaches</label>
+                        </div>
+
+                        <div class="interest">
+                            <input type="checkbox" id="wildlife">
+                            <label for="wildlife">🦁 Wildlife</label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- NOTES -->
+
+                <div class="section">
+
+                    <div class="section-title">
+                        <div class="section-number">5</div>
+                        <h2>Additional Preferences</h2>
+                    </div>
+
+                    <div class="form-group">
+
+                        <label>
+                            Anything else we should know?
+                        </label>
+
+                        <textarea
+                            id="notes"
+                            placeholder="Tell us about your travel preferences, special requirements, places you want to visit, etc."
+                        ></textarea>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACTIONS -->
+
+                <div class="form-actions">
+
+                    <button
+                        class="cancel-btn"
+                        onclick="cancelTrip()"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        class="create-btn"
+                        onclick="createTrip()"
+                    >
+                        Create Trip →
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= LIVE SUMMARY ================= -->
+
+            <div class="summary-card">
+
+                <div class="summary-title">
+                    Trip Preview
+                </div>
+
+                <div class="summary-subtitle">
+                    Your trip will look something like this
+                </div>
+
+
+                <div class="preview-image">
+
+                    <img
+                        src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=800&q=80"
+                        alt="Travel"
+                    >
+
+                </div>
+
+
+                <div
+                    class="preview-title"
+                    id="previewName"
+                >
+                    Your Trip Name
+                </div>
+
+                <div
+                    class="preview-location"
+                    id="previewDestination"
+                >
+                    📍 Your Destination
+                </div>
+
+
+                <div class="summary-item">
+
+                    <span>📅 Dates</span>
+
+                    <span id="previewDates">
+                        Not selected
+                    </span>
+
+                </div>
+
+
+                <div class="summary-item">
+
+                    <span>⏱️ Duration</span>
+
+                    <span id="previewDuration">
+                        —
+                    </span>
+
+                </div>
+
+
+                <div class="summary-item">
+
+                    <span>👥 Travellers</span>
+
+                    <span id="previewTravellers">
+                        1 Person
+                    </span>
+
+                </div>
+
+
+                <div class="summary-item">
+
+                    <span>💰 Budget</span>
+
+                    <span id="previewBudget">
+                        Not set
+                    </span>
+
+                </div>
+
+
+                <div class="summary-item">
+
+                    <span>✨ Trip Type</span>
+
+                    <span id="previewType">
+                        Adventure
+                    </span>
+
+                </div>
+
+
+                <div class="tip">
+                    💡 <strong>Tip:</strong> Add your interests and preferences so GlobeTrotter can generate a more personalized itinerary for you.
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+
+    <script>
+
+        function updatePreview() {
+
+            /* Trip Name */
+
+            const name =
+                document.getElementById("tripName").value;
+
+            document.getElementById("previewName").innerText =
+                name || "Your Trip Name";
+
+
+            /* Destination */
+
+            const destination =
+                document.getElementById("destination").value;
+
+            document.getElementById("previewDestination").innerText =
+                destination
+                ? "📍 " + destination
+                : "📍 Your Destination";
+
+
+            /* Travellers */
+
+            const travellers =
+                document.getElementById("travellers").value || 1;
+
+            document.getElementById("previewTravellers").innerText =
+                travellers +
+                (travellers == 1 ? " Person" : " People");
+
+
+            /* Budget */
+
+            const budget =
+                document.getElementById("budget").value;
+
+            if (budget) {
+
+                document.getElementById("previewBudget").innerText =
+                    "₹" + Number(budget).toLocaleString("en-IN");
+
+            } else {
+
+                document.getElementById("previewBudget").innerText =
+                    "Not set";
+
+            }
+
+
+            /* Trip Type */
+
+            const selectedType =
+                document.querySelector(
+                    'input[name="tripType"]:checked'
+                );
+
+            if (selectedType) {
+
+                document.getElementById("previewType").innerText =
+                    selectedType.value;
+
+            }
+
+
+            /* Dates */
+
+            const start =
+                document.getElementById("startDate").value;
+
+            const end =
+                document.getElementById("endDate").value;
+
+            if (start && end) {
+
+                const startDate =
+                    new Date(start);
+
+                const endDate =
+                    new Date(end);
+
+                const difference =
+                    endDate - startDate;
+
+                const days =
+                    Math.ceil(
+                        difference / (1000 * 60 * 60 * 24)
+                    );
+
+                if (days >= 0) {
+
+                    document.getElementById("previewDates").innerText =
+                        formatDate(startDate) +
+                        " - " +
+                        formatDate(endDate);
+
+                    document.getElementById("previewDuration").innerText =
+                        days + " Days";
+
+                } else {
+
+                    document.getElementById("previewDates").innerText =
+                        "Invalid dates";
+
+                    document.getElementById("previewDuration").innerText =
+                        "—";
+                }
+
+            } else {
+
+                document.getElementById("previewDates").innerText =
+                    "Not selected";
+
+                document.getElementById("previewDuration").innerText =
+                    "—";
+            }
+
+        }
+
+
+        function formatDate(date) {
+
+            return date.toLocaleDateString(
+                "en-IN",
+                {
+                    day: "numeric",
+                    month: "short"
+                }
+            );
+
+        }
+
+
+        function createTrip() {
+
+            const name =
+                document.getElementById("tripName").value;
+
+            const destination =
+                document.getElementById("destination").value;
+
+            const start =
+                document.getElementById("startDate").value;
+
+            const end =
+                document.getElementById("endDate").value;
+
+            if (!name || !destination || !start || !end) {
+
+                alert(
+                    "Please fill in the required fields."
+                );
+
+                return;
+            }
+
+            alert(
+                "🎉 Trip created successfully!\n\n" +
+                name +
+                " - " +
+                destination
+            );
+
+        }
+
+
+        function cancelTrip() {
+
+            const confirmCancel =
+                confirm(
+                    "Are you sure you want to cancel?"
+                );
+
+            if (confirmCancel) {
+
+                window.location.href = "#";
+
+            }
+
+        }
+
+
+        /* Set minimum date to today */
+
+        const today =
+            new Date().toISOString().split("T")[0];
+
+        document.getElementById("startDate").min =
+            today;
+
+        document.getElementById("endDate").min =
+            today;
+
+
+        /* Prevent end date before start date */
+
+        document
+            .getElementById("startDate")
+            .addEventListener("change", function () {
+
+                document
+                    .getElementById("endDate")
+                    .min = this.value;
+
+            });
+
+    </script>
+
+</body>
+</html>
