@@ -50,22 +50,11 @@
             font-size: 21px;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 35px;
-        }
+        .legacy-nav-links { display: none; }
 
-        .nav-links a {
-            text-decoration: none;
-            color: #687386;
-            font-size: 15px;
-            font-weight: 500;
-        }
+        .legacy-nav-links a { display: none; }
 
-        .nav-links a.active,
-        .nav-links a:hover {
-            color: #1976d2;
-        }
+        .legacy-nav-links a.active, .legacy-nav-links a:hover { color: inherit; }
 
         .profile {
             display: flex;
@@ -437,9 +426,7 @@
                 padding: 0 18px;
             }
 
-            .nav-links {
-                display: none;
-            }
+            .legacy-nav-links { display: none; }
 
             .profile span {
                 display: none;
@@ -471,38 +458,393 @@
                 width: 100%;
             }
         }
+
+        /* =========================
+           GLOBETROTTER LEFT SIDEBAR
+        ========================== */
+        :root {
+            --primary: #7c3aed;
+            --primary-dark: #5b21b6;
+            --primary-light: #a855f7;
+            --background: #050d18;
+            --sidebar: #07111f;
+            --card: #0b1726;
+            --white: #ffffff;
+            --text: #eef3fb;
+            --muted: #94a3b8;
+            --border: #1d3046;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            position: fixed;
+            inset: 0 auto 0 0;
+            width: 260px;
+            height: 100vh;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            padding: 24px 16px 18px;
+            background: var(--sidebar);
+            border-right: 1px solid #16273a;
+            overflow-y: auto;
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 8px;
+            margin-bottom: 30px;
+            color: #f8fafc;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: -.5px;
+        }
+
+        .sidebar-logo .logo-icon {
+            width: 38px;
+            height: 38px;
+            flex: 0 0 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 11px;
+            background: linear-gradient(135deg, #7c3aed, #d946ef);
+            box-shadow: 0 8px 22px rgba(124,58,237,.32);
+            color: white;
+            font-size: 19px;
+        }
+
+        .menu-label {
+            padding: 0 14px;
+            margin-bottom: 9px;
+            color: #66758b;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .sidebar .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .sidebar .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            min-height: 42px;
+            padding: 10px 13px;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #aab6c7;
+            font-size: 14px;
+            font-weight: 600;
+            transition: .2s ease;
+        }
+
+        .sidebar .nav-icon {
+            width: 20px;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .sidebar .nav-links a:hover {
+            color: #fff;
+            background: #101e30;
+            transform: translateX(2px);
+        }
+
+        .sidebar .nav-links a.active {
+            color: #fff;
+            background: linear-gradient(90deg, #6530e8, #7c3aed);
+            box-shadow: 0 8px 22px rgba(124,58,237,.24);
+        }
+
+        .sidebar-cta {
+            margin-top: auto;
+            padding: 18px 16px;
+            border-radius: 14px;
+            background: linear-gradient(145deg, #9b3ff4, #e06a98 78%, #ff944d);
+            color: #fff;
+            box-shadow: 0 12px 30px rgba(217,70,239,.18);
+        }
+
+        .sidebar-cta h3 {
+            font-size: 16px;
+            line-height: 1.25;
+            margin-bottom: 8px;
+        }
+
+        .sidebar-cta p {
+            font-size: 11px;
+            line-height: 1.5;
+            color: rgba(255,255,255,.86);
+            margin-bottom: 12px;
+        }
+
+        .sidebar-cta button {
+            border: none;
+            border-radius: 8px;
+            padding: 8px 12px;
+            background: rgba(39,17,76,.72);
+            color: white;
+            font-size: 11px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .sidebar-cta button:hover {
+            background: rgba(39,17,76,.95);
+        }
+
+        .sidebar::-webkit-scrollbar { width: 5px; }
+        .sidebar::-webkit-scrollbar-track { background: transparent; }
+        .sidebar::-webkit-scrollbar-thumb { background: #24364d; border-radius: 10px; }
+
+        /* =========================
+           DARK PAGE THEME
+        ========================== */
+        .container {
+            width: auto;
+            max-width: 1180px;
+            margin: 0 32px 70px 292px;
+            padding-top: 38px;
+        }
+
+        .page-heading h1 {
+            color: #f8fafc;
+            font-size: 32px;
+        }
+
+        .page-heading p {
+            color: #8fa0b5;
+        }
+
+        .form-card,
+        .summary-card {
+            background: #0b1726;
+            border: 1px solid #1d3046;
+            box-shadow: 0 12px 32px rgba(0,0,0,.16);
+        }
+
+        .section-title h2,
+        .summary-title,
+        .preview-title {
+            color: #eef3fb;
+        }
+
+        .section-number {
+            background: rgba(124,58,237,.16);
+            color: #a855f7;
+        }
+
+        label {
+            color: #b9c5d4;
+        }
+
+        .required {
+            color: #f472b6;
+        }
+
+        input,
+        select,
+        textarea {
+            border-color: #263c54;
+            background: #081421;
+            color: #e8eef7;
+        }
+
+        input::placeholder,
+        textarea::placeholder {
+            color: #65758b;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 3px rgba(124,58,237,.14);
+        }
+
+        .input-icon span {
+            color: #a855f7;
+        }
+
+        .type-option label {
+            border-color: #263c54;
+            background: #081421;
+            color: #8fa0b5;
+        }
+
+        .type-option input:checked + label {
+            border-color: #7c3aed;
+            background: rgba(124,58,237,.16);
+            color: #c4b5fd;
+            box-shadow: inset 0 0 0 1px rgba(168,85,247,.18);
+        }
+
+        .interest label {
+            border-color: #263c54;
+            background: #081421;
+            color: #8fa0b5;
+        }
+
+        .interest input:checked + label {
+            background: rgba(124,58,237,.16);
+            color: #c4b5fd;
+            border-color: #7c3aed;
+        }
+
+        .form-actions {
+            border-top-color: #1d3046;
+        }
+
+        .cancel-btn {
+            background: #101d2d;
+            border-color: #263c54;
+            color: #aab6c7;
+        }
+
+        .create-btn {
+            background: linear-gradient(90deg, #6530e8, #7c3aed);
+            box-shadow: 0 8px 20px rgba(124,58,237,.24);
+        }
+
+        .create-btn:hover {
+            background: linear-gradient(90deg, #5b21b6, #6d28d9);
+        }
+
+        .summary-subtitle,
+        .preview-location,
+        .summary-item span:first-child {
+            color: #8191a6;
+        }
+
+        .summary-item {
+            border-bottom-color: #1d3046;
+            color: #dce5f0;
+        }
+
+        .summary-item span:last-child {
+            color: #eef3fb;
+        }
+
+        .preview-image {
+            background: #111f31;
+        }
+
+        .tip {
+            background: rgba(124,58,237,.10);
+            color: #9eacc0;
+            border: 1px solid rgba(124,58,237,.18);
+        }
+
+        @media (max-width: 950px) {
+            .container {
+                margin-left: 280px;
+                margin-right: 20px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            .sidebar {
+                width: 220px;
+                padding: 20px 12px 14px;
+            }
+
+            .sidebar-logo {
+                font-size: 19px;
+            }
+
+            .sidebar .nav-links a {
+                font-size: 12px;
+                min-height: 38px;
+                padding: 8px 10px;
+            }
+
+            .sidebar-cta {
+                padding: 14px 12px;
+            }
+
+            .container {
+                margin-left: 235px;
+                margin-right: 14px;
+                width: auto;
+                padding-top: 25px;
+            }
+
+            .page-heading h1 {
+                font-size: 25px;
+            }
+
+            .form-card {
+                padding: 20px;
+            }
+
+            .two-columns {
+                grid-template-columns: 1fr;
+            }
+
+            .trip-types {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .form-actions {
+                flex-direction: column-reverse;
+            }
+
+            .cancel-btn,
+            .create-btn {
+                width: 100%;
+            }
+        }
+
     </style>
 </head>
 
 <body>
 
-    <!-- ================= NAVBAR ================= -->
+    <!-- =========================
+         LEFT SIDEBAR
+    ========================== -->
 
-    <nav class="navbar">
-
-        <div class="logo">
-            <div class="logo-icon">🌍</div>
-            GlobeTrotter
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <div class="logo-icon">✈</div>
+            <span>GlobeTrotter</span>
         </div>
 
-        <div class="nav-links">
-            <a href="#">Home</a>
-            <a href="#">My Trips</a>
-            <a href="#" class="active">Create Trip</a>
-            <a href="#">Explore</a>
-            <a href="#">Profile</a>
+        <div class="menu-label">Main Menu</div>
+
+        <nav class="nav-links" aria-label="Main navigation">
+            <a href="#"><span class="nav-icon">🏠</span>Dashboard</a>
+            <a href="#" class="active" aria-current="page"><span class="nav-icon">✎</span>Create Trip</a>
+            <a href="#"><span class="nav-icon">▣</span>My Trips</a>
+            <a href="#"><span class="nav-icon">♧</span>Itinerary Builder</a>
+            <a href="#"><span class="nav-icon">☷</span>Itinerary View</a>
+            <a href="#"><span class="nav-icon">⌕</span>City Search</a>
+            <a href="#"><span class="nav-icon">♧</span>Activities</a>
+            <a href="#"><span class="nav-icon">▣</span>Budget</a>
+            <a href="#"><span class="nav-icon">▦</span>Calendar</a>
+            <a href="#"><span class="nav-icon">♧</span>Shared Trip</a>
+            <a href="#"><span class="nav-icon">⚙</span>Settings</a>
+        </nav>
+
+        <div class="sidebar-cta">
+            <h3>Let's make your dream journey come true!</h3>
+            <p>Plan unforgettable adventures with GlobeTrotter.</p>
+            <button type="button" onclick="document.getElementById('tripName').focus()">Get Started</button>
         </div>
-
-        <div class="profile">
-            <img
-                src="https://i.pravatar.cc/100?img=12"
-                alt="Profile"
-            >
-            <span>Parth</span>
-        </div>
-
-    </nav>
-
+    </aside>
 
     <!-- ================= MAIN ================= -->
 
