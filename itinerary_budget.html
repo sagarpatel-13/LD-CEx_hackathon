@@ -1608,7 +1608,7 @@ body {
 
         <p>
             Plan unforgettable adventures
-            with GlobeTrotter.
+            with Travio.
         </p>
 
         <button class="promo-btn">
@@ -2081,8 +2081,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const loggedInUser =
         localStorage.getItem("loggedInUser");
 
-    const globalUser =
-        localStorage.getItem("globalTrottersUser");
+    const Travio =
+        localStorage.getItem("TraviosUser");
 
 
     if (loggedInUser) {
@@ -2096,10 +2096,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    if (!user && globalUser) {
+    if (!user && Travio) {
 
         try {
-            user = JSON.parse(globalUser);
+            user = JSON.parse(Travio);
         } catch (error) {
             user = null;
         }
@@ -2303,7 +2303,7 @@ document.addEventListener("DOMContentLoaded", function () {
             );
 
             localStorage.removeItem(
-                "globalTrottersUser"
+                "TraviosUser"
             );
 
             window.location.href =
@@ -2556,7 +2556,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const savedItinerary =
         localStorage.getItem(
-            "globalTrottersItinerary"
+            "TraviosItinerary"
         );
 
 
@@ -2604,7 +2604,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let budget =
         Number(
             localStorage.getItem(
-                "globalTrottersBudget"
+                "TraviosBudget"
             )
         ) || 0;
 
@@ -3303,7 +3303,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function saveTemporary() {
 
         localStorage.setItem(
-            "globalTrottersItinerary",
+            "TraviosItinerary",
             JSON.stringify(
                 itineraryData
             )
@@ -3361,7 +3361,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             localStorage.setItem(
-                "globalTrottersItinerary",
+                "TraviosItinerary",
                 JSON.stringify(
                     itineraryData
                 )
@@ -3369,7 +3369,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             localStorage.setItem(
-                "globalTrottersBudget",
+                "TraviosBudget",
                 budget
             );
 
