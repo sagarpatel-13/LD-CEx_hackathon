@@ -1,0 +1,2575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Travel Planner</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --bg:#07111f;
+    --bg2:#0b1728;
+    --card:#0d1d31;
+    --card2:#10243b;
+    --border:rgba(255,255,255,.10);
+    --text:#f7f8ff;
+    --muted:#91a0b7;
+    --purple:#7c3aed;
+    --purple2:#a855f7;
+    --blue:#2563eb;
+    --green:#10b981;
+    --orange:#f59e0b;
+    --pink:#ec4899;
+}
+
+body{
+    font-family:Inter,sans-serif;
+    background:
+        radial-gradient(circle at 80% 0%,rgba(124,58,237,.15),transparent 30%),
+        radial-gradient(circle at 10% 30%,rgba(37,99,235,.10),transparent 30%),
+        var(--bg);
+    color:var(--text);
+    min-height:100vh;
+}
+
+button,input,textarea,select{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.app{
+    display:flex;
+    min-height:100vh;
+}
+
+.sidebar{
+    width:245px;
+    height:100vh;
+    position:fixed;
+    left:0;
+    top:0;
+    background:rgba(5,14,26,.94);
+    border-right:1px solid var(--border);
+    padding:20px 15px;
+    z-index:100;
+    backdrop-filter:blur(20px);
+    overflow-y:auto;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:10px;
+    margin-bottom:22px;
+    font-size:20px;
+    font-weight:800;
+}
+
+.logo-icon{
+    width:35px;
+    height:35px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:10px;
+    background:linear-gradient(135deg,#7c3aed,#ec4899);
+    box-shadow:0 5px 20px rgba(124,58,237,.35);
+}
+
+.logo span{
+    color:#fff;
+}
+
+.logo small{
+    color:#a855f7;
+}
+
+.nav-title{
+    color:#607087;
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    padding:0 12px;
+    margin:15px 0 8px;
+}
+
+.nav button{
+    width:100%;
+    border:0;
+    color:#aab5c6;
+    background:transparent;
+    padding:11px 12px;
+    border-radius:9px;
+    text-align:left;
+    margin-bottom:3px;
+    transition:.25s;
+    font-size:13px;
+}
+
+.nav button:hover{
+    color:white;
+    background:rgba(255,255,255,.05);
+}
+
+.nav button.active{
+    color:white;
+    background:linear-gradient(90deg,#6530d7,#7c3aed);
+    box-shadow:0 8px 25px rgba(124,58,237,.28);
+}
+
+.promo{
+    margin-top:25px;
+    padding:18px;
+    border-radius:14px;
+    background:
+        linear-gradient(135deg,rgba(124,58,237,.8),rgba(236,72,153,.7)),
+        url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=500&q=80") center/cover;
+}
+
+.promo h3{
+    font-size:15px;
+    line-height:1.4;
+}
+
+.promo p{
+    font-size:11px;
+    color:#eee;
+    margin:8px 0 13px;
+}
+
+.promo button{
+    background:white;
+    color:#5122a8;
+    border:0;
+    border-radius:7px;
+    padding:8px 12px;
+    font-size:11px;
+    font-weight:700;
+}
+
+.main{
+    margin-left:245px;
+    width:calc(100% - 245px);
+    padding:18px 25px 40px;
+}
+
+.header{
+    height:58px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    border-bottom:1px solid var(--border);
+    margin-bottom:25px;
+}
+
+.header-title{
+    font-size:14px;
+    font-weight:600;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.notification{
+    width:34px;
+    height:34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid var(--border);
+    border-radius:50%;
+    background:#0c1a2d;
+}
+
+.profile{
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    border:2px solid #8b5cf6;
+    background:url("https://i.pravatar.cc/100?img=12") center/cover;
+}
+
+.page{
+    display:none;
+    animation:fade .3s ease;
+}
+
+.page.active{
+    display:block;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(5px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.page-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.page-heading h1{
+    font-size:25px;
+    font-weight:700;
+}
+
+.page-heading p{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:5px;
+}
+
+.hero{
+    min-height:300px;
+    border-radius:18px;
+    overflow:hidden;
+    position:relative;
+    display:flex;
+    align-items:center;
+    padding:40px;
+    background:
+        linear-gradient(90deg,rgba(5,12,23,.92),rgba(5,12,23,.35)),
+        url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1400&q=90") center/cover;
+    border:1px solid var(--border);
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.hero-content{
+    max-width:500px;
+}
+
+.hero-label{
+    color:#c084fc;
+    font-size:11px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:2px;
+    margin-bottom:10px;
+}
+
+.hero h1{
+    font-family:"Playfair Display",serif;
+    font-size:48px;
+    line-height:1.05;
+    margin-bottom:12px;
+}
+
+.hero h1 span{
+    color:#a855f7;
+}
+
+.hero p{
+    color:#c1cada;
+    font-size:13px;
+    line-height:1.6;
+    margin-bottom:20px;
+}
+
+.btn{
+    border:0;
+    border-radius:8px;
+    padding:10px 17px;
+    background:linear-gradient(135deg,#7c3aed,#9333ea);
+    color:white;
+    font-size:12px;
+    font-weight:600;
+    box-shadow:0 8px 20px rgba(124,58,237,.22);
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 25px rgba(124,58,237,.35);
+}
+
+.btn.secondary{
+    background:transparent;
+    border:1px solid var(--border);
+    box-shadow:none;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin:15px 0 25px;
+}
+
+.stat{
+    background:rgba(13,29,49,.8);
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:17px;
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.stat-icon{
+    width:38px;
+    height:38px;
+    border-radius:9px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:16px;
+    background:rgba(124,58,237,.16);
+}
+
+.stat:nth-child(2) .stat-icon{
+    background:rgba(37,99,235,.16);
+}
+
+.stat:nth-child(3) .stat-icon{
+    background:rgba(16,185,129,.16);
+}
+
+.stat h2{
+    font-size:19px;
+}
+
+.stat p{
+    color:var(--muted);
+    font-size:10px;
+    margin-top:3px;
+}
+
+.section-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin:20px 0 12px;
+}
+
+.section-head h2{
+    font-size:16px;
+}
+
+.section-head a{
+    color:#a855f7;
+    font-size:11px;
+    cursor:pointer;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:13px;
+}
+
+.destination-card{
+    overflow:hidden;
+    border:1px solid var(--border);
+    background:linear-gradient(180deg,#102139,#0b192a);
+    border-radius:12px;
+    transition:.25s;
+}
+
+.destination-card:hover{
+    transform:translateY(-4px);
+    border-color:rgba(168,85,247,.5);
+}
+
+.destination-img{
+    height:130px;
+    background-size:cover;
+    background-position:center;
+}
+
+.destination-info{
+    padding:12px;
+}
+
+.destination-info h3{
+    font-size:14px;
+}
+
+.destination-info p{
+    color:var(--muted);
+    font-size:10px;
+    margin-top:4px;
+}
+
+.card-row{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-top:10px;
+}
+
+.price{
+    font-size:11px;
+    color:#ddd;
+}
+
+.small-btn{
+    border:0;
+    background:#6527d4;
+    color:white;
+    padding:6px 10px;
+    border-radius:6px;
+    font-size:10px;
+}
+
+.form-card{
+    background:rgba(13,29,49,.8);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
+    max-width:850px;
+}
+
+.cover-image{
+    height:180px;
+    border-radius:10px;
+    margin-bottom:20px;
+    background:
+        linear-gradient(90deg,rgba(5,12,23,.2),rgba(5,12,23,.1)),
+        url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1200&q=80") center/cover;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.form-group{
+    margin-bottom:15px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    display:block;
+    color:#aab5c6;
+    font-size:10px;
+    margin-bottom:6px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select,
+.search-box input{
+    width:100%;
+    background:#091728;
+    border:1px solid var(--border);
+    color:white;
+    padding:11px;
+    border-radius:7px;
+    outline:none;
+    font-size:12px;
+}
+
+.form-group textarea{
+    min-height:90px;
+    resize:vertical;
+}
+
+.trip-card{
+    border:1px solid var(--border);
+    border-radius:12px;
+    overflow:hidden;
+    background:#0d1d31;
+}
+
+.trip-image{
+    height:145px;
+    background-size:cover;
+    background-position:center;
+}
+
+.trip-info{
+    padding:12px;
+}
+
+.trip-info h3{
+    font-size:14px;
+}
+
+.trip-info p{
+    color:var(--muted);
+    font-size:10px;
+    margin-top:5px;
+}
+
+.trip-info .cost{
+    margin-top:10px;
+    color:white;
+}
+
+.builder-grid{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    gap:15px;
+}
+
+.panel{
+    background:#0d1d31;
+    border:1px solid var(--border);
+    border-radius:12px;
+    padding:15px;
+}
+
+.panel h3{
+    font-size:13px;
+    margin-bottom:12px;
+}
+
+.stop{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:11px;
+    border:1px solid var(--border);
+    border-radius:8px;
+    margin-bottom:8px;
+    background:#0a1728;
+}
+
+.stop-number{
+    width:24px;
+    height:24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:#6d28d9;
+    font-size:10px;
+}
+
+.stop h4{
+    font-size:11px;
+}
+
+.stop p{
+    color:var(--muted);
+    font-size:9px;
+    margin-top:3px;
+}
+
+.itinerary-item{
+    display:grid;
+    grid-template-columns:110px 1fr 160px;
+    gap:15px;
+    padding:15px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.timeline{
+    position:relative;
+}
+
+.timeline-dot{
+    width:12px;
+    height:12px;
+    background:#8b5cf6;
+    border-radius:50%;
+    margin-top:4px;
+    box-shadow:0 0 12px #8b5cf6;
+}
+
+.itinerary-item h3{
+    font-size:13px;
+}
+
+.itinerary-item p{
+    color:var(--muted);
+    font-size:10px;
+    margin-top:5px;
+}
+
+.itinerary-photo{
+    height:90px;
+    border-radius:8px;
+    background-size:cover;
+    background-position:center;
+}
+
+.search-row{
+    display:flex;
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.search-box{
+    flex:1;
+}
+
+.search-box input{
+    height:40px;
+}
+
+.filter{
+    width:160px;
+    background:#091728;
+    border:1px solid var(--border);
+    color:#aaa;
+    border-radius:7px;
+    padding:0 10px;
+}
+
+.city-card{
+    position:relative;
+    overflow:hidden;
+    border-radius:11px;
+    border:1px solid var(--border);
+    background:#0d1d31;
+}
+
+.city-image{
+    height:155px;
+    background-size:cover;
+    background-position:center;
+}
+
+.city-info{
+    padding:10px;
+}
+
+.city-info h3{
+    font-size:13px;
+}
+
+.city-info p{
+    color:var(--muted);
+    font-size:9px;
+    margin-top:4px;
+}
+
+.activity-card{
+    overflow:hidden;
+    border-radius:11px;
+    border:1px solid var(--border);
+    background:#0d1d31;
+}
+
+.activity-image{
+    height:140px;
+    background-size:cover;
+    background-position:center;
+}
+
+.activity-info{
+    padding:11px;
+}
+
+.activity-info h3{
+    font-size:13px;
+}
+
+.activity-info p{
+    color:var(--muted);
+    font-size:9px;
+    margin:5px 0;
+}
+
+.budget-layout{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.budget-total{
+    background:
+        linear-gradient(135deg,rgba(124,58,237,.7),rgba(37,99,235,.35)),
+        #0d1d31;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:25px;
+}
+
+.budget-total p{
+    color:#d1d5db;
+    font-size:11px;
+}
+
+.budget-total h1{
+    font-size:34px;
+    margin:8px 0;
+}
+
+.budget-total span{
+    color:#a7f3d0;
+    font-size:11px;
+}
+
+.budget-list{
+    background:#0d1d31;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
+}
+
+.budget-row{
+    display:flex;
+    justify-content:space-between;
+    padding:13px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.budget-row:last-child{
+    border-bottom:0;
+}
+
+.budget-name{
+    color:#aab5c6;
+    font-size:11px;
+}
+
+.budget-value{
+    font-size:11px;
+}
+
+.progress{
+    height:5px;
+    border-radius:5px;
+    background:#182b43;
+    margin-top:7px;
+}
+
+.progress span{
+    display:block;
+    height:100%;
+    border-radius:5px;
+    background:linear-gradient(90deg,#7c3aed,#a855f7);
+}
+
+.calendar{
+    background:#0d1d31;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:18px;
+}
+
+.calendar-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.calendar-top h2{
+    font-size:15px;
+}
+
+.calendar-grid{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    gap:4px;
+}
+
+.calendar-grid div{
+    min-height:75px;
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:5px;
+    padding:7px;
+    color:#8e9cb0;
+    font-size:10px;
+}
+
+.calendar-grid .day-name{
+    min-height:30px;
+    text-align:center;
+    border:0;
+    color:#68778d;
+    font-weight:600;
+}
+
+.calendar-grid .trip-day{
+    background:rgba(124,58,237,.18);
+    color:white;
+    border-color:rgba(124,58,237,.3);
+}
+
+.calendar-grid small{
+    display:block;
+    color:#a855f7;
+    margin-top:6px;
+    font-size:8px;
+}
+
+.shared-card{
+    max-width:800px;
+    background:#0d1d31;
+    border:1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+}
+
+.shared-image{
+    height:260px;
+    background:
+        linear-gradient(180deg,transparent,rgba(5,12,23,.85)),
+        url("https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=1200&q=90") center/cover;
+}
+
+.shared-content{
+    padding:20px;
+}
+
+.shared-content h2{
+    font-family:"Playfair Display",serif;
+    font-size:25px;
+}
+
+.shared-content p{
+    color:var(--muted);
+    font-size:11px;
+    margin:7px 0;
+}
+
+.settings{
+    display:grid;
+    grid-template-columns:250px 1fr;
+    gap:15px;
+}
+
+.profile-card{
+    background:#0d1d31;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
+    text-align:center;
+}
+
+.profile-big{
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    margin:0 auto 12px;
+    background:url("https://i.pravatar.cc/200?img=12") center/cover;
+    border:3px solid #8b5cf6;
+}
+
+.profile-card h2{
+    font-size:16px;
+}
+
+.profile-card p{
+    color:var(--muted);
+    font-size:10px;
+    margin-top:4px;
+}
+
+.settings-form{
+    background:#0d1d31;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
+}
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#172a41;
+    border:1px solid #7c3aed;
+    padding:13px 18px;
+    border-radius:8px;
+    font-size:12px;
+    transform:translateY(100px);
+    opacity:0;
+    transition:.3s;
+    z-index:500;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+@media(max-width:900px){
+
+    .sidebar{
+        width:200px;
+    }
+
+    .main{
+        margin-left:200px;
+        width:calc(100% - 200px);
+    }
+
+    .hero h1{
+        font-size:38px;
+    }
+
+    .builder-grid,
+    .budget-layout,
+    .settings{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:700px){
+
+    .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+        border-right:0;
+        border-bottom:1px solid var(--border);
+    }
+
+    .app{
+        display:block;
+    }
+
+    .nav{
+        display:flex;
+        overflow-x:auto;
+    }
+
+    .nav button{
+        min-width:125px;
+        margin-right:4px;
+    }
+
+    .nav-title,
+    .promo{
+        display:none;
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+        padding:15px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        min-height:280px;
+        padding:25px;
+    }
+
+    .hero h1{
+        font-size:34px;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .itinerary-item{
+        grid-template-columns:1fr;
+    }
+
+    .itinerary-photo{
+        height:150px;
+    }
+
+    .search-row{
+        flex-direction:column;
+    }
+
+    .filter{
+        width:100%;
+        height:40px;
+    }
+
+    .calendar-grid div{
+        min-height:55px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<aside class="sidebar">
+
+<div class="logo">
+<div class="logo-icon">✈</div>
+<div>Trav<span>io</span></div>
+</div>
+
+<div class="nav-title">Main Menu</div>
+
+<nav class="nav">
+
+<button class="active" onclick="showPage('dashboard',this)">🏠 Dashboard</button>
+<button onclick="showPage('create',this)">✎ Create Trip</button>
+<button onclick="showPage('trips',this)">▣ My Trips</button>
+<button onclick="showPage('builder',this)">♧ Itinerary Builder</button>
+<button onclick="showPage('itinerary',this)">☷ Itinerary View</button>
+<button onclick="showPage('cities',this)">⌕ City Search</button>
+<button onclick="showPage('activities',this)">♧ Activities</button>
+<button onclick="showPage('budget',this)">▣ Budget</button>
+<button onclick="showPage('calendar',this)">▦ Calendar</button>
+<button onclick="showPage('shared',this)">♧ Shared Trip</button>
+<button onclick="showPage('settings',this)">⚙ Settings</button>
+
+</nav>
+
+<div class="promo">
+<h3>Let's make your dream journey come true!</h3>
+<p>Plan unforgettable adventures with GlobeTrotter.</p>
+<button onclick="showPage('create')">Get Started</button>
+</div>
+
+</aside>
+
+
+<main class="main">
+
+<header class="header">
+
+<div class="header-title" id="headerTitle">
+Dashboard
+</div>
+
+<div class="header-right">
+
+<div class="notification">♧</div>
+
+<div class="profile"></div>
+
+</div>
+
+</header>
+
+
+<section class="page active" id="dashboard">
+
+<div class="hero">
+
+<div class="hero-content">
+
+<div class="hero-label">
+Your next adventure
+</div>
+
+<h1>
+Explore<br>
+<span>The World</span>
+</h1>
+
+<p>
+Plan your perfect journey, discover amazing destinations,
+organize activities and keep your entire trip in one place.
+</p>
+
+<button class="btn" onclick="showPage('create')">
++ Plan New Trip
+</button>
+
+</div>
+
+</div>
+
+
+<div class="stats">
+
+<div class="stat">
+
+<div class="stat-icon">◉</div>
+
+<div>
+<h2>5</h2>
+<p>Total Trips</p>
+</div>
+
+</div>
+
+<div class="stat">
+
+<div class="stat-icon">◈</div>
+
+<div>
+<h2>18</h2>
+<p>Cities Visited</p>
+</div>
+
+</div>
+
+<div class="stat">
+
+<div class="stat-icon">₹</div>
+
+<div>
+<h2>₹85K</h2>
+<p>Estimated Spending</p>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="section-head">
+
+<h2>Top Destinations</h2>
+
+<a onclick="showPage('cities')">View All</a>
+
+</div>
+
+
+<div class="cards">
+
+<div class="destination-card">
+
+<div class="destination-img"
+style="background-image:url('https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=700&q=80')">
+</div>
+
+<div class="destination-info">
+
+<h3>Bali</h3>
+<p>Indonesia</p>
+
+<div class="card-row">
+<span class="price">₹35,000</span>
+<button class="small-btn">Explore</button>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="destination-card">
+
+<div class="destination-img"
+style="background-image:url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=700&q=80')">
+</div>
+
+<div class="destination-info">
+
+<h3>Paris</h3>
+<p>France</p>
+
+<div class="card-row">
+<span class="price">₹62,000</span>
+<button class="small-btn">Explore</button>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="destination-card">
+
+<div class="destination-img"
+style="background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=700&q=80')">
+</div>
+
+<div class="destination-info">
+
+<h3>Swiss Alps</h3>
+<p>Switzerland</p>
+
+<div class="card-row">
+<span class="price">₹85,000</span>
+<button class="small-btn">Explore</button>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="destination-card">
+
+<div class="destination-img"
+style="background-image:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=700&q=80')">
+</div>
+
+<div class="destination-info">
+
+<h3>Dubai</h3>
+<p>UAE</p>
+
+<div class="card-row">
+<span class="price">₹45,000</span>
+<button class="small-btn">Explore</button>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="destination-card">
+
+<div class="destination-img"
+style="background-image:url('https://images.unsplash.com/photo-1533105079780-92b9be482077?auto=format&fit=crop&w=700&q=80')">
+</div>
+
+<div class="destination-info">
+
+<h3>Santorini</h3>
+<p>Greece</p>
+
+<div class="card-row">
+<span class="price">₹72,000</span>
+<button class="small-btn">Explore</button>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="page" id="create">
+
+<div class="page-heading">
+
+<div>
+<h1>Create New Trip</h1>
+<p>Build your next unforgettable journey.</p>
+</div>
+
+</div>
+
+<div class="form-card">
+
+<div class="cover-image"></div>
+
+<div class="form-grid">
+
+<div class="form-group full">
+
+<label>Trip Name</label>
+
+<input id="tripName" placeholder="My Europe Adventure">
+
+</div>
+
+<div class="form-group">
+
+<label>Start Date</label>
+
+<input type="date" id="startDate">
+
+</div>
+
+<div class="form-group">
+
+<label>End Date</label>
+
+<input type="date" id="endDate">
+
+</div>
+
+<div class="form-group full">
+
+<label>Description</label>
+
+<textarea id="tripDescription" placeholder="Tell us about your journey..."></textarea>
+
+</div>
+
+</div>
+
+<button class="btn" onclick="createTrip()">
+Save Trip
+</button>
+
+</div>
+
+</section>
+
+
+<section class="page" id="trips">
+
+<div class="page-heading">
+
+<div>
+<h1>My Trips</h1>
+<p>Manage all your planned adventures.</p>
+</div>
+
+<button class="btn" onclick="showPage('create')">
++ New Trip
+</button>
+
+</div>
+
+
+<div class="cards">
+
+
+<div class="trip-card">
+
+<div class="trip-image"
+style="background-image:url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=800&q=85')">
+</div>
+
+<div class="trip-info">
+
+<h3>Europe Adventure</h3>
+<p>12 Jun - 25 Jun, 2025</p>
+<p>5 Cities</p>
+
+<div class="card-row">
+<span class="cost">₹45,500</span>
+<button class="small-btn" onclick="showPage('itinerary')">View</button>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="trip-card">
+
+<div class="trip-image"
+style="background-image:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=800&q=85')">
+</div>
+
+<div class="trip-info">
+
+<h3>Dubai Holiday</h3>
+<p>5 Aug - 10 Aug, 2025</p>
+<p>1 City</p>
+
+<div class="card-row">
+<span class="cost">₹38,000</span>
+<button class="small-btn">Edit</button>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="trip-card">
+
+<div class="trip-image"
+style="background-image:url('https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=800&q=85')">
+</div>
+
+<div class="trip-info">
+
+<h3>Goa Trip</h3>
+<p>20 Dec - 24 Dec, 2025</p>
+<p>2 Cities</p>
+
+<div class="card-row">
+<span class="cost">₹15,000</span>
+<button class="small-btn">View</button>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="trip-card">
+
+<div class="trip-image"
+style="background-image:url('https://images.unsplash.com/photo-1530789253388-582c481c54b0?auto=format&fit=crop&w=800&q=85')">
+</div>
+
+<div class="trip-info">
+
+<h3>Manali Escape</h3>
+<p>10 Jan - 15 Jan, 2026</p>
+<p>1 City</p>
+
+<div class="card-row">
+<span class="cost">₹12,000</span>
+<button class="small-btn">View</button>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="trip-card">
+
+<div class="trip-image"
+style="background-image:url('https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=800&q=85')">
+</div>
+
+<div class="trip-info">
+
+<h3>Thailand Fun</h3>
+<p>5 Feb - 15 Feb, 2026</p>
+<p>4 Cities</p>
+
+<div class="card-row">
+<span class="cost">₹60,000</span>
+<button class="small-btn">View</button>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="trip-card">
+
+<div class="trip-image"
+style="background-image:url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=85')">
+</div>
+
+<div class="trip-info">
+
+<h3>Japan Discovery</h3>
+<p>20 Mar - 30 Mar, 2026</p>
+<p>3 Cities</p>
+
+<div class="card-row">
+<span class="cost">₹70,000</span>
+<button class="small-btn">View</button>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="page" id="builder">
+
+<div class="page-heading">
+
+<div>
+<h1>Itinerary Builder</h1>
+<p>Create a day-by-day plan for your trip.</p>
+</div>
+
+</div>
+
+<div class="builder-grid">
+
+<div class="panel">
+
+<h3>Trip Stops</h3>
+
+<div id="stops">
+
+<div class="stop">
+
+<div class="stop-number">1</div>
+
+<div>
+<h4>Paris</h4>
+<p>12 Jun - 16 Jun</p>
+</div>
+
+</div>
+
+<div class="stop">
+
+<div class="stop-number">2</div>
+
+<div>
+<h4>Rome</h4>
+<p>16 Jun - 18 Jun</p>
+</div>
+
+</div>
+
+<div class="stop">
+
+<div class="stop-number">3</div>
+
+<div>
+<h4>Amsterdam</h4>
+<p>18 Jun - 22 Jun</p>
+</div>
+
+</div>
+
+<div class="stop">
+
+<div class="stop-number">4</div>
+
+<div>
+<h4>Barcelona</h4>
+<p>22 Jun - 25 Jun</p>
+</div>
+
+</div>
+
+</div>
+
+<button class="btn" onclick="addStop()">
++ Add Stop
+</button>
+
+</div>
+
+
+<div class="panel">
+
+<h3>Add New Stop</h3>
+
+<div class="form-group">
+
+<label>Select City</label>
+
+<select id="stopCity">
+
+<option>Paris</option>
+<option>Rome</option>
+<option>Amsterdam</option>
+<option>Barcelona</option>
+<option>London</option>
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Start Date</label>
+
+<input type="date">
+
+</div>
+
+<div class="form-group">
+
+<label>End Date</label>
+
+<input type="date">
+
+</div>
+
+<button class="btn" onclick="addSelectedStop()">
+Add to Itinerary
+</button>
+
+</div>
+
+
+<div class="panel" style="
+background:
+linear-gradient(90deg,rgba(5,12,23,.1),rgba(5,12,23,.2)),
+url('https://images.unsplash.com/photo-1515542622106-78bda8ba0e5b?auto=format&fit=crop&w=1000&q=85') center/cover;
+min-height:330px;
+">
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="page" id="itinerary">
+
+<div class="page-heading">
+
+<div>
+<h1>Itinerary View</h1>
+<p>Europe Adventure · 12 Jun - 25 Jun</p>
+</div>
+
+<div>
+<button class="btn secondary">List View</button>
+<button class="btn secondary">Calendar View</button>
+</div>
+
+</div>
+
+
+<div class="panel">
+
+
+<div class="itinerary-item">
+
+<div>
+<div class="timeline-dot"></div>
+<strong style="font-size:11px">Day 1 - 3</strong>
+<p style="font-size:9px;color:#777">Paris, France</p>
+</div>
+
+<div>
+
+<h3>Paris Highlights</h3>
+
+<p>• Eiffel Tower</p>
+<p>• Louvre Museum</p>
+<p>• Seine River Cruise</p>
+
+</div>
+
+<div class="itinerary-photo"
+style="background-image:url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=600&q=80')">
+</div>
+
+</div>
+
+
+<div class="itinerary-item">
+
+<div>
+<div class="timeline-dot"></div>
+<strong style="font-size:11px">Day 4 - 6</strong>
+<p style="font-size:9px;color:#777">Rome, Italy</p>
+</div>
+
+<div>
+
+<h3>Rome Discovery</h3>
+
+<p>• Colosseum</p>
+<p>• Vatican City</p>
+<p>• Trevi Fountain</p>
+
+</div>
+
+<div class="itinerary-photo"
+style="background-image:url('https://images.unsplash.com/photo-1529260830199-42c24126f198?auto=format&fit=crop&w=600&q=80')">
+</div>
+
+</div>
+
+
+<div class="itinerary-item">
+
+<div>
+<div class="timeline-dot"></div>
+<strong style="font-size:11px">Day 7 - 9</strong>
+<p style="font-size:9px;color:#777">Amsterdam</p>
+</div>
+
+<div>
+
+<h3>Amsterdam Culture</h3>
+
+<p>• Van Gogh Museum</p>
+<p>• Canal Tour</p>
+<p>• Anne Frank House</p>
+
+</div>
+
+<div class="itinerary-photo"
+style="background-image:url('https://images.unsplash.com/photo-1534351590666-13e3e96b5017?auto=format&fit=crop&w=600&q=80')">
+</div>
+
+</div>
+
+
+<div class="itinerary-item">
+
+<div>
+<div class="timeline-dot"></div>
+<strong style="font-size:11px">Day 10 - 12</strong>
+<p style="font-size:9px;color:#777">Barcelona</p>
+</div>
+
+<div>
+
+<h3>Barcelona Experience</h3>
+
+<p>• Sagrada Familia</p>
+<p>• Park Güell</p>
+<p>• La Rambla</p>
+
+</div>
+
+<div class="itinerary-photo"
+style="background-image:url('https://images.unsplash.com/photo-1539037116277-4db20889f2d4?auto=format&fit=crop&w=600&q=80')">
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="page" id="cities">
+
+<div class="page-heading">
+
+<div>
+<h1>City Search</h1>
+<p>Discover cities for your next adventure.</p>
+</div>
+
+</div>
+
+<div class="search-row">
+
+<div class="search-box">
+
+<input id="citySearch" placeholder="Search cities, countries..." oninput="filterCities()">
+
+</div>
+
+<select class="filter">
+<option>All Regions</option>
+<option>Europe</option>
+<option>Asia</option>
+<option>Middle East</option>
+</select>
+
+</div>
+
+
+<div class="cards" id="cityCards">
+
+
+<div class="city-card">
+
+<div class="city-image"
+style="background-image:url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=600&q=80')">
+</div>
+
+<div class="city-info">
+<h3>London</h3>
+<p>United Kingdom</p>
+<p>Cost Index: <b style="color:#f59e0b">High</b></p>
+<button class="small-btn">Add to Trip</button>
+</div>
+
+</div>
+
+
+<div class="city-card">
+
+<div class="city-image"
+style="background-image:url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=600&q=80')">
+</div>
+
+<div class="city-info">
+<h3>Paris</h3>
+<p>France</p>
+<p>Cost Index: <b style="color:#f59e0b">High</b></p>
+<button class="small-btn">Add to Trip</button>
+</div>
+
+</div>
+
+
+<div class="city-card">
+
+<div class="city-image"
+style="background-image:url('https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=600&q=80')">
+</div>
+
+<div class="city-info">
+<h3>Tokyo</h3>
+<p>Japan</p>
+<p>Cost Index: <b style="color:#f59e0b">High</b></p>
+<button class="small-btn">Add to Trip</button>
+</div>
+
+</div>
+
+
+<div class="city-card">
+
+<div class="city-image"
+style="background-image:url('https://images.unsplash.com/photo-1503614472-8c93d56e92ce?auto=format&fit=crop&w=600&q=80')">
+</div>
+
+<div class="city-info">
+<h3>New York</h3>
+<p>USA</p>
+<p>Cost Index: <b style="color:#f59e0b">High</b></p>
+<button class="small-btn">Add to Trip</button>
+</div>
+
+</div>
+
+
+<div class="city-card">
+
+<div class="city-image"
+style="background-image:url('https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=600&q=80')">
+</div>
+
+<div class="city-info">
+<h3>Dubai</h3>
+<p>UAE</p>
+<p>Cost Index: <b style="color:#f59e0b">High</b></p>
+<button class="small-btn">Add to Trip</button>
+</div>
+
+</div>
+
+
+<div class="city-card">
+
+<div class="city-image"
+style="background-image:url('https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=600&q=80')">
+</div>
+
+<div class="city-info">
+<h3>Bangkok</h3>
+<p>Thailand</p>
+<p>Cost Index: <b style="color:#10b981">Medium</b></p>
+<button class="small-btn">Add to Trip</button>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="page" id="activities">
+
+<div class="page-heading">
+
+<div>
+<h1>Activities</h1>
+<p>Find exciting things to do during your trip.</p>
+</div>
+
+</div>
+
+<div class="search-row">
+
+<div class="search-box">
+<input id="activitySearch" placeholder="Search activities..." oninput="filterActivities()">
+</div>
+
+<select class="filter">
+<option>All Types</option>
+<option>Adventure</option>
+<option>Food</option>
+<option>Culture</option>
+<option>Nature</option>
+</select>
+
+</div>
+
+
+<div class="cards" id="activityCards">
+
+
+<div class="activity-card">
+
+<div class="activity-image"
+style="background-image:url('https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=700&q=80')">
+</div>
+
+<div class="activity-info">
+<h3>Hot Air Balloon</h3>
+<p>Adventure Experience</p>
+<p>₹5,000 Per Person</p>
+<button class="small-btn" onclick="showToast('Hot Air Balloon added')">Add</button>
+</div>
+
+</div>
+
+
+<div class="activity-card">
+
+<div class="activity-image"
+style="background-image:url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=700&q=80')">
+</div>
+
+<div class="activity-info">
+<h3>Scuba Diving</h3>
+<p>Water Adventure</p>
+<p>₹4,000 Per Person</p>
+<button class="small-btn" onclick="showToast('Scuba Diving added')">Add</button>
+</div>
+
+</div>
+
+
+<div class="activity-card">
+
+<div class="activity-image"
+style="background-image:url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=700&q=80')">
+</div>
+
+<div class="activity-info">
+<h3>Food Tour</h3>
+<p>Local Cuisine</p>
+<p>₹2,500 Per Person</p>
+<button class="small-btn" onclick="showToast('Food Tour added')">Add</button>
+</div>
+
+</div>
+
+
+<div class="activity-card">
+
+<div class="activity-image"
+style="background-image:url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80')">
+</div>
+
+<div class="activity-info">
+<h3>Mountain Trekking</h3>
+<p>Nature Adventure</p>
+<p>₹3,000 Per Person</p>
+<button class="small-btn" onclick="showToast('Mountain Trekking added')">Add</button>
+</div>
+
+</div>
+
+
+<div class="activity-card">
+
+<div class="activity-image"
+style="background-image:url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=700&q=80')">
+</div>
+
+<div class="activity-info">
+<h3>City Walking Tour</h3>
+<p>Culture</p>
+<p>₹800 Per Person</p>
+<button class="small-btn" onclick="showToast('City Tour added')">Add</button>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="page" id="budget">
+
+<div class="page-heading">
+
+<div>
+<h1>Trip Budget</h1>
+<p>Track and manage your estimated travel expenses.</p>
+</div>
+
+</div>
+
+<div class="budget-layout">
+
+<div class="budget-total">
+
+<p>Total Estimated Budget</p>
+
+<h1>₹45,500</h1>
+
+<span>● Within your planned budget</span>
+
+<div style="
+height:150px;
+width:150px;
+border-radius:50%;
+background:conic-gradient(#7c3aed 0 27%,#2563eb 27% 67%,#10b981 67% 85%,#f59e0b 85% 100%);
+margin:25px auto 5px;
+display:flex;
+align-items:center;
+justify-content:center;
+">
+
+<div style="
+height:100px;
+width:100px;
+border-radius:50%;
+background:#0d1d31;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:13px;
+">
+₹45.5K
+</div>
+
+</div>
+
+</div>
+
+
+<div class="budget-list">
+
+<h3 style="font-size:14px;margin-bottom:10px">
+Expense Breakdown
+</h3>
+
+<div class="budget-row">
+
+<div>
+<div class="budget-name">Transport</div>
+<div class="progress"><span style="width:65%"></span></div>
+</div>
+
+<div class="budget-value">₹12,000</div>
+
+</div>
+
+
+<div class="budget-row">
+
+<div>
+<div class="budget-name">Stay</div>
+<div class="progress"><span style="width:85%"></span></div>
+</div>
+
+<div class="budget-value">₹18,000</div>
+
+</div>
+
+
+<div class="budget-row">
+
+<div>
+<div class="budget-name">Activities</div>
+<div class="progress"><span style="width:50%"></span></div>
+</div>
+
+<div class="budget-value">₹8,000</div>
+
+</div>
+
+
+<div class="budget-row">
+
+<div>
+<div class="budget-name">Meals</div>
+<div class="progress"><span style="width:40%"></span></div>
+</div>
+
+<div class="budget-value">₹7,500</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="page" id="calendar">
+
+<div class="page-heading">
+
+<div>
+<h1>Trip Calendar</h1>
+<p>See your complete travel schedule.</p>
+</div>
+
+<button class="btn">Today</button>
+
+</div>
+
+<div class="calendar">
+
+<div class="calendar-top">
+
+<button class="btn secondary">‹</button>
+
+<h2>June 2025</h2>
+
+<button class="btn secondary">›</button>
+
+</div>
+
+<div class="calendar-grid">
+
+<div class="day-name">Mon</div>
+<div class="day-name">Tue</div>
+<div class="day-name">Wed</div>
+<div class="day-name">Thu</div>
+<div class="day-name">Fri</div>
+<div class="day-name">Sat</div>
+<div class="day-name">Sun</div>
+
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div></div>
+<div>1</div>
+<div>2</div>
+
+<div>3</div>
+<div>4</div>
+<div>5</div>
+<div>6</div>
+<div>7</div>
+<div>8</div>
+<div>9</div>
+
+<div class="trip-day">10<small>Paris</small></div>
+<div class="trip-day">11<small>Eiffel</small></div>
+<div class="trip-day">12<small>Louvre</small></div>
+<div class="trip-day">13<small>Paris</small></div>
+<div class="trip-day">14<small>Paris</small></div>
+<div>15</div>
+<div>16</div>
+
+<div>17</div>
+<div class="trip-day">18<small>Rome</small></div>
+<div class="trip-day">19<small>Colosseum</small></div>
+<div class="trip-day">20<small>Rome</small></div>
+<div class="trip-day">21<small>Rome</small></div>
+<div>22</div>
+<div>23</div>
+
+<div class="trip-day">24<small>Barcelona</small></div>
+<div class="trip-day">25<small>Trip End</small></div>
+<div>26</div>
+<div>27</div>
+<div>28</div>
+<div>29</div>
+<div>30</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="page" id="shared">
+
+<div class="page-heading">
+
+<div>
+<h1>Shared Trip</h1>
+<p>Share your journey with friends and family.</p>
+</div>
+
+</div>
+
+<div class="shared-card">
+
+<div class="shared-image"></div>
+
+<div class="shared-content">
+
+<h2>Bali Paradise</h2>
+
+<p>Shared by Sagar · 7 Days · 3 Cities</p>
+
+<p>Ubud → Seminyak → Nusa Penida</p>
+
+<p>Estimated Budget: ₹35,000</p>
+
+<br>
+
+<button class="btn" onclick="copyTrip()">
+Copy Trip Link
+</button>
+
+<button class="btn secondary" onclick="showToast('Share options opened')">
+Share
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section class="page" id="settings">
+
+<div class="page-heading">
+
+<div>
+<h1>Settings</h1>
+<p>Manage your profile and preferences.</p>
+</div>
+
+</div>
+
+<div class="settings">
+
+<div class="profile-card">
+
+<div class="profile-big"></div>
+
+<h2>Sagar Patel</h2>
+
+<p>sagar@example.com</p>
+
+<br>
+
+<button class="btn secondary">
+Change Photo
+</button>
+
+</div>
+
+
+<div class="settings-form">
+
+<h3 style="font-size:15px;margin-bottom:18px">
+Personal Information
+</h3>
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Full Name</label>
+
+<input value="Sagar Patel">
+
+</div>
+
+<div class="form-group">
+
+<label>Email</label>
+
+<input value="sagar@example.com">
+
+</div>
+
+<div class="form-group">
+
+<label>Phone</label>
+
+<input value="+91 98765 43210">
+
+</div>
+
+<div class="form-group">
+
+<label>Language</label>
+
+<select>
+<option>English</option>
+<option>Hindi</option>
+<option>Gujarati</option>
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Currency</label>
+
+<select>
+<option>INR (₹)</option>
+<option>USD ($)</option>
+<option>GBP (£)</option>
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Time Zone</label>
+
+<select>
+<option>UTC+05:30 India</option>
+<option>UTC+00:00 London</option>
+</select>
+
+</div>
+
+</div>
+
+<button class="btn" onclick="saveSettings()">
+Save Changes
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+</main>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+const pageNames={
+    dashboard:"Dashboard",
+    create:"Create New Trip",
+    trips:"My Trips",
+    builder:"Itinerary Builder",
+    itinerary:"Itinerary View",
+    cities:"City Search",
+    activities:"Activities",
+    budget:"Trip Budget",
+    calendar:"Trip Calendar",
+    shared:"Shared Trip",
+    settings:"Settings"
+};
+
+function showPage(id,button){
+
+    document.querySelectorAll(".page").forEach(function(page){
+        page.classList.remove("active");
+    });
+
+    const target=document.getElementById(id);
+
+    if(target){
+        target.classList.add("active");
+    }
+
+    document.querySelectorAll(".nav button").forEach(function(btn){
+        btn.classList.remove("active");
+    });
+
+    if(button){
+        button.classList.add("active");
+    }
+
+    document.getElementById("headerTitle").textContent=pageNames[id];
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+    history.pushState(null,"","#"+id);
+}
+
+function createTrip(){
+
+    const name=document.getElementById("tripName").value;
+
+    const start=document.getElementById("startDate").value;
+
+    const end=document.getElementById("endDate").value;
+
+    if(!name || !start || !end){
+
+        showToast("Please fill all required fields");
+
+        return;
+    }
+
+    showToast("Trip created successfully!");
+
+    setTimeout(function(){
+
+        showPage("trips");
+
+    },800);
+}
+
+function addStop(){
+
+    const city=prompt("Enter city name");
+
+    if(!city){
+        return;
+    }
+
+    const stops=document.getElementById("stops");
+
+    const number=stops.children.length+1;
+
+    const stop=document.createElement("div");
+
+    stop.className="stop";
+
+    stop.innerHTML=`
+
+        <div class="stop-number">${number}</div>
+
+        <div>
+
+            <h4>${city}</h4>
+
+            <p>New travel stop</p>
+
+        </div>
+
+    `;
+
+    stops.appendChild(stop);
+
+    showToast(city+" added to your trip");
+}
+
+function addSelectedStop(){
+
+    const city=document.getElementById("stopCity").value;
+
+    const stops=document.getElementById("stops");
+
+    const number=stops.children.length+1;
+
+    const stop=document.createElement("div");
+
+    stop.className="stop";
+
+    stop.innerHTML=`
+
+        <div class="stop-number">${number}</div>
+
+        <div>
+
+            <h4>${city}</h4>
+
+            <p>New itinerary stop</p>
+
+        </div>
+
+    `;
+
+    stops.appendChild(stop);
+
+    showToast(city+" added to itinerary");
+}
+
+function filterCities(){
+
+    const value=document
+        .getElementById("citySearch")
+        .value
+        .toLowerCase();
+
+    document.querySelectorAll("#cityCards .city-card")
+    .forEach(function(card){
+
+        const text=card.textContent.toLowerCase();
+
+        card.style.display=
+            text.includes(value)
+            ? "block"
+            : "none";
+
+    });
+}
+
+function filterActivities(){
+
+    const value=document
+        .getElementById("activitySearch")
+        .value
+        .toLowerCase();
+
+    document.querySelectorAll("#activityCards .activity-card")
+    .forEach(function(card){
+
+        const text=card.textContent.toLowerCase();
+
+        card.style.display=
+            text.includes(value)
+            ? "block"
+            : "none";
+
+    });
+}
+
+function copyTrip(){
+
+    navigator.clipboard.writeText(
+        window.location.href
+    ).then(function(){
+
+        showToast("Trip link copied!");
+
+    }).catch(function(){
+
+        showToast("Trip link ready to share!");
+
+    });
+}
+
+function saveSettings(){
+
+    showToast("Settings saved successfully!");
+
+}
+
+function showToast(message){
+
+    const toast=document.getElementById("toast");
+
+    toast.textContent=message;
+
+    toast.classList.add("show");
+
+    setTimeout(function(){
+
+        toast.classList.remove("show");
+
+    },2500);
+}
+
+window.addEventListener("popstate",function(){
+
+    const id=location.hash.replace("#","");
+
+    if(id && document.getElementById(id)){
+
+        document.querySelectorAll(".page")
+        .forEach(function(page){
+            page.classList.remove("active");
+        });
+
+        document.getElementById(id)
+        .classList.add("active");
+
+        document.getElementById("headerTitle")
+        .textContent=pageNames[id];
+
+    }
+
+});
+
+if(location.hash){
+
+    const id=location.hash.replace("#","");
+
+    if(document.getElementById(id)){
+
+        document.querySelectorAll(".page")
+        .forEach(function(page){
+            page.classList.remove("active");
+        });
+
+        document.getElementById(id)
+        .classList.add("active");
+
+        document.getElementById("headerTitle")
+        .textContent=pageNames[id];
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
