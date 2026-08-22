@@ -1,0 +1,2135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Travio - Community / Feedback</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+:root{
+    --bg:#020914;
+    --sidebar:#06101d;
+    --card:#071524;
+    --border:#193149;
+    --text:#f5f7fb;
+    --muted:#8c9caf;
+    --purple:#792cff;
+    --purple2:#a52cff;
+    --pink:#d83bbd;
+}
+
+body{
+    min-height:100vh;
+    color:var(--text);
+    background:
+        radial-gradient(circle at 70% 10%,rgba(92,35,180,.16),transparent 30%),
+        radial-gradient(circle at 90% 80%,rgba(0,130,255,.08),transparent 28%),
+        var(--bg);
+}
+
+/* SIDEBAR */
+
+.sidebar{
+    width:235px;
+    position:fixed;
+    left:0;
+    top:0;
+    bottom:0;
+    background:linear-gradient(180deg,#071322,#040b14);
+    border-right:1px solid #15263a;
+    padding:20px 14px;
+    z-index:100;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:8px 10px 25px;
+}
+
+.logo-icon{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
+    font-weight:900;
+    color:white;
+    background:linear-gradient(135deg,#792cff,#d83bbd);
+    box-shadow:0 8px 25px rgba(120,35,255,.35);
+}
+
+.logo-text{
+    font-size:21px;
+    font-weight:800;
+}
+
+.menu-title{
+    color:#53677e;
+    font-size:10px;
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1.2px;
+    padding:0 12px;
+    margin:10px 0;
+}
+
+.menu{
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+}
+
+.menu-item{
+    height:42px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:0 12px;
+    border-radius:8px;
+    color:#94a4b7;
+    font-size:13px;
+    cursor:pointer;
+    transition:.2s;
+    text-decoration:none;
+}
+
+.menu-item:hover{
+    background:#101e30;
+    color:white;
+}
+
+.menu-item.active{
+    background:linear-gradient(90deg,#6924e9,#7f30f5);
+    color:white;
+    box-shadow:0 8px 20px rgba(110,40,240,.25);
+}
+
+.menu-icon{
+    width:19px;
+    text-align:center;
+    font-size:15px;
+}
+
+/* PROMO */
+
+.sidebar-promo{
+    position:absolute;
+    left:14px;
+    right:14px;
+    bottom:18px;
+    border-radius:12px;
+    padding:17px;
+    background:linear-gradient(135deg,#7730dd,#f05a91);
+}
+
+.sidebar-promo h3{
+    font-size:14px;
+    line-height:1.35;
+    margin-bottom:10px;
+}
+
+.sidebar-promo p{
+    font-size:10px;
+    opacity:.85;
+    margin-bottom:12px;
+}
+
+.promo-button{
+    display:inline-block;
+    background:white;
+    color:#6821c8;
+    border-radius:6px;
+    padding:7px 12px;
+    font-size:10px;
+    font-weight:800;
+}
+
+/* MAIN */
+
+.main{
+    margin-left:235px;
+    min-height:100vh;
+    padding:20px 28px 50px;
+}
+
+/* TOPBAR */
+
+.topbar{
+    height:55px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:18px;
+}
+
+.page-title h1{
+    font-size:20px;
+    font-weight:700;
+}
+
+.page-title p{
+    color:#718197;
+    font-size:11px;
+    margin-top:3px;
+}
+
+.top-actions{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+
+.top-icon{
+    width:34px;
+    height:34px;
+    border:1px solid #1a3045;
+    background:#081523;
+    border-radius:8px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#a9b7c7;
+}
+
+.profile{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#7429ed,#d23891);
+    font-size:12px;
+    font-weight:800;
+}
+
+/* HERO */
+
+.community-hero{
+    position:relative;
+    overflow:hidden;
+    border:1px solid #183149;
+    border-radius:12px;
+    padding:27px;
+    margin-bottom:18px;
+    background:linear-gradient(110deg,rgba(13,33,55,.96),rgba(7,20,34,.97));
+    box-shadow:0 15px 45px rgba(0,0,0,.25);
+}
+
+.community-hero:before{
+    content:"";
+    position:absolute;
+    width:380px;
+    height:380px;
+    right:-100px;
+    top:-200px;
+    background:radial-gradient(circle,rgba(117,39,240,.25),transparent 65%);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+}
+
+.hero-label{
+    color:#9e73ff;
+    font-size:10px;
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:1.4px;
+    margin-bottom:8px;
+}
+
+.community-hero h2{
+    font-size:27px;
+    margin-bottom:7px;
+}
+
+.community-hero p{
+    color:#8293a7;
+    font-size:12px;
+    line-height:1.6;
+    max-width:650px;
+}
+
+/* TOOLS */
+
+.tools{
+    display:grid;
+    grid-template-columns:1fr 190px auto;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.search-box{
+    position:relative;
+}
+
+.search-box span{
+    position:absolute;
+    left:13px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#6e8197;
+}
+
+.search-box input,
+.filter-box select{
+    width:100%;
+    height:42px;
+    border-radius:7px;
+    border:1px solid #1b344d;
+    background:#081827;
+    color:#dfe7f1;
+    outline:none;
+    font-size:11px;
+}
+
+.search-box input{
+    padding:0 12px 0 38px;
+}
+
+.filter-box select{
+    padding:0 12px;
+    cursor:pointer;
+}
+
+.search-box input:focus,
+.filter-box select:focus{
+    border-color:#7c35ee;
+    box-shadow:0 0 0 3px rgba(124,53,238,.12);
+}
+
+.search-box input::placeholder{
+    color:#607287;
+}
+
+/* WRITE BUTTON */
+
+.write-button{
+    height:42px;
+    border:none;
+    border-radius:7px;
+    padding:0 18px;
+    color:white;
+    background:linear-gradient(135deg,#7026ee,#9a2df0);
+    font-size:11px;
+    font-weight:800;
+    cursor:pointer;
+    box-shadow:0 7px 18px rgba(113,39,237,.25);
+}
+
+.write-button:hover{
+    transform:translateY(-2px);
+}
+
+/* FORM */
+
+.review-form{
+    display:none;
+    border:1px solid #253d57;
+    border-radius:11px;
+    padding:20px;
+    margin-bottom:20px;
+    background:linear-gradient(145deg,#091928,#06111d);
+}
+
+.review-form.show{
+    display:block;
+}
+
+.review-form-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:16px;
+}
+
+.review-form-header h2{
+    font-size:16px;
+}
+
+.close-button{
+    width:30px;
+    height:30px;
+    border:1px solid #243b52;
+    background:#081827;
+    color:#9aaabd;
+    border-radius:7px;
+    cursor:pointer;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    color:#8c9caf;
+    font-size:10px;
+    font-weight:700;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+    width:100%;
+    border:1px solid #1b344d;
+    border-radius:7px;
+    background:#081827;
+    color:#e5ebf3;
+    outline:none;
+    font-size:11px;
+    padding:10px 12px;
+}
+
+.form-group input,
+.form-group select{
+    height:40px;
+}
+
+.form-group textarea{
+    height:90px;
+    resize:vertical;
+}
+
+.publish-button{
+    margin-top:14px;
+    height:40px;
+    border:none;
+    border-radius:7px;
+    padding:0 20px;
+    background:linear-gradient(135deg,#7026ee,#9a2df0);
+    color:white;
+    font-size:11px;
+    font-weight:800;
+    cursor:pointer;
+}
+
+/* SECTION */
+
+.section-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin:22px 0 13px;
+}
+
+.section-title h2{
+    font-size:16px;
+    margin-bottom:3px;
+}
+
+.section-title p{
+    color:#697c91;
+    font-size:10px;
+}
+
+/* LIST */
+
+.community-list{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+/* CARD */
+
+.review-card{
+    background:linear-gradient(145deg,#091928,#06111d);
+    border:1px solid #183149;
+    border-radius:10px;
+    padding:17px;
+    transition:.25s;
+}
+
+.review-card:hover{
+    transform:translateY(-3px);
+    border-color:#6330c8;
+    box-shadow:0 15px 30px rgba(0,0,0,.3);
+}
+
+.review-top{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+}
+
+.avatar{
+    width:42px;
+    height:42px;
+    min-width:42px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#7429ed,#d23891);
+    color:white;
+    font-weight:800;
+    font-size:13px;
+}
+
+.review-main{
+    flex:1;
+}
+
+.review-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:10px;
+}
+
+.user-name{
+    color:#f2f5f9;
+    font-size:13px;
+    font-weight:700;
+}
+
+.review-date{
+    color:#64778b;
+    font-size:9px;
+}
+
+.destination{
+    display:inline-block;
+    margin-top:6px;
+    color:#a77aff;
+    background:rgba(121,44,255,.10);
+    border:1px solid rgba(121,44,255,.2);
+    padding:4px 8px;
+    border-radius:5px;
+    font-size:9px;
+}
+
+.rating{
+    margin-top:8px;
+    color:#f6b91c;
+    font-size:12px;
+    letter-spacing:1px;
+}
+
+.review-text{
+    color:#8293a7;
+    font-size:11px;
+    line-height:1.7;
+    margin-top:9px;
+}
+
+.review-footer{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    border-top:1px solid #152a3e;
+    margin-top:13px;
+    padding-top:10px;
+}
+
+.action-button{
+    border:none;
+    background:none;
+    color:#718397;
+    cursor:pointer;
+    font-size:10px;
+}
+
+.action-button:hover{
+    color:#a77aff;
+}
+
+.action-button.liked{
+    color:#ff4c87;
+}
+
+/* EMPTY */
+
+.empty-state{
+    text-align:center;
+    border:1px solid #193149;
+    border-radius:10px;
+    background:#071523;
+    padding:55px 20px;
+}
+
+.empty-icon{
+    width:52px;
+    height:52px;
+    margin:0 auto 12px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#101e30;
+    color:#8d65ff;
+    font-size:22px;
+}
+
+.empty-state h3{
+    font-size:15px;
+    margin-bottom:6px;
+}
+
+.empty-state p{
+    color:#718397;
+    font-size:10px;
+    line-height:1.6;
+}
+
+.empty-state button{
+    margin-top:14px;
+    border:none;
+    border-radius:6px;
+    padding:9px 15px;
+    color:white;
+    background:#792cff;
+    font-size:10px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#101e30;
+    border:1px solid #293f57;
+    color:#eaf0f6;
+    padding:12px 16px;
+    border-radius:8px;
+    font-size:11px;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+    transform:translateY(100px);
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
+    z-index:500;
+}
+
+.toast.show{
+    transform:translateY(0);
+    opacity:1;
+}
+
+/* TABLET */
+
+@media(max-width:850px){
+
+    .sidebar{
+        width:65px;
+        padding:15px 9px;
+    }
+
+    .logo-text,
+    .menu-item span:not(.menu-icon),
+    .menu-title,
+    .sidebar-promo{
+        display:none;
+    }
+
+    .logo{
+        justify-content:center;
+        padding-bottom:20px;
+    }
+
+    .menu-item{
+        justify-content:center;
+        padding:0;
+    }
+
+    .main{
+        margin-left:65px;
+        padding:16px;
+    }
+
+    .tools{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .search-box{
+        grid-column:1/-1;
+    }
+
+    .write-button{
+        width:100%;
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:560px){
+
+    .topbar{
+        align-items:flex-start;
+    }
+
+    .page-title h1{
+        font-size:17px;
+    }
+
+    .top-icon{
+        display:none;
+    }
+
+    .community-hero{
+        padding:20px;
+    }
+
+    .community-hero h2{
+        font-size:22px;
+    }
+
+    .tools{
+        grid-template-columns:1fr;
+    }
+
+    .search-box{
+        grid-column:auto;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+    .review-header{
+        flex-direction:column;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+        <div class="logo-icon">✈</div>
+        <div class="logo-text">Travio</div>
+    </div>
+
+    <div class="menu-title">Main Menu</div>
+
+    <div class="menu">
+
+        <a class="menu-item" href="#">
+            <span class="menu-icon">▦</span>
+            <span>Dashboard</span>
+        </a>
+
+        <a class="menu-item" href="#">
+            <span class="menu-icon">＋</span>
+            <span>Create Trip</span>
+        </a>
+
+        <a class="menu-item" href="#">
+            <span class="menu-icon">▤</span>
+            <span>My Trips</span>
+        </a>
+
+        <a class="menu-item" href="#">
+            <span class="menu-icon">⌘</span>
+            <span>Itinerary Builder</span>
+        </a>
+
+        <a class="menu-item" href="#">
+            <span class="menu-icon">◫</span>
+            <span>Itinerary View</span>
+        </a>
+
+        <a class="menu-item" href="#">
+            <span class="menu-icon">♧</span>
+            <span>Activities</span>
+        </a>
+
+        <a class="menu-item" href="#">
+            <span class="menu-icon">◒</span>
+            <span>Budget</span>
+        </a>
+
+        <a class="menu-item" href="#">
+            <span class="menu-icon">▣</span>
+            <span>Calendar</span>
+        </a>
+
+        <!-- KEEP THIS NAME -->
+
+        <a class="menu-item active" href="#">
+            <span class="menu-icon">◉</span>
+            <span>Community / Feedback</span>
+        </a>
+
+        <a class="menu-item" href="#">
+            <span class="menu-icon">⚙</span>
+            <span>Settings</span>
+        </a>
+
+    </div>
+
+    <div class="sidebar-promo">
+
+        <h3>
+            Let's make your dream journey come true!
+        </h3>
+
+        <p>
+            Discover amazing places and experiences.
+        </p>
+
+        <div class="promo-button">
+            Get Started
+        </div>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+    <!-- TOPBAR -->
+
+    <div class="topbar">
+
+        <div class="page-title">
+
+            <h1>
+                Community / Feedback
+            </h1>
+
+            <p>
+                Share real travel experiences with the Travio community
+            </p>
+
+        </div>
+
+        <div class="top-actions">
+
+            <div class="top-icon">♡</div>
+
+            <div class="top-icon">◉</div>
+
+            <div class="profile">S</div>
+
+        </div>
+
+    </div>
+
+
+    <!-- HERO -->
+
+    <section class="community-hero">
+
+        <div class="hero-content">
+
+            <div class="hero-label">
+                Travio Community
+            </div>
+
+            <h2>
+                Real experiences from real travellers
+            </h2>
+
+            <p>
+                Read travel experiences shared by Travio users,
+                discover destinations, and share your own journey.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- SEARCH + DESTINATION + WRITE -->
+
+    <div class="tools">
+
+        <div class="search-box">
+
+            <span>🔍</span>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search reviews or destinations..."
+            >
+
+        </div>
+
+
+        <div class="filter-box">
+
+            <select id="destinationFilter">
+
+                <option value="all">
+                    All Destinations
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <button
+            class="write-button"
+            onclick="openReviewForm()"
+        >
+            ＋ Write a Review
+        </button>
+
+    </div>
+
+
+    <!-- REVIEW FORM -->
+
+    <div
+        class="review-form"
+        id="reviewForm"
+    >
+
+        <div class="review-form-header">
+
+            <h2>
+                Share Your Experience
+            </h2>
+
+            <button
+                class="close-button"
+                onclick="closeReviewForm()"
+            >
+                ✕
+            </button>
+
+        </div>
+
+
+        <div class="form-grid">
+
+            <div class="form-group">
+
+                <label>Your Name</label>
+
+                <input
+                    type="text"
+                    id="reviewName"
+                    placeholder="Enter your name"
+                    maxlength="40"
+                >
+
+            </div>
+
+
+            <!-- DESTINATION DROPDOWN -->
+
+            <div class="form-group">
+
+                <label>Destination / Place</label>
+
+                <select id="reviewPlace">
+
+                    <option value="">
+                        Select Destination
+                    </option>
+
+                    <option value="Ahmedabad">
+                        Ahmedabad
+                    </option>
+
+                    <option value="Rishikesh">
+                        Rishikesh
+                    </option>
+
+                    <option value="Udaipur">
+                        Udaipur
+                    </option>
+
+                    <option value="Jaipur">
+                        Jaipur
+                    </option>
+
+                    <option value="Goa">
+                        Goa
+                    </option>
+
+                    <option value="Manali">
+                        Manali
+                    </option>
+
+                    <option value="Mumbai">
+                        Mumbai
+                    </option>
+
+                    <option value="Delhi">
+                        Delhi
+                    </option>
+
+                    <option value="Agra">
+                        Agra
+                    </option>
+
+                    <option value="Kerala">
+                        Kerala
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>Rating</label>
+
+                <select id="reviewRating">
+
+                    <option value="">
+                        Select Rating
+                    </option>
+
+                    <option value="5">
+                        ★★★★★ 5 - Excellent
+                    </option>
+
+                    <option value="4">
+                        ★★★★☆ 4 - Very Good
+                    </option>
+
+                    <option value="3">
+                        ★★★☆☆ 3 - Good
+                    </option>
+
+                    <option value="2">
+                        ★★☆☆☆ 2 - Average
+                    </option>
+
+                    <option value="1">
+                        ★☆☆☆☆ 1 - Poor
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group full">
+
+                <label>Your Review</label>
+
+                <textarea
+                    id="reviewText"
+                    placeholder="Tell other travellers about your experience..."
+                    maxlength="500"
+                ></textarea>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="publish-button"
+            onclick="publishReview()"
+        >
+            Publish Review
+        </button>
+
+    </div>
+
+
+    <!-- SECTION -->
+
+    <div class="section-header">
+
+        <div class="section-title">
+
+            <h2>
+                Community Reviews
+            </h2>
+
+            <p id="reviewCount">
+                No reviews yet
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- REVIEWS -->
+
+    <section
+        class="community-list"
+        id="communityList"
+    ></section>
+
+
+    <!-- EMPTY -->
+
+    <div
+        class="empty-state"
+        id="emptyState"
+    >
+
+        <div class="empty-icon">
+            💬
+        </div>
+
+        <h3>
+            No reviews yet
+        </h3>
+
+        <p>
+            Be the first traveller to share a real experience
+            with the Travio community.
+        </p>
+
+        <button onclick="openReviewForm()">
+            Write the First Review
+        </button>
+
+    </div>
+
+</main>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+/* =====================================================
+   STORAGE
+===================================================== */
+
+const STORAGE_KEY = "travioReviews";
+
+
+/* =====================================================
+   GET REVIEWS
+   ALSO CLEAN OLD INVALID REVIEWS
+===================================================== */
+
+function getReviews(){
+
+    try{
+
+        let reviews =
+            JSON.parse(
+                localStorage.getItem(STORAGE_KEY)
+            ) || [];
+
+
+        /*
+           REMOVE INVALID / UNDEFINED REVIEWS
+        */
+
+        reviews = reviews.filter(function(item){
+
+            return item &&
+                   typeof item === "object" &&
+                   item.name &&
+                   item.place &&
+                   item.review &&
+                   item.rating;
+
+        });
+
+
+        /*
+           REMOVE DUPLICATE REVIEWS
+
+           Same user + destination + review
+           will only appear once.
+        */
+
+        const unique = [];
+        const seen = new Set();
+
+        reviews.forEach(function(item){
+
+            const key =
+                String(item.name).trim().toLowerCase()
+                + "|"
+                + String(item.place).trim().toLowerCase()
+                + "|"
+                + String(item.review).trim().toLowerCase();
+
+            if(!seen.has(key)){
+
+                seen.add(key);
+                unique.push(item);
+
+            }
+
+        });
+
+
+        /*
+           SAVE CLEANED DATA
+        */
+
+        localStorage.setItem(
+            STORAGE_KEY,
+            JSON.stringify(unique)
+        );
+
+
+        return unique;
+
+    }catch(error){
+
+        localStorage.removeItem(STORAGE_KEY);
+
+        return [];
+
+    }
+
+}
+
+
+/* =====================================================
+   SAVE
+===================================================== */
+
+function saveReviews(reviews){
+
+    localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(reviews)
+    );
+
+}
+
+
+/* =====================================================
+   OPEN FORM
+===================================================== */
+
+function openReviewForm(){
+
+    const form =
+        document.getElementById("reviewForm");
+
+    form.classList.add("show");
+
+    setTimeout(function(){
+
+        document
+            .getElementById("reviewName")
+            .focus();
+
+    },100);
+
+    form.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+    });
+
+}
+
+
+/* =====================================================
+   CLOSE FORM
+===================================================== */
+
+function closeReviewForm(){
+
+    document
+        .getElementById("reviewForm")
+        .classList.remove("show");
+
+}
+
+
+/* =====================================================
+   PUBLISH REVIEW
+===================================================== */
+
+function publishReview(){
+
+    const name =
+        document
+        .getElementById("reviewName")
+        .value
+        .trim();
+
+    const place =
+        document
+        .getElementById("reviewPlace")
+        .value
+        .trim();
+
+    const rating =
+        document
+        .getElementById("reviewRating")
+        .value;
+
+    const review =
+        document
+        .getElementById("reviewText")
+        .value
+        .trim();
+
+
+    if(name === ""){
+
+        showToast("Please enter your name.");
+
+        return;
+
+    }
+
+
+    if(place === ""){
+
+        showToast("Please select a destination.");
+
+        return;
+
+    }
+
+
+    if(rating === ""){
+
+        showToast("Please select a rating.");
+
+        return;
+
+    }
+
+
+    if(review === ""){
+
+        showToast("Please write your review.");
+
+        return;
+
+    }
+
+
+    let reviews = getReviews();
+
+
+    /*
+       CHECK IF EXACT SAME REVIEW ALREADY EXISTS
+    */
+
+    const duplicate =
+        reviews.some(function(item){
+
+            return (
+                item.name.trim().toLowerCase() ===
+                name.toLowerCase()
+            )
+            &&
+            (
+                item.place.trim().toLowerCase() ===
+                place.toLowerCase()
+            )
+            &&
+            (
+                item.review.trim().toLowerCase() ===
+                review.toLowerCase()
+            );
+
+        });
+
+
+    if(duplicate){
+
+        showToast(
+            "This review already exists."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       CREATE NEW REVIEW
+    */
+
+    const newReview = {
+
+        id:Date.now(),
+
+        name:name,
+
+        place:place,
+
+        rating:Number(rating),
+
+        review:review,
+
+        likes:0,
+
+        liked:false,
+
+        date:Date.now()
+
+    };
+
+
+    /*
+       ADD TO TOP
+    */
+
+    reviews.unshift(newReview);
+
+
+    /*
+       SAVE
+    */
+
+    saveReviews(reviews);
+
+
+    /*
+       CLEAR FORM
+    */
+
+    document.getElementById("reviewName").value = "";
+
+    document.getElementById("reviewPlace").value = "";
+
+    document.getElementById("reviewRating").value = "";
+
+    document.getElementById("reviewText").value = "";
+
+
+    /*
+       CLOSE
+    */
+
+    closeReviewForm();
+
+
+    /*
+       UPDATE FILTER
+    */
+
+    updateDestinationFilter();
+
+
+    /*
+       RENDER IMMEDIATELY
+    */
+
+    renderReviews();
+
+
+    /*
+       SUCCESS MESSAGE
+    */
+
+    showToast(
+        "Your review has been published successfully."
+    );
+
+}
+
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+function renderReviews(){
+
+    const list =
+        document.getElementById("communityList");
+
+    const empty =
+        document.getElementById("emptyState");
+
+    const search =
+        document
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const destination =
+        document
+        .getElementById("destinationFilter")
+        .value;
+
+
+    let reviews = getReviews();
+
+
+    /*
+       SEARCH
+    */
+
+    reviews = reviews.filter(function(item){
+
+        const searchMatch =
+
+            search === "" ||
+
+            item.name
+                .toLowerCase()
+                .includes(search) ||
+
+            item.place
+                .toLowerCase()
+                .includes(search) ||
+
+            item.review
+                .toLowerCase()
+                .includes(search);
+
+
+        const destinationMatch =
+
+            destination === "all" ||
+
+            item.place.toLowerCase() ===
+            destination.toLowerCase();
+
+
+        return searchMatch &&
+               destinationMatch;
+
+    });
+
+
+    list.innerHTML = "";
+
+
+    /*
+       EMPTY
+    */
+
+    if(reviews.length === 0){
+
+        empty.style.display = "block";
+
+        const allReviews = getReviews();
+
+        document
+            .getElementById("reviewCount")
+            .innerText =
+                allReviews.length === 0
+                ? "No reviews yet"
+                : "No reviews match your search.";
+
+        return;
+
+    }
+
+
+    empty.style.display = "none";
+
+
+    document
+        .getElementById("reviewCount")
+        .innerText =
+            reviews.length +
+            (
+                reviews.length === 1
+                ? " review"
+                : " reviews"
+            );
+
+
+    /*
+       CREATE CARDS
+    */
+
+    reviews.forEach(function(item){
+
+        const card =
+            document.createElement("article");
+
+        card.className = "review-card";
+
+        card.dataset.id = item.id;
+
+
+        card.innerHTML = `
+
+            <div class="review-top">
+
+                <div class="avatar">
+                    ${getInitials(item.name)}
+                </div>
+
+                <div class="review-main">
+
+                    <div class="review-header">
+
+                        <div>
+
+                            <div class="user-name">
+                                ${escapeHTML(item.name)}
+                            </div>
+
+                            <div class="destination">
+                                📍 ${escapeHTML(item.place)}
+                            </div>
+
+                        </div>
+
+                        <div class="review-date">
+                            ${formatDate(item.date)}
+                        </div>
+
+                    </div>
+
+
+                    <div class="rating">
+                        ${getStars(item.rating)}
+                    </div>
+
+
+                    <div class="review-text">
+                        ${escapeHTML(item.review)}
+                    </div>
+
+
+                    <div class="review-footer">
+
+                        <button
+                            class="action-button ${item.liked ? "liked" : ""}"
+                            onclick="toggleLike(${item.id})"
+                        >
+
+                            ${item.liked ? "♥" : "♡"}
+                            Like
+                            ${
+                                item.likes > 0
+                                ? "(" + item.likes + ")"
+                                : ""
+                            }
+
+                        </button>
+
+
+                        <button
+                            class="action-button"
+                            onclick="shareReview(${item.id})"
+                        >
+
+                            ↗ Share
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        `;
+
+
+        list.appendChild(card);
+
+    });
+
+}
+
+
+/* =====================================================
+   DESTINATION FILTER
+===================================================== */
+
+function updateDestinationFilter(){
+
+    const select =
+        document.getElementById(
+            "destinationFilter"
+        );
+
+    const current =
+        select.value;
+
+
+    const reviews =
+        getReviews();
+
+
+    const places = [];
+
+
+    reviews.forEach(function(item){
+
+        if(!item.place){
+            return;
+        }
+
+        const place =
+            item.place.trim();
+
+
+        const exists =
+            places.some(function(existing){
+
+                return existing.toLowerCase() ===
+                       place.toLowerCase();
+
+            });
+
+
+        if(!exists){
+
+            places.push(place);
+
+        }
+
+    });
+
+
+    places.sort();
+
+
+    select.innerHTML = `
+
+        <option value="all">
+            All Destinations
+        </option>
+
+    `;
+
+
+    places.forEach(function(place){
+
+        const option =
+            document.createElement("option");
+
+        option.value = place;
+
+        option.textContent = place;
+
+        select.appendChild(option);
+
+    });
+
+
+    if(
+        places.some(function(place){
+
+            return place.toLowerCase() ===
+                   current.toLowerCase();
+
+        })
+    ){
+
+        select.value = current;
+
+    }
+
+}
+
+
+/* =====================================================
+   INITIALS
+===================================================== */
+
+function getInitials(name){
+
+    if(!name){
+        return "?";
+    }
+
+    const words =
+        name
+        .trim()
+        .split(/\s+/);
+
+
+    if(words.length === 1){
+
+        return words[0]
+            .substring(0,2)
+            .toUpperCase();
+
+    }
+
+
+    return (
+        words[0][0] +
+        words[words.length-1][0]
+    ).toUpperCase();
+
+}
+
+
+/* =====================================================
+   STARS
+===================================================== */
+
+function getStars(rating){
+
+    let stars = "";
+
+    for(let i=1;i<=5;i++){
+
+        stars +=
+            i <= rating
+            ? "★"
+            : "☆";
+
+    }
+
+    return stars;
+
+}
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+function formatDate(timestamp){
+
+    if(!timestamp){
+        return "Recently";
+    }
+
+
+    const difference =
+        Date.now() - timestamp;
+
+
+    const minutes =
+        Math.floor(
+            difference / 60000
+        );
+
+
+    if(minutes < 1){
+        return "Just now";
+    }
+
+
+    if(minutes < 60){
+
+        return minutes +
+            (
+                minutes === 1
+                ? " minute ago"
+                : " minutes ago"
+            );
+
+    }
+
+
+    const hours =
+        Math.floor(
+            minutes / 60
+        );
+
+
+    if(hours < 24){
+
+        return hours +
+            (
+                hours === 1
+                ? " hour ago"
+                : " hours ago"
+            );
+
+    }
+
+
+    const days =
+        Math.floor(
+            hours / 24
+        );
+
+
+    if(days < 7){
+
+        return days +
+            (
+                days === 1
+                ? " day ago"
+                : " days ago"
+            );
+
+    }
+
+
+    return new Date(timestamp)
+        .toLocaleDateString(
+            "en-IN",
+            {
+                day:"numeric",
+                month:"short",
+                year:"numeric"
+            }
+        );
+
+}
+
+
+/* =====================================================
+   LIKE
+===================================================== */
+
+function toggleLike(id){
+
+    const reviews =
+        getReviews();
+
+
+    const review =
+        reviews.find(function(item){
+
+            return item.id === id;
+
+        });
+
+
+    if(!review){
+        return;
+    }
+
+
+    if(review.liked){
+
+        review.likes =
+            Math.max(
+                0,
+                review.likes - 1
+            );
+
+        review.liked = false;
+
+    }else{
+
+        review.likes++;
+
+        review.liked = true;
+
+    }
+
+
+    saveReviews(reviews);
+
+    renderReviews();
+
+}
+
+
+/* =====================================================
+   SHARE
+===================================================== */
+
+function shareReview(id){
+
+    const reviews =
+        getReviews();
+
+
+    const review =
+        reviews.find(function(item){
+
+            return item.id === id;
+
+        });
+
+
+    if(!review){
+        return;
+    }
+
+
+    const text =
+        `${review.name} reviewed ${review.place} on Travio.
+
+Rating: ${review.rating}/5
+
+"${review.review}"`;
+
+
+    if(navigator.share){
+
+        navigator.share({
+
+            title:"Travio Review",
+
+            text:text
+
+        }).catch(function(){});
+
+    }else{
+
+        navigator.clipboard
+            .writeText(text)
+            .then(function(){
+
+                showToast(
+                    "Review copied."
+                );
+
+            });
+
+    }
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(text){
+
+    return String(text)
+
+        .replace(/&/g,"&amp;")
+
+        .replace(/</g,"&lt;")
+
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+let toastTimer;
+
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+
+    toast.innerText =
+        message;
+
+
+    toast.classList.add("show");
+
+
+    clearTimeout(toastTimer);
+
+
+    toastTimer =
+        setTimeout(function(){
+
+            toast.classList.remove("show");
+
+        },2500);
+
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+document
+    .getElementById("searchInput")
+    .addEventListener(
+        "input",
+        renderReviews
+    );
+
+
+/* =====================================================
+   DESTINATION FILTER
+===================================================== */
+
+document
+    .getElementById("destinationFilter")
+    .addEventListener(
+        "change",
+        renderReviews
+    );
+
+
+/* =====================================================
+   CTRL + ENTER
+===================================================== */
+
+document
+    .getElementById("reviewText")
+    .addEventListener(
+        "keydown",
+        function(event){
+
+            if(
+                event.ctrlKey &&
+                event.key === "Enter"
+            ){
+
+                publishReview();
+
+            }
+
+        }
+    );
+
+
+/* =====================================================
+   INITIAL LOAD
+===================================================== */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        /*
+           getReviews() cleans old
+           undefined/duplicate reviews
+        */
+
+        getReviews();
+
+        updateDestinationFilter();
+
+        renderReviews();
+
+    }
+);
+
+</script>
+
+</body>
+</html>
