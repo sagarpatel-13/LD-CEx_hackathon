@@ -5,11 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<<<<<<< HEAD
     <title>Travio | Login</title>
-=======
-    <title>GlobeTrotter | Login</title>
->>>>>>> d1fe517e7c85584c000105acf62b9640ad5ace9a
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,15 +38,12 @@
         ========================= */
 
         body {
-
             font-family: "Inter", Arial, sans-serif;
 
             min-height: 100vh;
 
             display: flex;
-
             justify-content: center;
-
             align-items: center;
 
             overflow: hidden;
@@ -84,7 +77,6 @@
         ========================= */
 
         .glow {
-
             position: fixed;
 
             border-radius: 50%;
@@ -94,11 +86,11 @@
             filter: blur(70px);
 
             opacity: 0.35;
+
+            z-index: 0;
         }
 
-
         .glow.one {
-
             width: 300px;
             height: 300px;
 
@@ -108,9 +100,7 @@
             left: -100px;
         }
 
-
         .glow.two {
-
             width: 320px;
             height: 320px;
 
@@ -120,9 +110,7 @@
             bottom: -150px;
         }
 
-
         .glow.three {
-
             width: 180px;
             height: 180px;
 
@@ -140,17 +128,13 @@
         ========================= */
 
         .login-card {
-
             width: 980px;
-
             max-width: 92%;
-
             min-height: 580px;
 
             display: flex;
 
             position: relative;
-
             z-index: 5;
 
             overflow: hidden;
@@ -177,15 +161,12 @@
         ========================= */
 
         .left-panel {
-
             width: 52%;
 
             padding: 42px;
 
             display: flex;
-
             flex-direction: column;
-
             justify-content: space-between;
 
             position: relative;
@@ -208,10 +189,11 @@
         }
 
 
-        /* Decorative grid */
+        /* =========================
+           DECORATIVE GRID
+        ========================= */
 
         .left-panel::before {
-
             content: "";
 
             position: absolute;
@@ -240,7 +222,6 @@
         ========================= */
 
         .brand {
-
             display: inline-flex;
 
             align-items: center;
@@ -258,11 +239,8 @@
             text-decoration: none;
         }
 
-
         .brand-icon {
-
             width: 42px;
-
             height: 42px;
 
             border-radius: 9px;
@@ -270,7 +248,6 @@
             display: flex;
 
             justify-content: center;
-
             align-items: center;
 
             background:
@@ -290,9 +267,7 @@
             transform: rotate(-5deg);
         }
 
-
         .brand-name {
-
             font-size: 24px;
 
             font-weight: 700;
@@ -300,9 +275,7 @@
             letter-spacing: -0.8px;
         }
 
-
         .brand-name span {
-
             color: #a855f7;
         }
 
@@ -312,7 +285,6 @@
         ========================= */
 
         .hero {
-
             position: relative;
 
             z-index: 2;
@@ -320,9 +292,7 @@
             max-width: 460px;
         }
 
-
         .hero h1 {
-
             font-size: 46px;
 
             line-height: 1.05;
@@ -334,21 +304,15 @@
             margin-bottom: 18px;
         }
 
-
         .hero h1 .purple {
-
             color: #a855f7;
         }
 
-
         .hero h1 .blue {
-
             color: #60a5fa;
         }
 
-
         .hero p {
-
             max-width: 420px;
 
             color: #8ca4b7;
@@ -364,7 +328,6 @@
         ========================= */
 
         .features {
-
             display: flex;
 
             gap: 10px;
@@ -372,9 +335,7 @@
             margin-top: 28px;
         }
 
-
         .feature {
-
             display: flex;
 
             align-items: center;
@@ -394,9 +355,7 @@
             font-size: 11px;
         }
 
-
         .feature i {
-
             color: #a855f7;
 
             font-size: 13px;
@@ -408,7 +367,6 @@
         ========================= */
 
         .left-footer {
-
             position: relative;
 
             z-index: 2;
@@ -426,7 +384,6 @@
         ========================= */
 
         .right-panel {
-
             width: 48%;
 
             padding: 48px 55px;
@@ -446,13 +403,10 @@
         ========================= */
 
         .login-header {
-
             margin-bottom: 28px;
         }
 
-
         .login-header h2 {
-
             font-size: 25px;
 
             font-weight: 700;
@@ -462,9 +416,7 @@
             margin-bottom: 7px;
         }
 
-
         .login-header p {
-
             font-size: 12px;
 
             color: #71889b;
@@ -476,13 +428,10 @@
         ========================= */
 
         .input-group {
-
             margin-bottom: 18px;
         }
 
-
         .input-group label {
-
             display: block;
 
             margin-bottom: 7px;
@@ -494,15 +443,11 @@
             color: #a8b8c5;
         }
 
-
         .input-wrapper {
-
             position: relative;
         }
 
-
         .input-icon {
-
             position: absolute;
 
             left: 13px;
@@ -518,9 +463,7 @@
             pointer-events: none;
         }
 
-
         .input-wrapper input {
-
             width: 100%;
 
             height: 45px;
@@ -544,15 +487,11 @@
             transition: 0.2s ease;
         }
 
-
         .input-wrapper input::placeholder {
-
             color: #506779;
         }
 
-
         .input-wrapper input:focus {
-
             border-color: #6d28d9;
 
             background: #061622;
@@ -567,7 +506,6 @@
         ========================= */
 
         .password-toggle {
-
             position: absolute;
 
             right: 14px;
@@ -585,9 +523,7 @@
             transition: 0.2s;
         }
 
-
         .password-toggle:hover {
-
             color: #a855f7;
         }
 
@@ -597,7 +533,6 @@
         ========================= */
 
         .options {
-
             display: flex;
 
             justify-content: space-between;
@@ -609,9 +544,7 @@
             font-size: 10px;
         }
 
-
         .remember {
-
             display: flex;
 
             align-items: center;
@@ -623,9 +556,7 @@
             cursor: pointer;
         }
 
-
         .remember input {
-
             width: 12px;
 
             height: 12px;
@@ -635,9 +566,7 @@
             cursor: pointer;
         }
 
-
         .forgot {
-
             color: #a855f7;
 
             text-decoration: none;
@@ -645,9 +574,7 @@
             font-weight: 500;
         }
 
-
         .forgot:hover {
-
             color: #c084fc;
 
             text-decoration: underline;
@@ -659,7 +586,6 @@
         ========================= */
 
         .login-btn {
-
             width: 100%;
 
             height: 45px;
@@ -691,9 +617,7 @@
             transition: 0.2s ease;
         }
 
-
         .login-btn:hover {
-
             transform: translateY(-1px);
 
             background:
@@ -707,9 +631,7 @@
                 0 10px 25px rgba(109, 40, 217, 0.35);
         }
 
-
         .login-btn:active {
-
             transform: translateY(0);
         }
 
@@ -719,7 +641,6 @@
         ========================= */
 
         #message {
-
             min-height: 16px;
 
             margin-top: 9px;
@@ -737,7 +658,6 @@
         ========================= */
 
         .divider {
-
             display: flex;
 
             align-items: center;
@@ -753,10 +673,8 @@
             letter-spacing: 0.5px;
         }
 
-
         .divider::before,
         .divider::after {
-
             content: "";
 
             flex: 1;
@@ -772,15 +690,12 @@
         ========================= */
 
         .social-login {
-
             display: flex;
 
             gap: 9px;
         }
 
-
         .social-btn {
-
             flex: 1;
 
             height: 40px;
@@ -810,9 +725,7 @@
             transition: 0.2s;
         }
 
-
         .social-btn:hover {
-
             border-color: #36506a;
 
             background: #081c2b;
@@ -822,9 +735,7 @@
             transform: translateY(-1px);
         }
 
-
         .social-btn i {
-
             font-size: 13px;
         }
 
@@ -834,7 +745,6 @@
         ========================= */
 
         .signup {
-
             text-align: center;
 
             margin-top: 22px;
@@ -844,9 +754,7 @@
             font-size: 10px;
         }
 
-
         .signup a {
-
             color: #a855f7;
 
             font-weight: 600;
@@ -854,9 +762,7 @@
             text-decoration: none;
         }
 
-
         .signup a:hover {
-
             color: #c084fc;
 
             text-decoration: underline;
@@ -870,15 +776,12 @@
         @media (max-width: 800px) {
 
             body {
-
                 overflow-y: auto;
 
                 padding: 25px 0;
             }
 
-
             .login-card {
-
                 flex-direction: column;
 
                 max-width: 92%;
@@ -886,27 +789,25 @@
                 margin: auto;
             }
 
-
             .left-panel {
-
                 width: 100%;
 
                 min-height: 360px;
 
                 padding: 35px;
+
+                border-right: none;
+
+                border-bottom: 1px solid #183148;
             }
 
-
             .right-panel {
-
                 width: 100%;
 
                 padding: 40px;
             }
 
-
             .hero h1 {
-
                 font-size: 38px;
             }
         }
@@ -915,27 +816,20 @@
         @media (max-width: 500px) {
 
             .left-panel {
-
                 padding: 28px;
 
                 min-height: 330px;
             }
 
-
             .right-panel {
-
                 padding: 32px 25px;
             }
 
-
             .brand-name {
-
                 font-size: 21px;
             }
 
-
             .brand-icon {
-
                 width: 38px;
 
                 height: 38px;
@@ -943,39 +837,29 @@
                 font-size: 16px;
             }
 
-
             .hero h1 {
-
                 font-size: 31px;
 
                 letter-spacing: -1.2px;
             }
 
-
             .hero p {
-
                 font-size: 11px;
             }
 
-
             .features {
-
                 gap: 6px;
 
                 flex-wrap: wrap;
             }
 
-
             .feature {
-
                 font-size: 9px;
 
                 padding: 7px 9px;
             }
 
-
             .social-login {
-
                 flex-direction: column;
             }
         }
@@ -986,7 +870,6 @@
 
 
 <body>
-
 
     <!-- =========================
          BACKGROUND
@@ -1008,20 +891,7 @@
              LEFT PANEL
         ========================== -->
 
-<<<<<<< HEAD
-        <section class="left-section">
-
-            <div>
-
-                <img
-                    src="c:\Users\maitr\Downloads\travel-tourism-logo-isolated-on-white-background-vector.webp"
-                    alt="Travio Logo"
-                    class="logo">
-
-            </div>
-=======
         <section class="left-panel">
->>>>>>> d1fe517e7c85584c000105acf62b9640ad5ace9a
 
 
             <!-- BRAND -->
@@ -1029,16 +899,11 @@
             <a href="index.html" class="brand">
 
                 <div class="brand-icon">
-
-                    <i class="fa-solid fa-plane-departure"></i>    
-
+                    <i class="fa-solid fa-plane-departure"></i>
                 </div>
 
-
                 <div class="brand-name">
-
                     Trav<span>io</span>
-
                 </div>
 
             </a>
@@ -1050,7 +915,8 @@
 
                 <h1>
 
-                    Explore
+                    <span class="purple">Explore</span>
+
                     <br>
 
                     <span class="blue">The</span>
@@ -1060,19 +926,16 @@
 
 
                 <p>
-
                     Plan unforgettable journeys,
                     discover amazing destinations,
                     and keep every travel experience
                     organized in one place.
-
                 </p>
 
 
                 <!-- FEATURES -->
 
                 <div class="features">
-
 
                     <div class="feature">
 
@@ -1100,7 +963,6 @@
 
                     </div>
 
-
                 </div>
 
             </div>
@@ -1110,16 +972,10 @@
 
             <div class="left-footer">
 
-<<<<<<< HEAD
-                © 2026 Travio ·
-                Explore the world 🌎
-=======
                 © 2026 GlobeTrotter ·
                 Your journey begins here.
->>>>>>> d1fe517e7c85584c000105acf62b9640ad5ace9a
 
             </div>
-
 
         </section>
 
@@ -1215,7 +1071,6 @@
 
                 <div class="options">
 
-
                     <label class="remember">
 
                         <input
@@ -1254,7 +1109,6 @@
 
                 <div id="message"></div>
 
-
             </form>
 
 
@@ -1270,7 +1124,6 @@
             <!-- SOCIAL LOGIN -->
 
             <div class="social-login">
-
 
                 <button
                     class="social-btn"
@@ -1295,7 +1148,6 @@
 
                 </button>
 
-
             </div>
 
 
@@ -1306,16 +1158,13 @@
                 Don't have an account?
 
                 <a href="register.html">
-
                     Create Account
-
                 </a>
 
             </div>
 
 
         </section>
-
 
     </main>
 
@@ -1326,7 +1175,6 @@
 
     <script>
 
-
         /* =========================
            ELEMENTS
         ========================== */
@@ -1334,14 +1182,11 @@
         const loginForm =
             document.getElementById("loginForm");
 
-
         const username =
             document.getElementById("username");
 
-
         const password =
             document.getElementById("password");
-
 
         const message =
             document.getElementById("message");
@@ -1353,14 +1198,12 @@
 
         loginForm.addEventListener(
             "submit",
-            function(event) {
+            function (event) {
 
                 event.preventDefault();
 
-
                 const usernameValue =
                     username.value.trim();
-
 
                 const passwordValue =
                     password.value.trim();
@@ -1422,16 +1265,13 @@
 
             message.textContent = text;
 
-
             if (type === "error") {
 
-                message.style.color =
-                    "#ef4444";
+                message.style.color = "#ef4444";
 
             } else {
 
-                message.style.color =
-                    "#22c55e";
+                message.style.color = "#22c55e";
 
             }
 
@@ -1443,24 +1283,20 @@
         ========================== */
 
         const togglePassword =
-            document.getElementById(
-                "togglePassword"
-            );
+            document.getElementById("togglePassword");
 
 
         togglePassword.addEventListener(
             "click",
-            function() {
+            function () {
 
                 if (password.type === "password") {
 
                     password.type = "text";
 
-
                     togglePassword.classList.remove(
                         "fa-eye"
                     );
-
 
                     togglePassword.classList.add(
                         "fa-eye-slash"
@@ -1470,11 +1306,9 @@
 
                     password.type = "password";
 
-
                     togglePassword.classList.remove(
                         "fa-eye-slash"
                     );
-
 
                     togglePassword.classList.add(
                         "fa-eye"
@@ -1494,10 +1328,9 @@
             .getElementById("forgotPassword")
             .addEventListener(
                 "click",
-                function(event) {
+                function (event) {
 
                     event.preventDefault();
-
 
                     const email =
                         prompt(
@@ -1535,7 +1368,6 @@
         }
 
     </script>
-
 
 </body>
 
