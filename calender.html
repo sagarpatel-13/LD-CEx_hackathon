@@ -22,9 +22,6 @@
 
 <style>
 
-/* =========================================================
-   GLOBAL
-========================================================= */
 
 * {
     margin: 0;
@@ -1730,7 +1727,7 @@ body {
         </h3>
 
         <p>
-            Plan unforgettable adventures with GlobeTrotter.
+            Plan unforgettable adventures with Travio.
         </p>
 
         <button
@@ -2578,7 +2575,7 @@ const defaultTrips = [
 
 let savedTrips =
     JSON.parse(
-        localStorage.getItem("globalTrottersTrips")
+        localStorage.getItem("TraviosTrips")
     ) || defaultTrips;
 
 
@@ -2594,7 +2591,7 @@ let filterValue = "all";
 ========================================================= */
 
 const savedUser =
-    localStorage.getItem("globalTrottersUser");
+    localStorage.getItem("TraviosUser");
 
 
 if (savedUser) {
@@ -3489,7 +3486,7 @@ document
 
 
         localStorage.setItem(
-            "globalTrottersTrips",
+            "TraviosTrips",
             JSON.stringify(savedTrips)
         );
 
