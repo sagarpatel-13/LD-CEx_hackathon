@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Travio — Plan Your Journey</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f5f9f9;
+            color: #102a30;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================== */
+
+        .navbar {
+            height: 76px;
+            padding: 0 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: white;
+
+            border-bottom: 1px solid #e7eeee;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+
+            border-radius: 13px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: linear-gradient(
+                135deg,
+                #42d9c8,
+                #1ba6b8
+            );
+
+            color: white;
+            font-size: 21px;
+        }
+
+        .brand-name {
+            font-size: 25px;
+            font-weight: 700;
+        }
+
+        .brand-name span {
+            color: #20b8ae;
+        }
+
+        /* Navigation */
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: #60777c;
+            font-size: 14px;
+            font-weight: 500;
+
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: #16a99f;
+        }
+
+        /* Profile */
+
+        .profile-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar {
+            width: 38px;
+            height: 38px;
+
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: #d9f5f1;
+
+            color: #159d94;
+
+            font-weight: 700;
+        }
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+            max-width: 1180px;
+            margin: auto;
+
+            padding: 75px 25px 45px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 50px;
+        }
+
+        .hero-content {
+            max-width: 570px;
+        }
+
+        .small-title {
+            color: #16a99f;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 53px;
+            line-height: 1.08;
+
+            letter-spacing: -2px;
+
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #16b5aa;
+        }
+
+        .hero p {
+            color: #687f84;
+
+            font-size: 17px;
+
+            line-height: 1.7;
+
+            max-width: 520px;
+
+            margin-bottom: 30px;
+        }
+
+        /* Buttons */
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+        }
+
+        .primary-btn {
+            padding: 14px 23px;
+
+            border-radius: 11px;
+
+            background: #16b5aa;
+
+            color: white;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            border: none;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        .primary-btn:hover {
+            background: #109c93;
+            transform: translateY(-2px);
+        }
+
+        .secondary-btn {
+            padding: 14px 23px;
+
+            border-radius: 11px;
+
+            background: white;
+
+            color: #31575d;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            border: 1px solid #dce9e9;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        .secondary-btn:hover {
+            border-color: #16b5aa;
+            color: #16a99f;
+        }
+
+        /* =========================
+           HERO VISUAL
+        ========================== */
+
+        .hero-visual {
+            width: 440px;
+            height: 330px;
+
+            border-radius: 25px;
+
+            position: relative;
+            overflow: hidden;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #0d5360,
+                    #159c9b
+                );
+
+            box-shadow:
+                0 25px 60px rgba(13, 83, 96, 0.18);
+        }
+
+        .sun {
+            width: 90px;
+            height: 90px;
+
+            background: #b9eee7;
+
+            border-radius: 50%;
+
+            position: absolute;
+
+            right: 55px;
+            top: 40px;
+
+            opacity: 0.8;
+        }
+
+        .mountain {
+            position: absolute;
+
+            bottom: -70px;
+
+            width: 280px;
+            height: 220px;
+
+            transform: rotate(45deg);
+
+            background: #07434f;
+        }
+
+        .mountain.one {
+            left: 10px;
+        }
+
+        .mountain.two {
+            right: 0;
+            width: 330px;
+            height: 250px;
+
+            background: #0a6670;
+        }
+
+        .road {
+            position: absolute;
+
+            width: 160px;
+            height: 430px;
+
+            background: #e8f3f1;
+
+            bottom: -220px;
+            left: 150px;
+
+            transform: rotate(18deg);
+
+            border-radius: 50%;
+        }
+
+        .plane-icon {
+            position: absolute;
+
+            top: 90px;
+            left: 75px;
+
+            color: white;
+
+            font-size: 30px;
+
+            transform: rotate(-15deg);
+        }
+
+        /* =========================
+           QUICK ACTIONS
+        ========================== */
+
+        .section {
+            max-width: 1180px;
+
+            margin: auto;
+
+            padding: 20px 25px 60px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 20px;
+        }
+
+        .section-header h2 {
+            font-size: 23px;
+        }
+
+        .view-all {
+            color: #16a99f;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 18px;
+        }
+
+        .action-card {
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 16px;
+
+            border: 1px solid #e7eeee;
+
+            transition: 0.25s;
+        }
+
+        .action-card:hover {
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 15px 35px rgba(20, 80, 85, 0.08);
+        }
+
+        .action-icon {
+            width: 48px;
+            height: 48px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 13px;
+
+            background: #e6f8f5;
+
+            color: #13a79d;
+
+            font-size: 21px;
+
+            margin-bottom: 18px;
+        }
+
+        .action-card h3 {
+            font-size: 16px;
+            margin-bottom: 7px;
+        }
+
+        .action-card p {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #799095;
+        }
+
+        /* =========================
+           UPCOMING TRIP
+        ========================== */
+
+        .trip-section {
+            max-width: 1180px;
+
+            margin: auto;
+
+            padding: 0 25px 70px;
+        }
+
+        .trip-card {
+            background: white;
+
+            border-radius: 18px;
+
+            border: 1px solid #e7eeee;
+
+            padding: 22px;
+
+            display: flex;
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .trip-info {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+
+        .trip-image {
+            width: 85px;
+            height: 75px;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #1d8c95,
+                    #70d6c7
+                );
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: white;
+
+            font-size: 25px;
+        }
+
+        .trip-info h3 {
+            font-size: 17px;
+            margin-bottom: 6px;
+        }
+
+        .trip-info p {
+            color: #82969a;
+            font-size: 13px;
+        }
+
+        .trip-status {
+            padding: 8px 13px;
+
+            border-radius: 20px;
+
+            background: #e5f8f3;
+
+            color: #159b8f;
+
+            font-size: 12px;
+
+            font-weight: 600;
+        }
+
+        /* =========================
+           FOOTER
+        ========================== */
+
+        footer {
+            padding: 25px;
+
+            text-align: center;
+
+            border-top: 1px solid #e5eeee;
+
+            color: #84979b;
+
+            font-size: 12px;
+
+            background: white;
+        }
+
+        /* =========================
+           MOBILE
+        ========================== */
+
+        @media (max-width: 900px) {
+
+            .nav-links {
+                gap: 15px;
+            }
+
+            .hero {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hero-visual {
+                width: 100%;
+            }
+
+            .cards {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 45px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero p {
+                font-size: 15px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .hero-buttons a {
+                width: 100%;
+            }
+
+            .hero-buttons button {
+                width: 100%;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .trip-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <nav class="navbar">
+
+        <a href="index.html" class="brand">
+
+            <div class="brand-icon">
+                ✦
+            </div>
+
+            <div class="brand-name">
+                Trav<span>io</span>
+            </div>
+
+        </a>
+
+
+        <div class="nav-links">
+
+            <a href="index.html" class="active">
+                Home
+            </a>
+
+            <a href="trips.html">
+                My Trips
+            </a>
+
+            <a href="explore.html">
+                Explore
+            </a>
+
+            <a href="create-trip.html">
+                Create Trip
+            </a>
+
+        </div>
+
+
+        <a href="profile.html" class="profile-link">
+
+            <div class="avatar">
+                P
+            </div>
+
+        </a>
+
+    </nav>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="small-title">
+                Your travel companion
+            </div>
+
+            <h1>
+                Plan less.
+                <span>Travel more.</span>
+            </h1>
+
+            <p>
+                Create personalized trips, discover amazing destinations,
+                build smart itineraries and keep every part of your journey
+                organized in one place.
+            </p>
+
+
+            <div class="hero-buttons">
+
+                <a href="create-trip.html">
+                    <button class="primary-btn">
+                        + Create New Trip
+                    </button>
+                </a>
+
+                <a href="explore.html">
+                    <button class="secondary-btn">
+                        Explore Destinations
+                    </button>
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- Travel visual -->
+
+        <div class="hero-visual">
+
+            <div class="sun"></div>
+
+            <div class="plane-icon">
+                ✈
+            </div>
+
+            <div class="mountain one"></div>
+
+            <div class="mountain two"></div>
+
+            <div class="road"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         QUICK ACTIONS
+    ========================== -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <h2>
+                What do you want to do?
+            </h2>
+
+        </div>
+
+
+        <div class="cards">
+
+
+            <!-- My Trips -->
+
+            <a href="trips.html">
+
+                <div class="action-card">
+
+                    <div class="action-icon">
+                        🧳
+                    </div>
+
+                    <h3>
+                        My Trips
+                    </h3>
+
+                    <p>
+                        View and manage all your planned journeys.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            <!-- Create Trip -->
+
+            <a href="create-trip.html">
+
+                <div class="action-card">
+
+                    <div class="action-icon">
+                        ✈
+                    </div>
+
+                    <h3>
+                        Create a Trip
+                    </h3>
+
+                    <p>
+                        Start planning your next adventure from scratch.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            <!-- Explore -->
+
+            <a href="explore.html">
+
+                <div class="action-card">
+
+                    <div class="action-icon">
+                        🧭
+                    </div>
+
+                    <h3>
+                        Explore
+                    </h3>
+
+                    <p>
+                        Find destinations and discover new experiences.
+                    </p>
+
+                </div>
+
+            </a>
+
+
+            <!-- Profile -->
+
+            <a href="profile.html">
+
+                <div class="action-card">
+
+                    <div class="action-icon">
+                        👤
+                    </div>
+
+                    <h3>
+                        My Profile
+                    </h3>
+
+                    <p>
+                        Manage your profile and travel preferences.
+                    </p>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         UPCOMING TRIP
+    ========================== -->
+
+    <section class="trip-section">
+
+        <div class="section-header">
+
+            <h2>
+                Upcoming Trip
+            </h2>
+
+            <a href="trips.html" class="view-all">
+                View all →
+            </a>
+
+        </div>
+
+
+        <div class="trip-card">
+
+            <div class="trip-info">
+
+                <div class="trip-image">
+                    🏔️
+                </div>
+
+                <div>
+
+                    <h3>
+                        Your next adventure
+                    </h3>
+
+                    <p>
+                        No upcoming trips yet · Start planning one today
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <a href="create-trip.html">
+
+                <button class="primary-btn">
+                    Plan a Trip
+                </button>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        © 2026 Travio · Plan • Explore • Travel
+
+    </footer>
+
+
+</body>
+</html>
